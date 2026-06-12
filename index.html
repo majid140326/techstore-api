@@ -53,7 +53,7 @@
         /* Team Grid */
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
             margin-top: 15px;
         }
@@ -66,115 +66,55 @@
             align-items: center;
             gap: 15px;
         }
-        .team-item .avatar {
-            font-size: 2em;
-            background: #e6f2ff;
-            padding: 10px;
-            border-radius: 50%;
-        }
-        .team-item div h4 { color: #1e3a5f; margin-bottom: 2px; }
-        .team-item div p { color: #666; font-size: 0.9em; font-family: monospace; font-weight: bold;}
+        .team-item .avatar { font-size: 2em; background: #e6f2ff; padding: 10px; border-radius: 50%; }
+        .team-item div h4 { color: #1e3a5f; margin-bottom: 2px; font-size: 1em; }
+        .team-item div p { color: #666; font-size: 0.85em; font-family: monospace; font-weight: bold;}
+
+        /* Tech, Structure, Status Grids */
+        .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .tech-item { background: #f5f9ff; border: 1px solid #d0e8ff; border-radius: 8px; padding: 15px; text-align: center; }
+        .tech-item .icon { font-size: 2em; margin-bottom: 8px; }
+        .tech-item h4 { color: #1e3a5f; }
+        
+        .struktur { background: #1e1e1e; color: #dcdcdc; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 0.95em; line-height: 1.8; overflow-x: auto; border-left: 5px solid #2196F3;}
+        
+        /* Tables for API Docs */
+        table { width: 100%; border-collapse: collapse; margin: 15px 0 30px 0; font-size: 0.95em; }
+        th { background: #1e3a5f; color: white; padding: 12px; text-align: left; }
+        td { padding: 10px 12px; border-bottom: 1px solid #eee; }
+        tr:hover { background: #f5f9ff; }
+        .method { display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 0.85em; color: white; min-width: 70px; text-align: center; }
+        .m-get { background: #4CAF50; } .m-post { background: #2196F3; } .m-put { background: #FF9800; } .m-delete { background: #f44336; }
+        code.url-code { background: #f0f0f0; padding: 4px 8px; border-radius: 4px; font-size: 0.9em; color: #d63384; font-family: monospace;}
 
         /* POSTMAN UI SIMULATOR */
-        .postman-wrapper {
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            margin-bottom: 40px;
-            background: #fff;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        
-        /* URL Bar */
-        .pm-url-bar {
-            display: flex;
-            background: #f9fafb;
-            padding: 15px;
-            border-bottom: 1px solid #e5e7eb;
-            align-items: center;
-            gap: 15px;
-        }
-        .pm-method {
-            padding: 8px 15px;
-            border-radius: 4px;
-            color: white;
-            font-weight: bold;
-            font-size: 0.9em;
-            letter-spacing: 0.5px;
-        }
-        .pm-method.post { background: #FFB400; color: #fff; text-shadow: 0 1px 1px rgba(0,0,0,0.2); }
-        .pm-method.get { background: #0CBB52; }
-        .pm-method.put { background: #097BED; }
-        .pm-method.delete { background: #EB2013; }
-        
-        .pm-url {
-            flex: 1;
-            background: #fff;
-            border: 1px solid #d1d5db;
-            padding: 10px 15px;
-            border-radius: 4px;
-            font-family: 'Consolas', monospace;
-            font-size: 1em;
-            color: #374151;
-        }
-        .pm-btn-send {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+        .postman-wrapper { border: 1px solid #d1d5db; border-radius: 8px; margin-bottom: 35px; background: #fff; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .pm-url-bar { display: flex; background: #f9fafb; padding: 15px; border-bottom: 1px solid #e5e7eb; align-items: center; gap: 15px; }
+        .pm-method { padding: 8px 15px; border-radius: 4px; color: white; font-weight: bold; font-size: 0.9em; letter-spacing: 0.5px; }
+        .pm-method.post { background: #FFB400; } .pm-method.get { background: #0CBB52; } .pm-method.put { background: #097BED; } .pm-method.delete { background: #EB2013; }
+        .pm-url { flex: 1; background: #fff; border: 1px solid #d1d5db; padding: 10px 15px; border-radius: 4px; font-family: 'Consolas', monospace; font-size: 0.95em; color: #374151; }
+        .pm-btn-send { background: #007bff; color: white; border: none; padding: 10px 25px; border-radius: 4px; font-weight: bold; cursor: pointer; }
 
         /* Step Guide per Request */
-        .pm-guide {
-            background: #f0f7ff;
-            border-bottom: 1px solid #e5e7eb;
-            padding: 15px 20px;
-        }
-        .pm-guide h4 { color: #0056b3; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;}
+        .pm-guide { background: #fff8e1; border-bottom: 1px solid #e5e7eb; padding: 15px 20px; border-left: 4px solid #FFC107; }
+        .pm-guide h4 { color: #b08d00; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;}
         .pm-guide ol { margin-left: 20px; color: #4b5563; font-size: 0.95em; }
         .pm-guide li { margin-bottom: 4px; }
-        .pm-guide code { background: #e0e7ff; padding: 2px 6px; border-radius: 4px; color: #3730a3; font-size: 0.9em; font-family: monospace;}
+        .pm-guide code { background: #ffecb3; padding: 2px 6px; border-radius: 4px; color: #d84315; font-size: 0.9em; font-family: monospace;}
 
         /* Data Section (Body & Response) */
-        .pm-data-section {
-            padding: 20px;
-        }
-        .pm-section-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9em;
-            color: #6b7280;
-            margin-bottom: 8px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        .pm-status-code {
-            color: #0CBB52;
-            font-family: monospace;
-            background: #e6f9ed;
-            padding: 4px 8px;
-            border-radius: 4px;
-        }
+        .pm-data-section { padding: 20px; }
+        .pm-section-title { display: flex; justify-content: space-between; align-items: center; font-size: 0.9em; color: #6b7280; margin-bottom: 8px; font-weight: bold; text-transform: uppercase; }
+        .pm-status-code { color: #0CBB52; font-family: monospace; background: #e6f9ed; padding: 4px 8px; border-radius: 4px; }
 
         /* Code Blocks */
-        pre {
-            background: #282c34;
-            color: #abb2bf;
-            padding: 15px;
-            border-radius: 6px;
-            overflow-x: auto;
-            font-size: 0.95em;
-            font-family: 'Consolas', monospace;
-            margin-bottom: 20px;
-            border-left: 4px solid #61afef;
-        }
-        .json-key { color: #e06c75; }
-        .json-str { color: #98c379; }
-        .json-num { color: #d19a66; }
+        pre { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 6px; overflow-x: auto; font-size: 0.95em; font-family: 'Consolas', monospace; margin-bottom: 20px; border-left: 4px solid #61afef; }
+        .json-key { color: #e06c75; } .json-str { color: #98c379; } .json-num { color: #d19a66; }
+
+        .middleware-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;}
+        .middleware-item { background: #f5f9ff; border-left: 4px solid #2196F3; padding: 15px; border-radius: 4px; }
+        .status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+        .status-item { text-align: center; padding: 15px; border-radius: 8px; color: white; font-weight: bold; }
 
         footer { text-align: center; padding: 30px; color: #888; font-size: 0.9em; border-top: 1px solid #ddd; margin-top: 40px;}
     </style>
@@ -183,7 +123,7 @@
 
 <header>
     <h1>🖥️ TechStore API</h1>
-    <p>Dokumentasi REST API Sistem Kasir & Panduan Integrasi Postman</p>
+    <p>Dokumentasi Lengkap REST API Sistem Kasir HP & Laptop</p>
     <span class="badge">📚 Kelompok 5</span>
     <span class="badge">🎓 Integrasi Sistem</span>
     <span class="badge">⚡ Node.js + MySQL</span>
@@ -192,56 +132,98 @@
 <div class="container">
 
     <div class="card">
-        <h2>📌 Pendahuluan</h2>
-        <p>TechStore API adalah REST API yang dibangun menggunakan <strong>Node.js</strong> dan <strong>Express.js</strong> sebagai backend sistem kasir toko HP dan Laptop. API ini mengelola data produk, customer, transaksi penjualan, dan laporan secara lengkap dengan koneksi database <strong>MySQL (XAMPP)</strong>. Seluruh proses di bawah ini mensimulasikan penggunaan melalui aplikasi <strong>Postman</strong>.</p>
-    </div>
-
-    <div class="card">
-        <h2>👥 Anggota Kelompok 5</h2>
+        <h2>📌 1. Pendahuluan</h2>
+        <p>TechStore API adalah REST API yang dibangun menggunakan <strong>Node.js</strong> dan <strong>Express.js</strong> sebagai backend sistem kasir toko HP dan Laptop. API ini bertugas mengelola data produk, customer, keranjang transaksi penjualan, dan laporan secara menyeluruh dengan penyimpanan menggunakan database <strong>MySQL (XAMPP)</strong>.</p>
+        
+        <h3 style="color:#1e3a5f; margin: 25px 0 10px 0; font-size: 1.2em;">👥 Anggota Kelompok 5</h3>
         <div class="team-grid">
-            <div class="team-item">
-                <div class="avatar">👨‍💻</div>
-                <div>
-                    <h4>Nur Majid</h4>
-                    <p>NIM. 2405903040064</p>
-                </div>
-            </div>
-            <div class="team-item">
-                <div class="avatar">👨‍💻</div>
-                <div>
-                    <h4>M. Munji Nasrullah</h4>
-                    <p>NIM. 2405903040050</p>
-                </div>
-            </div>
-            <div class="team-item">
-                <div class="avatar">👩‍💻</div>
-                <div>
-                    <h4>Ida</h4>
-                    <p>NIM. 2405903040039</p>
-                </div>
-            </div>
-            <div class="team-item">
-                <div class="avatar">👩‍💻</div>
-                <div>
-                    <h4>Amisha F. Putri Kamal</h4>
-                    <p>NIM. 2405903040009</p>
-                </div>
-            </div>
-            <div class="team-item">
-                <div class="avatar">👩‍💻</div>
-                <div>
-                    <h4>Indah Muftabsyirah</h4>
-                    <p>NIM. 2405903040039</p>
-                </div>
-            </div>
+            <div class="team-item"><div class="avatar">👨‍💻</div><div><h4>Nur Majid</h4><p>2405903040064</p></div></div>
+            <div class="team-item"><div class="avatar">👨‍💻</div><div><h4>M. Munji Nasrullah</h4><p>2405903040050</p></div></div>
+            <div class="team-item"><div class="avatar">👩‍💻</div><div><h4>Ida</h4><p>2405903040039</p></div></div>
+            <div class="team-item"><div class="avatar">👩‍💻</div><div><h4>Amisha F. Putri Kamal</h4><p>2405903040009</p></div></div>
+            <div class="team-item"><div class="avatar">👩‍💻</div><div><h4>Indah Muftabsyirah</h4><p>2405903040039</p></div></div>
         </div>
     </div>
 
     <div class="card">
-        <h2>📦 Simulasi Siklus CRUD: Produk (Products)</h2>
-        <p style="margin-bottom: 25px; color: #555;">Berikut adalah demonstrasi alur hidup sebuah entitas data. Kita akan membuat produk <strong>MacBook Pro M3</strong>, memanggil datanya, mengubah harganya, dan terakhir menghapusnya. Semua tersinkronisasi menggunakan <strong>ID Produk: 5</strong>.</p>
+        <h2>🛠️ 2. Teknologi yang Digunakan</h2>
+        <div class="tech-grid">
+            <div class="tech-item"><div class="icon">🟢</div><h4>Node.js</h4><p>Runtime environment JS</p></div>
+            <div class="tech-item"><div class="icon">⚡</div><h4>Express.js</h4><p>Web Framework</p></div>
+            <div class="tech-item"><div class="icon">🗄️</div><h4>MySQL</h4><p>Database via XAMPP</p></div>
+            <div class="tech-item"><div class="icon">📮</div><h4>Postman</h4><p>Testing API Endpoints</p></div>
+        </div>
+    </div>
 
-        <h3 style="color:#1e3a5f; margin-bottom: 10px;">Langkah 1: Tambah Produk Baru (Create)</h3>
+    <div class="card">
+        <h2>📁 3. Struktur Project</h2>
+        <div class="struktur">
+TechStoreAPI/
+├── src/
+│   ├── config/
+│   │   └── db.js
+│   ├── controllers/
+│   │   ├── customers.controller.js
+│   │   ├── laporan.controller.js
+│   │   ├── products.controller.js
+│   │   └── transactions.controller.js
+│   ├── middleware/
+│   │   ├── errorHandler.js
+│   │   ├── logger.js
+│   │   └── validator.js
+│   ├── routes/
+│   │   ├── customers.routes.js
+│   │   ├── info.routes.js
+│   │   ├── laporan.routes.js
+│   │   ├── products.routes.js
+│   │   └── transactions.routes.js
+│   └── app.js
+├── server.js
+├── package.json
+└── README.md
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📡 4. Dokumentasi API (Tabel Endpoint)</h2>
+        <p style="margin-bottom: 15px;">Base URL Utama: <code class="url-code">http://localhost:3000</code></p>
+
+        <h3 style="color:#2196F3;">📦 Products (Produk)</h3>
+        <table>
+            <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
+            <tr><td><span class="method m-get">GET</span></td><td><code class="url-code">/api/v1/products</code></td><td>Ambil daftar semua produk</td></tr>
+            <tr><td><span class="method m-get">GET</span></td><td><code class="url-code">/api/v1/products/:id</code></td><td>Ambil detail 1 produk by ID</td></tr>
+            <tr><td><span class="method m-post">POST</span></td><td><code class="url-code">/api/v1/products</code></td><td>Buat / Tambah produk baru</td></tr>
+            <tr><td><span class="method m-put">PUT</span></td><td><code class="url-code">/api/v1/products/:id</code></td><td>Update informasi produk</td></tr>
+            <tr><td><span class="method m-delete">DELETE</span></td><td><code class="url-code">/api/v1/products/:id</code></td><td>Hapus produk dari database</td></tr>
+        </table>
+
+        <h3 style="color:#2196F3;">👥 Customers (Pelanggan)</h3>
+        <table>
+            <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
+            <tr><td><span class="method m-get">GET</span></td><td><code class="url-code">/api/v1/customers</code></td><td>Ambil daftar semua pelanggan</td></tr>
+            <tr><td><span class="method m-get">GET</span></td><td><code class="url-code">/api/v1/customers/:id</code></td><td>Ambil profil pelanggan by ID</td></tr>
+            <tr><td><span class="method m-post">POST</span></td><td><code class="url-code">/api/v1/customers</code></td><td>Daftarkan pelanggan baru</td></tr>
+            <tr><td><span class="method m-put">PUT</span></td><td><code class="url-code">/api/v1/customers/:id</code></td><td>Update data pelanggan</td></tr>
+            <tr><td><span class="method m-delete">DELETE</span></td><td><code class="url-code">/api/v1/customers/:id</code></td><td>Hapus data pelanggan</td></tr>
+        </table>
+
+        <h3 style="color:#2196F3;">💰 Transactions & Laporan</h3>
+        <table>
+            <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
+            <tr><td><span class="method m-post">POST</span></td><td><code class="url-code">/api/v1/transactions</code></td><td>Proses kasir/checkout & potong stok</td></tr>
+            <tr><td><span class="method m-get">GET</span></td><td><code class="url-code">/api/v1/transactions/:id</code></td><td>Lihat struk nota transaksi</td></tr>
+            <tr><td><span class="method m-get">GET</span></td><td><code class="url-code">/api/v1/laporan/penjualan</code></td><td>Rekapitulasi total omset</td></tr>
+            <tr><td><span class="method m-get">GET</span></td><td><code class="url-code">/api/v1/laporan/produk-terlaris</code></td><td>Pemeringkatan 5 produk terlaris</td></tr>
+            <tr><td><span class="method m-get">GET</span></td><td><code class="url-code">/api/v1/laporan/stok-menipis</code></td><td>Peringatan stok kurang dari 5</td></tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>✅ 5. Hasil Pengujian (Simulasi CRUD Postman)</h2>
+        <p style="margin-bottom: 25px; color: #555;">Berikut adalah tampilan *real* dari proses Input dan Output JSON setiap kali kita melakukan aksi (CRUD) menggunakan aplikasi Postman.</p>
+
+        <h3 style="color:#1e3a5f; margin-bottom: 10px;">A. Create Data (POST) - Tambah Produk Baru</h3>
         <div class="postman-wrapper">
             <div class="pm-url-bar">
                 <div class="pm-method post">POST</div>
@@ -249,36 +231,31 @@
                 <button class="pm-btn-send">Send</button>
             </div>
             <div class="pm-guide">
-                <h4>Cara Akses di Postman:</h4>
+                <h4>Langkah Penggunaan di Postman:</h4>
                 <ol>
-                    <li>Ubah tipe request menjadi <strong>POST</strong> di sebelah kiri kotak URL.</li>
-                    <li>Masukkan alamat endpoint: <code>http://localhost:3000/api/v1/products</code></li>
-                    <li>Di bawah URL, klik tab <strong>Body</strong> ➔ pilih opsi <strong>raw</strong> ➔ ubah Text menjadi <strong>JSON</strong> di pojok kanan.</li>
-                    <li>Copy kode JSON request di bawah ini dan paste ke dalam kolom editor.</li>
-                    <li>Klik tombol biru <strong>Send</strong>.</li>
+                    <li>Ubah metode di sebelah kiri URL menjadi <strong>POST</strong>.</li>
+                    <li>Ketik URL lengkap endpoint products.</li>
+                    <li>Di bawah URL, klik tab <strong>Body</strong> ➔ pilih <strong>raw</strong> ➔ ubah format ujung kanan ke <strong>JSON</strong>.</li>
+                    <li>Ketik kode JSON *Request* di bawah, lalu tekan tombol <strong>Send</strong>.</li>
                 </ol>
             </div>
             <div class="pm-data-section">
-                <div class="pm-section-title">Body (Raw - JSON)</div>
+                <div class="pm-section-title">Request Body (Input)</div>
 <pre>{
   <span class="json-key">"nama"</span>: <span class="json-str">"MacBook Pro M3"</span>,
   <span class="json-key">"kategori"</span>: <span class="json-str">"Laptop"</span>,
   <span class="json-key">"harga"</span>: <span class="json-num">25000000</span>,
   <span class="json-key">"stok"</span>: <span class="json-num">10</span>
 }</pre>
-                <div class="pm-section-title">
-                    <span>Response</span>
-                    <span class="pm-status-code">Status: 201 Created</span>
-                </div>
+                <div class="pm-section-title"><span>Response (Output)</span><span class="pm-status-code">201 Created</span></div>
 <pre>{
-  <span class="json-key">"status"</span>: <span class="json-str">"success"</span>,
   <span class="json-key">"message"</span>: <span class="json-str">"Produk berhasil ditambahkan"</span>,
   <span class="json-key">"insertId"</span>: <span class="json-num">5</span>
 }</pre>
             </div>
         </div>
 
-        <h3 style="color:#1e3a5f; margin-bottom: 10px;">Langkah 2: Tampilkan Data Produk (Read)</h3>
+        <h3 style="color:#1e3a5f; margin-bottom: 10px;">B. Read Data (GET) - Tampilkan Data Produk</h3>
         <div class="postman-wrapper">
             <div class="pm-url-bar">
                 <div class="pm-method get">GET</div>
@@ -286,21 +263,16 @@
                 <button class="pm-btn-send">Send</button>
             </div>
             <div class="pm-guide">
-                <h4>Cara Akses di Postman:</h4>
+                <h4>Langkah Penggunaan di Postman:</h4>
                 <ol>
-                    <li>Buka tab baru (klik icon <strong>+</strong>).</li>
-                    <li>Ubah tipe request menjadi <strong>GET</strong>.</li>
-                    <li>Masukkan alamat endpoint ditambah ID produk di akhir URL: <code>http://localhost:3000/api/v1/products/5</code></li>
-                    <li>Karena ini metode GET, Anda <strong>tidak perlu</strong> mengisi tab Body. Langsung klik tombol <strong>Send</strong>.</li>
+                    <li>Ubah metode menjadi <strong>GET</strong>.</li>
+                    <li>Ketik URL dengan menyertakan ID produk (contoh: 5) di akhir URL.</li>
+                    <li>Metode GET <strong>tidak membutuhkan Body</strong>. Langsung klik tombol <strong>Send</strong>.</li>
                 </ol>
             </div>
             <div class="pm-data-section">
-                <div class="pm-section-title">
-                    <span>Response</span>
-                    <span class="pm-status-code">Status: 200 OK</span>
-                </div>
+                <div class="pm-section-title"><span>Response (Output)</span><span class="pm-status-code">200 OK</span></div>
 <pre>{
-  <span class="json-key">"status"</span>: <span class="json-str">"success"</span>,
   <span class="json-key">"data"</span>: {
     <span class="json-key">"id"</span>: <span class="json-num">5</span>,
     <span class="json-key">"nama"</span>: <span class="json-str">"MacBook Pro M3"</span>,
@@ -312,7 +284,7 @@
             </div>
         </div>
 
-        <h3 style="color:#1e3a5f; margin-bottom: 10px;">Langkah 3: Ubah Data Produk (Update)</h3>
+        <h3 style="color:#1e3a5f; margin-bottom: 10px;">C. Update Data (PUT) - Ubah Harga & Stok</h3>
         <div class="postman-wrapper">
             <div class="pm-url-bar">
                 <div class="pm-method put">PUT</div>
@@ -320,35 +292,30 @@
                 <button class="pm-btn-send">Send</button>
             </div>
             <div class="pm-guide">
-                <h4>Cara Akses di Postman:</h4>
+                <h4>Langkah Penggunaan di Postman:</h4>
                 <ol>
-                    <li>Ubah tipe request menjadi <strong>PUT</strong>.</li>
-                    <li>Masukkan alamat endpoint target (jangan lupa sertakan ID): <code>http://localhost:3000/api/v1/products/5</code></li>
+                    <li>Ubah metode menjadi <strong>PUT</strong>.</li>
+                    <li>URL harus mengandung ID produk target (contoh: 5).</li>
                     <li>Masuk ke tab <strong>Body</strong> ➔ <strong>raw</strong> ➔ <strong>JSON</strong>.</li>
-                    <li>Masukkan kode JSON di bawah ini. Kita akan mengubah harga menjadi 24 Juta dan sisa stok menjadi 8.</li>
-                    <li>Klik tombol <strong>Send</strong>.</li>
+                    <li>Ketik *Request* pembaruan (misal: harga diskon jadi 24 juta), klik <strong>Send</strong>.</li>
                 </ol>
             </div>
             <div class="pm-data-section">
-                <div class="pm-section-title">Body (Raw - JSON)</div>
+                <div class="pm-section-title">Request Body (Input)</div>
 <pre>{
   <span class="json-key">"nama"</span>: <span class="json-str">"MacBook Pro M3"</span>,
   <span class="json-key">"kategori"</span>: <span class="json-str">"Laptop"</span>,
   <span class="json-key">"harga"</span>: <span class="json-num">24000000</span>,
-  <span class="json-key">"stok"</span>: <span class="json-num">8</span>
+  <span class="json-key">"stok"</span>: <span class="json-num">15</span>
 }</pre>
-                <div class="pm-section-title">
-                    <span>Response</span>
-                    <span class="pm-status-code">Status: 200 OK</span>
-                </div>
+                <div class="pm-section-title"><span>Response (Output)</span><span class="pm-status-code">200 OK</span></div>
 <pre>{
-  <span class="json-key">"status"</span>: <span class="json-str">"success"</span>,
   <span class="json-key">"message"</span>: <span class="json-str">"Data produk ID 5 berhasil diupdate"</span>
 }</pre>
             </div>
         </div>
 
-        <h3 style="color:#1e3a5f; margin-bottom: 10px;">Langkah 4: Hapus Data Produk (Delete)</h3>
+        <h3 style="color:#1e3a5f; margin-bottom: 10px;">D. Delete Data (DELETE) - Hapus Produk</h3>
         <div class="postman-wrapper">
             <div class="pm-url-bar">
                 <div class="pm-method delete">DELETE</div>
@@ -356,31 +323,24 @@
                 <button class="pm-btn-send">Send</button>
             </div>
             <div class="pm-guide">
-                <h4>Cara Akses di Postman:</h4>
+                <h4>Langkah Penggunaan di Postman:</h4>
                 <ol>
-                    <li>Ubah tipe request menjadi <strong>DELETE</strong>.</li>
-                    <li>Masukkan URL dengan ID produk yang ingin dihapus: <code>http://localhost:3000/api/v1/products/5</code></li>
-                    <li>Sama seperti GET, metode ini tidak membutuhkan Body. Langsung klik <strong>Send</strong>.</li>
-                    <li><em>*(Jika Anda mencoba melakukan metode GET lagi di URL yang sama setelah proses ini, status akan menjadi 404 Not Found).*</em></li>
+                    <li>Ubah metode menjadi <strong>DELETE</strong>.</li>
+                    <li>Pastikan ID produk di URL sudah benar. Hati-hati karena data akan hilang.</li>
+                    <li>Kosongkan tab Body, lalu tekan <strong>Send</strong>.</li>
                 </ol>
             </div>
             <div class="pm-data-section">
-                <div class="pm-section-title">
-                    <span>Response</span>
-                    <span class="pm-status-code">Status: 200 OK</span>
-                </div>
+                <div class="pm-section-title"><span>Response (Output)</span><span class="pm-status-code">200 OK</span></div>
 <pre>{
-  <span class="json-key">"status"</span>: <span class="json-str">"success"</span>,
   <span class="json-key">"message"</span>: <span class="json-str">"Produk ID 5 berhasil dihapus dari database"</span>
 }</pre>
             </div>
         </div>
-    </div>
 
-    <div class="card">
-        <h2>💰 Transaksi Penjualan (Kasir)</h2>
-        <p style="margin-bottom: 25px; color: #555;">Contoh proses ketika pelanggan memproses pembayaran / checkout barang. Sistem akan memotong stok secara otomatis.</p>
-        
+        <hr style="border: 1px solid #eee; margin: 40px 0;">
+
+        <h3 style="color:#1e3a5f; margin-bottom: 10px;">E. Proses Kasir (POST) - Membuat Transaksi Penjualan</h3>
         <div class="postman-wrapper">
             <div class="pm-url-bar">
                 <div class="pm-method post">POST</div>
@@ -388,16 +348,16 @@
                 <button class="pm-btn-send">Send</button>
             </div>
             <div class="pm-guide">
-                <h4>Cara Akses di Postman:</h4>
+                <h4>Langkah Penggunaan di Postman:</h4>
                 <ol>
-                    <li>Ubah metode ke <strong>POST</strong> dan masukkan URL endpoint transaksi.</li>
+                    <li>Gunakan metode <strong>POST</strong> ke endpoint transactions.</li>
                     <li>Pilih tab <strong>Body</strong> ➔ <strong>raw</strong> ➔ <strong>JSON</strong>.</li>
-                    <li>Masukkan data ID customer dan list keranjang belanja (berupa array <code>items</code> dari product_id dan jumlah barang).</li>
-                    <li>Klik <strong>Send</strong>.</li>
+                    <li>Kirim format ID customer pembeli, dan array <code>items</code> (berisi ID produk dan jumlah yang dibeli). Klik <strong>Send</strong>.</li>
+                    <li><em>*Catatan: Saat API ini dijalankan, stok produk otomatis akan berkurang di Database.</em></li>
                 </ol>
             </div>
             <div class="pm-data-section">
-                <div class="pm-section-title">Body (Raw - JSON)</div>
+                <div class="pm-section-title">Request Body (Keranjang Belanja)</div>
 <pre>{
   <span class="json-key">"customer_id"</span>: <span class="json-num">1</span>,
   <span class="json-key">"items"</span>: [
@@ -405,12 +365,8 @@
     { <span class="json-key">"product_id"</span>: <span class="json-num">2</span>, <span class="json-key">"jumlah"</span>: <span class="json-num">1</span> }
   ]
 }</pre>
-                <div class="pm-section-title">
-                    <span>Response</span>
-                    <span class="pm-status-code">Status: 201 Created</span>
-                </div>
+                <div class="pm-section-title"><span>Response (Struk Transaksi)</span><span class="pm-status-code">201 Created</span></div>
 <pre>{
-  <span class="json-key">"status"</span>: <span class="json-str">"success"</span>,
   <span class="json-key">"message"</span>: <span class="json-str">"Transaksi berhasil dibuat, stok produk telah terpotong"</span>,
   <span class="json-key">"data"</span>: {
     <span class="json-key">"transaction_id"</span>: <span class="json-num">1</span>,
@@ -420,6 +376,31 @@
 }</pre>
             </div>
         </div>
+
+    </div>
+
+    <div class="card">
+        <h2>📝 6. Kesimpulan & Penutup</h2>
+        
+        <h4 style="color:#1e3a5f; margin-bottom: 10px;">🔒 Middleware & Pengamanan</h4>
+        <div class="middleware-grid">
+            <div class="middleware-item"><h4>📝 Logger</h4><p>Mencatat history IP, Waktu & Method.</p></div>
+            <div class="middleware-item"><h4>✅ Validator</h4><p>Mencegah payload request JSON yang rusak.</p></div>
+            <div class="middleware-item"><h4>❌ Error Handler</h4><p>Mencegah server crash 500 saat ada bug internal.</p></div>
+        </div>
+
+        <h4 style="color:#1e3a5f; margin: 20px 0 10px 0;">📊 Standar Status Code</h4>
+        <div class="status-grid">
+            <div class="status-item" style="background:#4CAF50;">200 OK</div>
+            <div class="status-item" style="background:#2196F3;">201 Created</div>
+            <div class="status-item" style="background:#FF9800;">400 Bad Request</div>
+            <div class="status-item" style="background:#f44336;">404 Not Found</div>
+            <div class="status-item" style="background:#9C27B0;">500 Error</div>
+        </div>
+
+        <p style="margin-top: 25px; text-align: justify;">
+            <strong>Kesimpulan:</strong> TechStore API berhasil dibangun dengan kelengkapan fitur penuh. Seluruh operasi basis data (CRUD) untuk Products, Customers, dan Transactions telah berjalan mulus. Implementasi relasi database MySQL bekerja dengan sempurna dalam memotong stok otomatis pada saat checkout, serta mampu men-generate laporan bisnis. Arsitektur kode sudah berstandar industri dengan implementasi Route, Controller, dan Middleware.
+        </p>
     </div>
 
 </div>
