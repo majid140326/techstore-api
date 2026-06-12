@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechStore API - Laporan Project</title>
+    <title>TechStore API - Laporan Project & Postman Guide</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f4f7f6;
+            background: #f0f2f5;
             color: #333;
             line-height: 1.6;
         }
@@ -17,10 +17,10 @@
             color: white;
             padding: 60px 20px;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         header h1 { font-size: 2.8em; margin-bottom: 10px; font-weight: bold; }
-        header p { font-size: 1.1em; opacity: 0.9; margin-bottom: 20px;}
+        header p { font-size: 1.1em; opacity: 0.9; margin-bottom: 20px; }
         .badge {
             display: inline-block;
             background: rgba(255,255,255,0.2);
@@ -30,14 +30,14 @@
             font-size: 0.9em;
             font-weight: 600;
         }
-        .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+        .container { max-width: 1050px; margin: 40px auto; padding: 0 20px; }
         .card {
             background: white;
             border-radius: 12px;
             padding: 30px;
             margin-bottom: 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid #eaeaea;
+            border: 1px solid #e4e8ec;
         }
         .card h2 {
             color: #1e3a5f;
@@ -75,86 +75,115 @@
         .team-item div h4 { color: #1e3a5f; margin-bottom: 2px; }
         .team-item div p { color: #666; font-size: 0.9em; font-family: monospace; font-weight: bold;}
 
-        /* Interactive Endpoints */
-        details.endpoint {
-            margin-bottom: 15px;
+        /* POSTMAN UI SIMULATOR */
+        .postman-wrapper {
+            border: 1px solid #d1d5db;
             border-radius: 8px;
-            border: 1px solid #d1e3f8;
+            margin-bottom: 40px;
             background: #fff;
             overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
-        details.endpoint summary {
-            padding: 15px 20px;
-            cursor: pointer;
+        
+        /* URL Bar */
+        .pm-url-bar {
             display: flex;
+            background: #f9fafb;
+            padding: 15px;
+            border-bottom: 1px solid #e5e7eb;
             align-items: center;
             gap: 15px;
-            background: #f8fbff;
-            list-style: none;
-            font-weight: 600;
-            transition: 0.2s;
         }
-        details.endpoint summary:hover { background: #eef5ff; }
-        details.endpoint[open] summary { border-bottom: 1px solid #d1e3f8; }
-        
-        .method-badge {
-            padding: 5px 12px;
+        .pm-method {
+            padding: 8px 15px;
             border-radius: 4px;
             color: white;
-            font-size: 0.85em;
-            min-width: 80px;
-            text-align: center;
+            font-weight: bold;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
         }
-        .bg-get { background: #4CAF50; }
-        .bg-post { background: #2196F3; }
-        .bg-put { background: #FF9800; }
-        .bg-delete { background: #f44336; }
+        .pm-method.post { background: #FFB400; color: #fff; text-shadow: 0 1px 1px rgba(0,0,0,0.2); }
+        .pm-method.get { background: #0CBB52; }
+        .pm-method.put { background: #097BED; }
+        .pm-method.delete { background: #EB2013; }
         
-        .endpoint-url { font-family: monospace; font-size: 1.1em; color: #333; }
-        .endpoint-desc { margin-left: auto; color: #666; font-size: 0.9em; font-weight: normal; }
+        .pm-url {
+            flex: 1;
+            background: #fff;
+            border: 1px solid #d1d5db;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            font-size: 1em;
+            color: #374151;
+        }
+        .pm-btn-send {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-        .endpoint-body { padding: 20px; background: #fff; }
-        .endpoint-body h4 { color: #1e3a5f; margin: 15px 0 5px 0; font-size: 0.95em; text-transform: uppercase; }
-        .endpoint-body h4:first-child { margin-top: 0; }
+        /* Step Guide per Request */
+        .pm-guide {
+            background: #f0f7ff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 15px 20px;
+        }
+        .pm-guide h4 { color: #0056b3; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;}
+        .pm-guide ol { margin-left: 20px; color: #4b5563; font-size: 0.95em; }
+        .pm-guide li { margin-bottom: 4px; }
+        .pm-guide code { background: #e0e7ff; padding: 2px 6px; border-radius: 4px; color: #3730a3; font-size: 0.9em; font-family: monospace;}
+
+        /* Data Section (Body & Response) */
+        .pm-data-section {
+            padding: 20px;
+        }
+        .pm-section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9em;
+            color: #6b7280;
+            margin-bottom: 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .pm-status-code {
+            color: #0CBB52;
+            font-family: monospace;
+            background: #e6f9ed;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
 
         /* Code Blocks */
         pre {
-            background: #1e1e1e;
-            color: #a6e22e;
+            background: #282c34;
+            color: #abb2bf;
             padding: 15px;
             border-radius: 6px;
             overflow-x: auto;
-            font-size: 0.9em;
+            font-size: 0.95em;
             font-family: 'Consolas', monospace;
-            border-left: 4px solid #2196F3;
+            margin-bottom: 20px;
+            border-left: 4px solid #61afef;
         }
-        .json-key { color: #f92672; }
-        .json-str { color: #e6db74; }
-        .json-num { color: #ae81ff; }
+        .json-key { color: #e06c75; }
+        .json-str { color: #98c379; }
+        .json-num { color: #d19a66; }
 
-        /* Other Grids */
-        .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-        .tech-item { background: #f5f9ff; border: 1px solid #d0e8ff; border-radius: 8px; padding: 15px; text-align: center; }
-        .tech-item .icon { font-size: 2em; margin-bottom: 8px; }
-        
-        .postman-guide { background: #fff3e0; border-left: 5px solid #FF9800; padding: 20px; border-radius: 8px; margin-bottom: 15px; }
-        .postman-guide ol { margin-left: 20px; line-height: 1.8; }
-        .postman-guide code { background: #ffe0b2; padding: 2px 6px; border-radius: 4px; color: #e65100; font-family: monospace; }
-
-        .middleware-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-        .middleware-item { background: #f5f9ff; border-left: 4px solid #2196F3; padding: 15px; border-radius: 4px; }
-        
-        .status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
-        .status-item { text-align: center; padding: 15px; border-radius: 8px; color: white; font-weight: bold; }
-
-        footer { text-align: center; padding: 30px; color: #888; font-size: 0.9em; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 0.9em; border-top: 1px solid #ddd; margin-top: 40px;}
     </style>
 </head>
 <body>
 
 <header>
     <h1>🖥️ TechStore API</h1>
-    <p>Dokumentasi REST API Sistem Kasir Toko HP dan Laptop</p>
+    <p>Dokumentasi REST API Sistem Kasir & Panduan Integrasi Postman</p>
     <span class="badge">📚 Kelompok 5</span>
     <span class="badge">🎓 Integrasi Sistem</span>
     <span class="badge">⚡ Node.js + MySQL</span>
@@ -164,7 +193,7 @@
 
     <div class="card">
         <h2>📌 Pendahuluan</h2>
-        <p>TechStore API adalah REST API yang dibangun menggunakan <strong>Node.js</strong> dan <strong>Express.js</strong> sebagai backend sistem kasir toko HP dan Laptop. API ini mengelola data produk, customer, transaksi penjualan, dan laporan secara lengkap dengan koneksi database <strong>MySQL (XAMPP)</strong>.</p>
+        <p>TechStore API adalah REST API yang dibangun menggunakan <strong>Node.js</strong> dan <strong>Express.js</strong> sebagai backend sistem kasir toko HP dan Laptop. API ini mengelola data produk, customer, transaksi penjualan, dan laporan secara lengkap dengan koneksi database <strong>MySQL (XAMPP)</strong>. Seluruh proses di bawah ini mensimulasikan penggunaan melalui aplikasi <strong>Postman</strong>.</p>
     </div>
 
     <div class="card">
@@ -209,124 +238,166 @@
     </div>
 
     <div class="card">
-        <h2>🚀 Cara Penggunaan di Postman</h2>
-        <div class="postman-guide">
-            <ol>
-                <li>Pastikan server API sudah berjalan di lokal (<code>npm run dev</code> atau <code>node server.js</code>).</li>
-                <li>Buka aplikasi <strong>Postman</strong> dan buat <em>Workspace/Collection</em> baru.</li>
-                <li>Klik tombol <strong>+ New Request</strong>.</li>
-                <li>Pilih metode HTTP yang sesuai (<strong>GET, POST, PUT, DELETE</strong>) pada <em>dropdown</em> di sebelah kiri kolom URL.</li>
-                <li>Masukkan <strong>Base URL + Endpoint</strong> ke kolom URL. Contoh: <code>http://localhost:3000/api/v1/products</code></li>
-                <li><strong>Khusus untuk metode POST dan PUT (Tambah/Update Data):</strong>
-                    <ul>
-                        <li>Pilih tab <strong>Body</strong> di bawah kolom URL.</li>
-                        <li>Pilih opsi <strong>raw</strong>.</li>
-                        <li>Ubah format dari Text menjadi <strong>JSON</strong> di <em>dropdown</em> sebelah kanan.</li>
-                        <li>Masukkan format JSON (Payload) sesuai dokumentasi di bawah.</li>
-                    </ul>
-                </li>
-                <li>Klik tombol <strong>Send</strong> (warna biru) di sebelah kanan.</li>
-                <li>Lihat hasil balasan dari server di bagian bawah pada kotak <strong>Response (Body)</strong>.</li>
-            </ol>
+        <h2>📦 Simulasi Siklus CRUD: Produk (Products)</h2>
+        <p style="margin-bottom: 25px; color: #555;">Berikut adalah demonstrasi alur hidup sebuah entitas data. Kita akan membuat produk <strong>MacBook Pro M3</strong>, memanggil datanya, mengubah harganya, dan terakhir menghapusnya. Semua tersinkronisasi menggunakan <strong>ID Produk: 5</strong>.</p>
+
+        <h3 style="color:#1e3a5f; margin-bottom: 10px;">Langkah 1: Tambah Produk Baru (Create)</h3>
+        <div class="postman-wrapper">
+            <div class="pm-url-bar">
+                <div class="pm-method post">POST</div>
+                <div class="pm-url">http://localhost:3000/api/v1/products</div>
+                <button class="pm-btn-send">Send</button>
+            </div>
+            <div class="pm-guide">
+                <h4>Cara Akses di Postman:</h4>
+                <ol>
+                    <li>Ubah tipe request menjadi <strong>POST</strong> di sebelah kiri kotak URL.</li>
+                    <li>Masukkan alamat endpoint: <code>http://localhost:3000/api/v1/products</code></li>
+                    <li>Di bawah URL, klik tab <strong>Body</strong> ➔ pilih opsi <strong>raw</strong> ➔ ubah Text menjadi <strong>JSON</strong> di pojok kanan.</li>
+                    <li>Copy kode JSON request di bawah ini dan paste ke dalam kolom editor.</li>
+                    <li>Klik tombol biru <strong>Send</strong>.</li>
+                </ol>
+            </div>
+            <div class="pm-data-section">
+                <div class="pm-section-title">Body (Raw - JSON)</div>
+<pre>{
+  <span class="json-key">"nama"</span>: <span class="json-str">"MacBook Pro M3"</span>,
+  <span class="json-key">"kategori"</span>: <span class="json-str">"Laptop"</span>,
+  <span class="json-key">"harga"</span>: <span class="json-num">25000000</span>,
+  <span class="json-key">"stok"</span>: <span class="json-num">10</span>
+}</pre>
+                <div class="pm-section-title">
+                    <span>Response</span>
+                    <span class="pm-status-code">Status: 201 Created</span>
+                </div>
+<pre>{
+  <span class="json-key">"status"</span>: <span class="json-str">"success"</span>,
+  <span class="json-key">"message"</span>: <span class="json-str">"Produk berhasil ditambahkan"</span>,
+  <span class="json-key">"insertId"</span>: <span class="json-num">5</span>
+}</pre>
+            </div>
+        </div>
+
+        <h3 style="color:#1e3a5f; margin-bottom: 10px;">Langkah 2: Tampilkan Data Produk (Read)</h3>
+        <div class="postman-wrapper">
+            <div class="pm-url-bar">
+                <div class="pm-method get">GET</div>
+                <div class="pm-url">http://localhost:3000/api/v1/products/5</div>
+                <button class="pm-btn-send">Send</button>
+            </div>
+            <div class="pm-guide">
+                <h4>Cara Akses di Postman:</h4>
+                <ol>
+                    <li>Buka tab baru (klik icon <strong>+</strong>).</li>
+                    <li>Ubah tipe request menjadi <strong>GET</strong>.</li>
+                    <li>Masukkan alamat endpoint ditambah ID produk di akhir URL: <code>http://localhost:3000/api/v1/products/5</code></li>
+                    <li>Karena ini metode GET, Anda <strong>tidak perlu</strong> mengisi tab Body. Langsung klik tombol <strong>Send</strong>.</li>
+                </ol>
+            </div>
+            <div class="pm-data-section">
+                <div class="pm-section-title">
+                    <span>Response</span>
+                    <span class="pm-status-code">Status: 200 OK</span>
+                </div>
+<pre>{
+  <span class="json-key">"status"</span>: <span class="json-str">"success"</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"id"</span>: <span class="json-num">5</span>,
+    <span class="json-key">"nama"</span>: <span class="json-str">"MacBook Pro M3"</span>,
+    <span class="json-key">"kategori"</span>: <span class="json-str">"Laptop"</span>,
+    <span class="json-key">"harga"</span>: <span class="json-num">25000000</span>,
+    <span class="json-key">"stok"</span>: <span class="json-num">10</span>
+  }
+}</pre>
+            </div>
+        </div>
+
+        <h3 style="color:#1e3a5f; margin-bottom: 10px;">Langkah 3: Ubah Data Produk (Update)</h3>
+        <div class="postman-wrapper">
+            <div class="pm-url-bar">
+                <div class="pm-method put">PUT</div>
+                <div class="pm-url">http://localhost:3000/api/v1/products/5</div>
+                <button class="pm-btn-send">Send</button>
+            </div>
+            <div class="pm-guide">
+                <h4>Cara Akses di Postman:</h4>
+                <ol>
+                    <li>Ubah tipe request menjadi <strong>PUT</strong>.</li>
+                    <li>Masukkan alamat endpoint target (jangan lupa sertakan ID): <code>http://localhost:3000/api/v1/products/5</code></li>
+                    <li>Masuk ke tab <strong>Body</strong> ➔ <strong>raw</strong> ➔ <strong>JSON</strong>.</li>
+                    <li>Masukkan kode JSON di bawah ini. Kita akan mengubah harga menjadi 24 Juta dan sisa stok menjadi 8.</li>
+                    <li>Klik tombol <strong>Send</strong>.</li>
+                </ol>
+            </div>
+            <div class="pm-data-section">
+                <div class="pm-section-title">Body (Raw - JSON)</div>
+<pre>{
+  <span class="json-key">"nama"</span>: <span class="json-str">"MacBook Pro M3"</span>,
+  <span class="json-key">"kategori"</span>: <span class="json-str">"Laptop"</span>,
+  <span class="json-key">"harga"</span>: <span class="json-num">24000000</span>,
+  <span class="json-key">"stok"</span>: <span class="json-num">8</span>
+}</pre>
+                <div class="pm-section-title">
+                    <span>Response</span>
+                    <span class="pm-status-code">Status: 200 OK</span>
+                </div>
+<pre>{
+  <span class="json-key">"status"</span>: <span class="json-str">"success"</span>,
+  <span class="json-key">"message"</span>: <span class="json-str">"Data produk ID 5 berhasil diupdate"</span>
+}</pre>
+            </div>
+        </div>
+
+        <h3 style="color:#1e3a5f; margin-bottom: 10px;">Langkah 4: Hapus Data Produk (Delete)</h3>
+        <div class="postman-wrapper">
+            <div class="pm-url-bar">
+                <div class="pm-method delete">DELETE</div>
+                <div class="pm-url">http://localhost:3000/api/v1/products/5</div>
+                <button class="pm-btn-send">Send</button>
+            </div>
+            <div class="pm-guide">
+                <h4>Cara Akses di Postman:</h4>
+                <ol>
+                    <li>Ubah tipe request menjadi <strong>DELETE</strong>.</li>
+                    <li>Masukkan URL dengan ID produk yang ingin dihapus: <code>http://localhost:3000/api/v1/products/5</code></li>
+                    <li>Sama seperti GET, metode ini tidak membutuhkan Body. Langsung klik <strong>Send</strong>.</li>
+                    <li><em>*(Jika Anda mencoba melakukan metode GET lagi di URL yang sama setelah proses ini, status akan menjadi 404 Not Found).*</em></li>
+                </ol>
+            </div>
+            <div class="pm-data-section">
+                <div class="pm-section-title">
+                    <span>Response</span>
+                    <span class="pm-status-code">Status: 200 OK</span>
+                </div>
+<pre>{
+  <span class="json-key">"status"</span>: <span class="json-str">"success"</span>,
+  <span class="json-key">"message"</span>: <span class="json-str">"Produk ID 5 berhasil dihapus dari database"</span>
+}</pre>
+            </div>
         </div>
     </div>
 
     <div class="card">
-        <h2>📡 Dokumentasi & Hasil CRUD API</h2>
-        <p style="margin-bottom: 20px; color: #555;">Base URL: <code style="background:#eee; padding:2px 6px; border-radius:4px;">http://localhost:3000</code><br><em>Klik pada setiap endpoint di bawah ini untuk melihat detail Request JSON dan Response JSON.</em></p>
-
-        <h3 style="color:#2196F3; margin: 25px 0 10px 0;">📦 1. Products (Produk)</h3>
+        <h2>💰 Transaksi Penjualan (Kasir)</h2>
+        <p style="margin-bottom: 25px; color: #555;">Contoh proses ketika pelanggan memproses pembayaran / checkout barang. Sistem akan memotong stok secara otomatis.</p>
         
-        <details class="endpoint">
-            <summary><span class="method-badge bg-get">GET</span><span class="endpoint-url">/api/v1/products</span><span class="endpoint-desc">Ambil semua produk</span></summary>
-            <div class="endpoint-body">
-                <h4>Hasil Response (200 OK):</h4>
-<pre>[
-  { <span class="json-key">"id"</span>: <span class="json-num">1</span>, <span class="json-key">"nama"</span>: <span class="json-str">"ASUS TUF A15"</span>, <span class="json-key">"kategori"</span>: <span class="json-str">"Laptop"</span>, <span class="json-key">"harga"</span>: <span class="json-num">12000000</span>, <span class="json-key">"stok"</span>: <span class="json-num">10</span> },
-  { <span class="json-key">"id"</span>: <span class="json-num">2</span>, <span class="json-key">"nama"</span>: <span class="json-str">"iPhone 15"</span>, <span class="json-key">"kategori"</span>: <span class="json-str">"HP"</span>, <span class="json-key">"harga"</span>: <span class="json-num">15000000</span>, <span class="json-key">"stok"</span>: <span class="json-num">8</span> }
-]</pre>
+        <div class="postman-wrapper">
+            <div class="pm-url-bar">
+                <div class="pm-method post">POST</div>
+                <div class="pm-url">http://localhost:3000/api/v1/transactions</div>
+                <button class="pm-btn-send">Send</button>
             </div>
-        </details>
-
-        <details class="endpoint">
-            <summary><span class="method-badge bg-post">POST</span><span class="endpoint-url">/api/v1/products</span><span class="endpoint-desc">Tambah produk baru</span></summary>
-            <div class="endpoint-body">
-                <h4>Request Body (JSON):</h4>
-<pre>{
-  <span class="json-key">"nama"</span>: <span class="json-str">"MacBook Air M2"</span>,
-  <span class="json-key">"kategori"</span>: <span class="json-str">"Laptop"</span>,
-  <span class="json-key">"harga"</span>: <span class="json-num">18000000</span>,
-  <span class="json-key">"stok"</span>: <span class="json-num">5</span>
-}</pre>
-                <h4>Hasil Response (201 Created):</h4>
-<pre>{
-  <span class="json-key">"message"</span>: <span class="json-str">"Produk berhasil ditambahkan"</span>,
-  <span class="json-key">"insertId"</span>: <span class="json-num">3</span>
-}</pre>
+            <div class="pm-guide">
+                <h4>Cara Akses di Postman:</h4>
+                <ol>
+                    <li>Ubah metode ke <strong>POST</strong> dan masukkan URL endpoint transaksi.</li>
+                    <li>Pilih tab <strong>Body</strong> ➔ <strong>raw</strong> ➔ <strong>JSON</strong>.</li>
+                    <li>Masukkan data ID customer dan list keranjang belanja (berupa array <code>items</code> dari product_id dan jumlah barang).</li>
+                    <li>Klik <strong>Send</strong>.</li>
+                </ol>
             </div>
-        </details>
-
-        <details class="endpoint">
-            <summary><span class="method-badge bg-put">PUT</span><span class="endpoint-url">/api/v1/products/:id</span><span class="endpoint-desc">Update data produk</span></summary>
-            <div class="endpoint-body">
-                <h4>Request Body (JSON):</h4>
-<pre>{
-  <span class="json-key">"nama"</span>: <span class="json-str">"ASUS TUF A15 (Updated)"</span>,
-  <span class="json-key">"harga"</span>: <span class="json-num">11500000</span>,
-  <span class="json-key">"stok"</span>: <span class="json-num">15</span>
-}</pre>
-                <h4>Hasil Response (200 OK):</h4>
-<pre>{
-  <span class="json-key">"message"</span>: <span class="json-str">"Produk berhasil diupdate"</span>
-}</pre>
-            </div>
-        </details>
-
-        <details class="endpoint">
-            <summary><span class="method-badge bg-delete">DELETE</span><span class="endpoint-url">/api/v1/products/:id</span><span class="endpoint-desc">Hapus produk</span></summary>
-            <div class="endpoint-body">
-                <h4>Hasil Response (200 OK):</h4>
-<pre>{
-  <span class="json-key">"message"</span>: <span class="json-str">"Produk berhasil dihapus"</span>
-}</pre>
-            </div>
-        </details>
-
-        <h3 style="color:#2196F3; margin: 25px 0 10px 0;">👥 2. Customers (Pelanggan)</h3>
-
-        <details class="endpoint">
-            <summary><span class="method-badge bg-get">GET</span><span class="endpoint-url">/api/v1/customers</span><span class="endpoint-desc">Ambil semua customer</span></summary>
-            <div class="endpoint-body">
-                <h4>Hasil Response (200 OK):</h4>
-<pre>[
-  { <span class="json-key">"id"</span>: <span class="json-num">1</span>, <span class="json-key">"nama"</span>: <span class="json-str">"Budi Santoso"</span>, <span class="json-key">"email"</span>: <span class="json-str">"budi@gmail.com"</span>, <span class="json-key">"telepon"</span>: <span class="json-str">"08123456789"</span> }
-]</pre>
-            </div>
-        </details>
-
-        <details class="endpoint">
-            <summary><span class="method-badge bg-post">POST</span><span class="endpoint-url">/api/v1/customers</span><span class="endpoint-desc">Tambah customer baru</span></summary>
-            <div class="endpoint-body">
-                <h4>Request Body (JSON):</h4>
-<pre>{
-  <span class="json-key">"nama"</span>: <span class="json-str">"Siti Aminah"</span>,
-  <span class="json-key">"email"</span>: <span class="json-str">"siti@gmail.com"</span>,
-  <span class="json-key">"telepon"</span>: <span class="json-str">"08998765432"</span>
-}</pre>
-                <h4>Hasil Response (201 Created):</h4>
-<pre>{
-  <span class="json-key">"message"</span>: <span class="json-str">"Customer berhasil ditambahkan"</span>,
-  <span class="json-key">"insertId"</span>: <span class="json-num">2</span>
-}</pre>
-            </div>
-        </details>
-
-        <h3 style="color:#2196F3; margin: 25px 0 10px 0;">💰 3. Transactions (Transaksi Kasir)</h3>
-
-        <details class="endpoint">
-            <summary><span class="method-badge bg-post">POST</span><span class="endpoint-url">/api/v1/transactions</span><span class="endpoint-desc">Buat Transaksi Baru (Checkout)</span></summary>
-            <div class="endpoint-body">
-                <h4>Request Body (JSON):</h4>
+            <div class="pm-data-section">
+                <div class="pm-section-title">Body (Raw - JSON)</div>
 <pre>{
   <span class="json-key">"customer_id"</span>: <span class="json-num">1</span>,
   <span class="json-key">"items"</span>: [
@@ -334,9 +405,13 @@
     { <span class="json-key">"product_id"</span>: <span class="json-num">2</span>, <span class="json-key">"jumlah"</span>: <span class="json-num">1</span> }
   ]
 }</pre>
-                <h4>Hasil Response (201 Created):</h4>
+                <div class="pm-section-title">
+                    <span>Response</span>
+                    <span class="pm-status-code">Status: 201 Created</span>
+                </div>
 <pre>{
-  <span class="json-key">"message"</span>: <span class="json-str">"Transaksi berhasil dibuat"</span>,
+  <span class="json-key">"status"</span>: <span class="json-str">"success"</span>,
+  <span class="json-key">"message"</span>: <span class="json-str">"Transaksi berhasil dibuat, stok produk telah terpotong"</span>,
   <span class="json-key">"data"</span>: {
     <span class="json-key">"transaction_id"</span>: <span class="json-num">1</span>,
     <span class="json-key">"total_harga"</span>: <span class="json-num">39000000</span>,
@@ -344,97 +419,7 @@
   }
 }</pre>
             </div>
-        </details>
-
-        <details class="endpoint">
-            <summary><span class="method-badge bg-get">GET</span><span class="endpoint-url">/api/v1/transactions/:id</span><span class="endpoint-desc">Lihat Detail Struk Transaksi</span></summary>
-            <div class="endpoint-body">
-                <h4>Hasil Response (200 OK):</h4>
-<pre>{
-  <span class="json-key">"id"</span>: <span class="json-num">1</span>,
-  <span class="json-key">"customer"</span>: { <span class="json-key">"nama"</span>: <span class="json-str">"Budi Santoso"</span> },
-  <span class="json-key">"items"</span>: [
-    { <span class="json-key">"nama_produk"</span>: <span class="json-str">"ASUS TUF A15"</span>, <span class="json-key">"harga"</span>: <span class="json-num">12000000</span>, <span class="json-key">"jumlah"</span>: <span class="json-num">2</span>, <span class="json-key">"subtotal"</span>: <span class="json-num">24000000</span> },
-    { <span class="json-key">"nama_produk"</span>: <span class="json-str">"iPhone 15"</span>, <span class="json-key">"harga"</span>: <span class="json-num">15000000</span>, <span class="json-key">"jumlah"</span>: <span class="json-num">1</span>, <span class="json-key">"subtotal"</span>: <span class="json-num">15000000</span> }
-  ],
-  <span class="json-key">"total_keseluruhan"</span>: <span class="json-num">39000000</span>
-}</pre>
-            </div>
-        </details>
-
-        <h3 style="color:#2196F3; margin: 25px 0 10px 0;">📊 4. Laporan (Reporting)</h3>
-
-        <details class="endpoint">
-            <summary><span class="method-badge bg-get">GET</span><span class="endpoint-url">/api/v1/laporan/penjualan</span><span class="endpoint-desc">Rekap Omset Penjualan</span></summary>
-            <div class="endpoint-body">
-                <h4>Hasil Response (200 OK):</h4>
-<pre>{
-  <span class="json-key">"message"</span>: <span class="json-str">"Rekap penjualan"</span>,
-  <span class="json-key">"data"</span>: {
-    <span class="json-key">"total_transaksi"</span>: <span class="json-num">1</span>,
-    <span class="json-key">"total_pendapatan"</span>: <span class="json-str">"39000000"</span>
-  }
-}</pre>
-            </div>
-        </details>
-        
-        <details class="endpoint">
-            <summary><span class="method-badge bg-get">GET</span><span class="endpoint-url">/api/v1/laporan/produk-terlaris</span><span class="endpoint-desc">Top 5 Produk Terlaris</span></summary>
-            <div class="endpoint-body">
-                <h4>Hasil Response (200 OK):</h4>
-<pre>{
-  <span class="json-key">"message"</span>: <span class="json-str">"Produk terlaris"</span>,
-  <span class="json-key">"data"</span>: [
-    { <span class="json-key">"product_id"</span>: <span class="json-num">1</span>, <span class="json-key">"nama"</span>: <span class="json-str">"ASUS TUF A15"</span>, <span class="json-key">"total_terjual"</span>: <span class="json-str">"2"</span> }
-  ]
-}</pre>
-            </div>
-        </details>
-
-    </div>
-
-    <div class="card">
-        <h2>🛠️ Teknologi yang Digunakan</h2>
-        <div class="tech-grid">
-            <div class="tech-item"><div class="icon">🟢</div><h4>Node.js</h4><p>Runtime JavaScript</p></div>
-            <div class="tech-item"><div class="icon">⚡</div><h4>Express.js</h4><p>Web Framework</p></div>
-            <div class="tech-item"><div class="icon">🗄️</div><h4>MySQL</h4><p>Database (XAMPP)</p></div>
-            <div class="tech-item"><div class="icon">📮</div><h4>Postman</h4><p>API Testing</p></div>
         </div>
-    </div>
-
-    <div class="card">
-        <h2>🔒 Middleware System</h2>
-        <div class="middleware-grid">
-            <div class="middleware-item"><h4>📝 Logger</h4><p>Mencatat setiap request yang masuk (Waktu & Method).</p></div>
-            <div class="middleware-item"><h4>✅ Validator</h4><p>Memfilter request body sebelum masuk ke controller.</p></div>
-            <div class="middleware-item"><h4>❌ Error Handler</h4><p>Menangani error internal agar server tidak crash.</p></div>
-            <div class="middleware-item"><h4>🔍 Not Found</h4><p>Menangkap rute URL yang salah / tidak terdaftar.</p></div>
-        </div>
-    </div>
-
-    <div class="card">
-        <h2>📊 Standar Status Code HTTP</h2>
-        <div class="status-grid">
-            <div class="status-item bg-get">200<br>OK</div>
-            <div class="status-item bg-post">201<br>Created</div>
-            <div class="status-item bg-put">400<br>Bad Request</div>
-            <div class="status-item bg-delete">404<br>Not Found</div>
-            <div class="status-item" style="background: #9C27B0;">500<br>Server Error</div>
-        </div>
-    </div>
-
-    <div class="card">
-        <h2>📝 Kesimpulan</h2>
-        <p>TechStore API berhasil dibangun dengan fitur fungsional lengkap yang memenuhi standar industri meliputi:</p>
-        <br>
-        <ul style="padding-left: 20px; line-height: 2">
-            <li>✅ <strong>Implementasi CRUD Lengkap</strong> untuk data Products, Customers, dan Transactions.</li>
-            <li>✅ <strong>Arsitektur Keamanan</strong> melalui Middleware Logger, Validator, dan Error Handler.</li>
-            <li>✅ <strong>Relasi Database</strong> tersusun rapi menggunakan MySQL (XAMPP).</li>
-            <li>✅ <strong>Laporan Intelijen Bisnis</strong> mencakup Omset Penjualan, Top Produk, dan Sisa Stok (Warning).</li>
-            <li>✅ <strong>Telah Diuji Sepenuhnya</strong> menggunakan Postman dan berjalan tanpa kendala (*bug-free*).</li>
-        </ul>
     </div>
 
 </div>
