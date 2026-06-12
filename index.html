@@ -8,86 +8,80 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f4f6f9;
+            background: #f4f7f6;
             color: #333;
             line-height: 1.6;
         }
         header {
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            background: linear-gradient(135deg, #1e3a5f, #2196F3);
             color: white;
-            padding: 70px 20px;
+            padding: 60px 20px;
             text-align: center;
-            border-bottom: 5px solid #3498db;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        header h1 { font-size: 2.8em; margin-bottom: 15px; font-weight: 700; letter-spacing: 1px; }
-        header p { font-size: 1.2em; opacity: 0.9; max-width: 600px; margin: 0 auto 20px; }
+        header h1 { font-size: 2.8em; margin-bottom: 10px; font-weight: bold; }
+        header p { font-size: 1.1em; opacity: 0.9; margin-bottom: 20px;}
         .badge {
             display: inline-block;
             background: rgba(255,255,255,0.2);
-            padding: 6px 18px;
+            padding: 6px 16px;
             border-radius: 20px;
             margin: 5px;
-            font-size: 0.95em;
+            font-size: 0.9em;
             font-weight: 600;
-            backdrop-filter: blur(5px);
         }
-        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
         .card {
             background: white;
             border-radius: 12px;
-            padding: 35px;
-            margin-bottom: 35px;
+            padding: 30px;
+            margin-bottom: 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid #eef2f5;
+            border: 1px solid #eaeaea;
         }
         .card h2 {
-            color: #2c5364;
-            font-size: 1.65em;
-            margin-bottom: 25px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #3498db;
+            color: #1e3a5f;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #2196F3;
             display: flex;
             align-items: center;
             gap: 10px;
-        }
-        .card h3 {
-            color: #203a43;
-            margin: 30px 0 15px;
-            font-size: 1.3em;
-            background: #eef2f5;
-            padding: 10px 15px;
-            border-radius: 6px;
-            border-left: 4px solid #3498db;
         }
         
         /* Team Grid */
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 15px;
             margin-top: 15px;
         }
         .team-item {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.2s;
-        }
-        .team-item:hover { transform: translateY(-5px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .team-item .avatar { font-size: 2.5em; margin-bottom: 10px; }
-        .team-item h4 { color: #2c5364; font-size: 1.1em; margin-bottom: 5px; }
-        .team-item p { color: #64748b; font-size: 0.9em; font-family: monospace; font-weight: bold; }
-
-        /* Interactive Endpoints (Swagger Style) */
-        details.endpoint {
-            margin-bottom: 12px;
+            background: #f8fbff;
+            border: 1px solid #cce5ff;
+            padding: 15px;
             border-radius: 8px;
-            border: 1px solid #cbd5e1;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .team-item .avatar {
+            font-size: 2em;
+            background: #e6f2ff;
+            padding: 10px;
+            border-radius: 50%;
+        }
+        .team-item div h4 { color: #1e3a5f; margin-bottom: 2px; }
+        .team-item div p { color: #666; font-size: 0.9em; font-family: monospace; font-weight: bold;}
+
+        /* Interactive Endpoints */
+        details.endpoint {
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #d1e3f8;
             background: #fff;
             overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
         details.endpoint summary {
             padding: 15px 20px;
@@ -95,69 +89,72 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            background: #f8fafc;
+            background: #f8fbff;
             list-style: none;
-            transition: background 0.2s;
+            font-weight: 600;
+            transition: 0.2s;
         }
-        details.endpoint summary::-webkit-details-marker { display: none; }
-        details.endpoint summary:hover { background: #f1f5f9; }
-        details.endpoint[open] summary { border-bottom: 1px solid #cbd5e1; background: #f1f5f9; }
+        details.endpoint summary:hover { background: #eef5ff; }
+        details.endpoint[open] summary { border-bottom: 1px solid #d1e3f8; }
         
         .method-badge {
-            padding: 6px 12px;
+            padding: 5px 12px;
             border-radius: 4px;
             color: white;
             font-size: 0.85em;
-            font-weight: bold;
             min-width: 80px;
             text-align: center;
-            text-transform: uppercase;
         }
-        .badge-get { background: #10b981; }
-        .badge-post { background: #3b82f6; }
-        .badge-put { background: #f59e0b; }
-        .badge-delete { background: #ef4444; }
-
-        .endpoint-url { color: #0f172a; font-family: 'Consolas', monospace; font-size: 1.05em; font-weight: 600; }
-        .endpoint-desc { color: #64748b; margin-left: auto; font-size: 0.95em; }
+        .bg-get { background: #4CAF50; }
+        .bg-post { background: #2196F3; }
+        .bg-put { background: #FF9800; }
+        .bg-delete { background: #f44336; }
         
-        .endpoint-body { padding: 20px; background: #fff; }
-        .endpoint-body h4 { margin-bottom: 10px; color: #334155; font-size: 0.95em; text-transform: uppercase; letter-spacing: 0.5px; }
+        .endpoint-url { font-family: monospace; font-size: 1.1em; color: #333; }
+        .endpoint-desc { margin-left: auto; color: #666; font-size: 0.9em; font-weight: normal; }
 
-        /* JSON Code Block */
+        .endpoint-body { padding: 20px; background: #fff; }
+        .endpoint-body h4 { color: #1e3a5f; margin: 15px 0 5px 0; font-size: 0.95em; text-transform: uppercase; }
+        .endpoint-body h4:first-child { margin-top: 0; }
+
+        /* Code Blocks */
         pre {
             background: #1e1e1e;
-            color: #d4d4d4;
+            color: #a6e22e;
             padding: 15px;
             border-radius: 6px;
             overflow-x: auto;
             font-size: 0.9em;
-            border-left: 4px solid #3498db;
-            font-family: 'Consolas', 'Monaco', monospace;
-            margin-bottom: 10px;
+            font-family: 'Consolas', monospace;
+            border-left: 4px solid #2196F3;
         }
-        .json-key { color: #9cdcfe; }
-        .json-string { color: #ce9178; }
-        .json-number { color: #b5cea8; }
+        .json-key { color: #f92672; }
+        .json-str { color: #e6db74; }
+        .json-num { color: #ae81ff; }
 
-        /* Tech & Status Grids */
-        .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-        .tech-item { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 20px; text-align: center; }
-        .tech-item .icon { font-size: 2.5em; margin-bottom: 10px; }
-        .tech-item h4 { color: #2c5364; margin-bottom: 5px; font-size: 1.15em; }
+        /* Other Grids */
+        .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .tech-item { background: #f5f9ff; border: 1px solid #d0e8ff; border-radius: 8px; padding: 15px; text-align: center; }
+        .tech-item .icon { font-size: 2em; margin-bottom: 8px; }
         
-        .status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
-        .status-item { text-align: center; padding: 20px 15px; border-radius: 10px; color: white; font-weight: bold; }
-        .s200 { background: #10b981; } .s201 { background: #3b82f6; } .s400 { background: #f59e0b; } .s404 { background: #ef4444; } .s500 { background: #8b5cf6; }
+        .postman-guide { background: #fff3e0; border-left: 5px solid #FF9800; padding: 20px; border-radius: 8px; margin-bottom: 15px; }
+        .postman-guide ol { margin-left: 20px; line-height: 1.8; }
+        .postman-guide code { background: #ffe0b2; padding: 2px 6px; border-radius: 4px; color: #e65100; font-family: monospace; }
+
+        .middleware-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .middleware-item { background: #f5f9ff; border-left: 4px solid #2196F3; padding: 15px; border-radius: 4px; }
         
-        footer { text-align: center; padding: 40px; color: #64748b; font-size: 0.95em; background: #e2e8f0; margin-top: 60px; }
+        .status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+        .status-item { text-align: center; padding: 15px; border-radius: 8px; color: white; font-weight: bold; }
+
+        footer { text-align: center; padding: 30px; color: #888; font-size: 0.9em; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>🖥️ TechStore API</h1>
-    <p>Dokumentasi REST API Sistem Kasir & Manajemen Inventori Toko HP dan Laptop</p>
+    <p>Dokumentasi REST API Sistem Kasir Toko HP dan Laptop</p>
     <span class="badge">📚 Kelompok 5</span>
     <span class="badge">🎓 Integrasi Sistem</span>
     <span class="badge">⚡ Node.js + MySQL</span>
@@ -167,386 +164,229 @@
 
     <div class="card">
         <h2>📌 Pendahuluan</h2>
-        <p>TechStore API adalah platform RESTful API backend yang dirancang khusus untuk mendukung operasional sistem kasir toko ritel HP dan Laptop. API ini mampu mengotomatisasi pendataan stok barang, pengelolaan data pelanggan secara terpusat, validasi transaksi penjualan seketika, serta menghasilkan rekapitulasi data laporan bisnis.</p>
+        <p>TechStore API adalah REST API yang dibangun menggunakan <strong>Node.js</strong> dan <strong>Express.js</strong> sebagai backend sistem kasir toko HP dan Laptop. API ini mengelola data produk, customer, transaksi penjualan, dan laporan secara lengkap dengan koneksi database <strong>MySQL (XAMPP)</strong>.</p>
     </div>
 
     <div class="card">
-        <h2>👥 Tim Pengembang (Kelompok 5)</h2>
+        <h2>👥 Anggota Kelompok 5</h2>
         <div class="team-grid">
             <div class="team-item">
                 <div class="avatar">👨‍💻</div>
-                <h4>Nur Majid</h4>
-                <p>2405903040064</p>
+                <div>
+                    <h4>Nur Majid</h4>
+                    <p>NIM. 2405903040064</p>
+                </div>
             </div>
             <div class="team-item">
                 <div class="avatar">👨‍💻</div>
-                <h4>M. Munji Nasrullah</h4>
-                <p>2405903040050</p>
+                <div>
+                    <h4>M. Munji Nasrullah</h4>
+                    <p>NIM. 2405903040050</p>
+                </div>
             </div>
             <div class="team-item">
                 <div class="avatar">👩‍💻</div>
-                <h4>Ida</h4>
-                <p>2405903040039</p>
+                <div>
+                    <h4>Ida</h4>
+                    <p>NIM. 2405903040039</p>
+                </div>
             </div>
             <div class="team-item">
                 <div class="avatar">👩‍💻</div>
-                <h4>Amisha F. Putri Kamal</h4>
-                <p>2405903040009</p>
+                <div>
+                    <h4>Amisha F. Putri Kamal</h4>
+                    <p>NIM. 2405903040009</p>
+                </div>
             </div>
             <div class="team-item">
                 <div class="avatar">👩‍💻</div>
-                <h4>Indah Muftabsyirah</h4>
-                <p>2405903040039</p>
+                <div>
+                    <h4>Indah Muftabsyirah</h4>
+                    <p>NIM. 2405903040039</p>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="card">
-        <h2>📡 Dokumentasi API & Hasil Pengujian</h2>
-        <p style="margin-bottom: 20px;"><em>Klik pada masing-masing endpoint di bawah ini untuk melihat detail deskripsi dan contoh respon (tampilan JSON) yang dikembalikan oleh server.</em></p>
+        <h2>🚀 Cara Penggunaan di Postman</h2>
+        <div class="postman-guide">
+            <ol>
+                <li>Pastikan server API sudah berjalan di lokal (<code>npm run dev</code> atau <code>node server.js</code>).</li>
+                <li>Buka aplikasi <strong>Postman</strong> dan buat <em>Workspace/Collection</em> baru.</li>
+                <li>Klik tombol <strong>+ New Request</strong>.</li>
+                <li>Pilih metode HTTP yang sesuai (<strong>GET, POST, PUT, DELETE</strong>) pada <em>dropdown</em> di sebelah kiri kolom URL.</li>
+                <li>Masukkan <strong>Base URL + Endpoint</strong> ke kolom URL. Contoh: <code>http://localhost:3000/api/v1/products</code></li>
+                <li><strong>Khusus untuk metode POST dan PUT (Tambah/Update Data):</strong>
+                    <ul>
+                        <li>Pilih tab <strong>Body</strong> di bawah kolom URL.</li>
+                        <li>Pilih opsi <strong>raw</strong>.</li>
+                        <li>Ubah format dari Text menjadi <strong>JSON</strong> di <em>dropdown</em> sebelah kanan.</li>
+                        <li>Masukkan format JSON (Payload) sesuai dokumentasi di bawah.</li>
+                    </ul>
+                </li>
+                <li>Klik tombol <strong>Send</strong> (warna biru) di sebelah kanan.</li>
+                <li>Lihat hasil balasan dari server di bagian bawah pada kotak <strong>Response (Body)</strong>.</li>
+            </ol>
+        </div>
+    </div>
 
-        <h3>ℹ️ Info Server</h3>
+    <div class="card">
+        <h2>📡 Dokumentasi & Hasil CRUD API</h2>
+        <p style="margin-bottom: 20px; color: #555;">Base URL: <code style="background:#eee; padding:2px 6px; border-radius:4px;">http://localhost:3000</code><br><em>Klik pada setiap endpoint di bawah ini untuk melihat detail Request JSON dan Response JSON.</em></p>
+
+        <h3 style="color:#2196F3; margin: 25px 0 10px 0;">📦 1. Products (Produk)</h3>
         
         <details class="endpoint">
-            <summary>
-                <span class="method-badge badge-get">GET</span>
-                <span class="endpoint-url">http://localhost:3000/api/info</span>
-                <span class="endpoint-desc">Cek status server API</span>
-            </summary>
+            <summary><span class="method-badge bg-get">GET</span><span class="endpoint-url">/api/v1/products</span><span class="endpoint-desc">Ambil semua produk</span></summary>
             <div class="endpoint-body">
-                <h4>Response (200 OK):</h4>
-<pre>{
-    <span class="json-key">"status"</span>: <span class="json-string">"success"</span>,
-    <span class="json-key">"app"</span>: <span class="json-string">"TechStore API Server"</span>,
-    <span class="json-key">"version"</span>: <span class="json-string">"1.0.0"</span>
-}</pre>
-            </div>
-        </details>
-
-        <details class="endpoint">
-            <summary>
-                <span class="method-badge badge-get">GET</span>
-                <span class="endpoint-url">http://localhost:3000/api/info/readme</span>
-                <span class="endpoint-desc">Lihat dokumentasi teks</span>
-            </summary>
-            <div class="endpoint-body">
-                <h4>Response (200 OK):</h4>
-<pre>{
-    <span class="json-key">"status"</span>: <span class="json-string">"success"</span>,
-    <span class="json-key">"content"</span>: <span class="json-string">"# TechStore API\nSistem backend kasir..."</span>
-}</pre>
-            </div>
-        </details>
-
-        <h3>📦 Manajemen Produk</h3>
-
-        <details class="endpoint">
-            <summary>
-                <span class="method-badge badge-get">GET</span>
-                <span class="endpoint-url">http://localhost:3000/api/v1/products</span>
-                <span class="endpoint-desc">Ambil semua daftar produk</span>
-            </summary>
-            <div class="endpoint-body">
-                <h4>Response (200 OK):</h4>
+                <h4>Hasil Response (200 OK):</h4>
 <pre>[
-    { <span class="json-key">"id"</span>: 1, <span class="json-key">"nama"</span>: <span class="json-string">"ASUS TUF A15"</span>, <span class="json-key">"kategori"</span>: <span class="json-string">"Laptop"</span>, <span class="json-key">"harga"</span>: <span class="json-number">12000000</span>, <span class="json-key">"stok"</span>: <span class="json-number">10</span> },
-    { <span class="json-key">"id"</span>: 2, <span class="json-key">"nama"</span>: <span class="json-string">"iPhone 15"</span>, <span class="json-key">"kategori"</span>: <span class="json-string">"HP"</span>, <span class="json-key">"harga"</span>: <span class="json-number">15000000</span>, <span class="json-key">"stok"</span>: <span class="json-number">8</span> }
+  { <span class="json-key">"id"</span>: <span class="json-num">1</span>, <span class="json-key">"nama"</span>: <span class="json-str">"ASUS TUF A15"</span>, <span class="json-key">"kategori"</span>: <span class="json-str">"Laptop"</span>, <span class="json-key">"harga"</span>: <span class="json-num">12000000</span>, <span class="json-key">"stok"</span>: <span class="json-num">10</span> },
+  { <span class="json-key">"id"</span>: <span class="json-num">2</span>, <span class="json-key">"nama"</span>: <span class="json-str">"iPhone 15"</span>, <span class="json-key">"kategori"</span>: <span class="json-str">"HP"</span>, <span class="json-key">"harga"</span>: <span class="json-num">15000000</span>, <span class="json-key">"stok"</span>: <span class="json-num">8</span> }
 ]</pre>
             </div>
         </details>
 
         <details class="endpoint">
-            <summary>
-                <span class="method-badge badge-get">GET</span>
-                <span class="endpoint-url">http://localhost:3000/api/v1/products/:id</span>
-                <span class="endpoint-desc">Detail 1 produk berdasarkan ID</span>
-            </summary>
+            <summary><span class="method-badge bg-post">POST</span><span class="endpoint-url">/api/v1/products</span><span class="endpoint-desc">Tambah produk baru</span></summary>
             <div class="endpoint-body">
-                <h4>Response (200 OK):</h4>
+                <h4>Request Body (JSON):</h4>
 <pre>{
-    <span class="json-key">"status"</span>: <span class="json-string">"success"</span>,
-    <span class="json-key">"data"</span>: { <span class="json-key">"id"</span>: 2, <span class="json-key">"nama"</span>: <span class="json-string">"iPhone 15"</span>, <span class="json-key">"kategori"</span>: <span class="json-string">"HP"</span>, <span class="json-key">"harga"</span>: <span class="json-number">15000000</span>, <span class="json-key">"stok"</span>: <span class="json-number">8</span> }
+  <span class="json-key">"nama"</span>: <span class="json-str">"MacBook Air M2"</span>,
+  <span class="json-key">"kategori"</span>: <span class="json-str">"Laptop"</span>,
+  <span class="json-key">"harga"</span>: <span class="json-num">18000000</span>,
+  <span class="json-key">"stok"</span>: <span class="json-num">5</span>
+}</pre>
+                <h4>Hasil Response (201 Created):</h4>
+<pre>{
+  <span class="json-key">"message"</span>: <span class="json-str">"Produk berhasil ditambahkan"</span>,
+  <span class="json-key">"insertId"</span>: <span class="json-num">3</span>
 }</pre>
             </div>
         </details>
 
         <details class="endpoint">
-            <summary>
-                <span class="method-badge badge-post">POST</span>
-                <span class="endpoint-url">http://localhost:3000/api/v1/products</span>
-                <span class="endpoint-desc">Tambah produk baru</span>
-            </summary>
+            <summary><span class="method-badge bg-put">PUT</span><span class="endpoint-url">/api/v1/products/:id</span><span class="endpoint-desc">Update data produk</span></summary>
             <div class="endpoint-body">
-                <h4>Response (201 Created):</h4>
+                <h4>Request Body (JSON):</h4>
 <pre>{
-    <span class="json-key">"status"</span>: <span class="json-string">"success"</span>,
-    <span class="json-key">"message"</span>: <span class="json-string">"Produk berhasil ditambahkan"</span>,
-    <span class="json-key">"productId"</span>: <span class="json-number">5</span>
+  <span class="json-key">"nama"</span>: <span class="json-str">"ASUS TUF A15 (Updated)"</span>,
+  <span class="json-key">"harga"</span>: <span class="json-num">11500000</span>,
+  <span class="json-key">"stok"</span>: <span class="json-num">15</span>
+}</pre>
+                <h4>Hasil Response (200 OK):</h4>
+<pre>{
+  <span class="json-key">"message"</span>: <span class="json-str">"Produk berhasil diupdate"</span>
 }</pre>
             </div>
         </details>
 
         <details class="endpoint">
-            <summary>
-                <span class="method-badge badge-put">PUT</span>
-                <span class="endpoint-url">http://localhost:3000/api/v1/products/:id</span>
-                <span class="endpoint-desc">Ubah data produk</span>
-            </summary>
+            <summary><span class="method-badge bg-delete">DELETE</span><span class="endpoint-url">/api/v1/products/:id</span><span class="endpoint-desc">Hapus produk</span></summary>
             <div class="endpoint-body">
-                <h4>Response (200 OK):</h4>
+                <h4>Hasil Response (200 OK):</h4>
 <pre>{
-    <span class="json-key">"status"</span>: <span class="json-string">"success"</span>,
-    <span class="json-key">"message"</span>: <span class="json-string">"Data produk ID 2 berhasil diubah"</span>
+  <span class="json-key">"message"</span>: <span class="json-str">"Produk berhasil dihapus"</span>
 }</pre>
             </div>
         </details>
 
-        <details class="endpoint">
-            <summary>
-                <span class="method-badge badge-delete">DELETE</span>
-                <span class="endpoint-url">http://localhost:3000/api/v1/products/:id</span>
-                <span class="endpoint-desc">Hapus produk</span>
-            </summary>
-            <div class="endpoint-body">
-                <h4>Response (200 OK):</h4>
-<pre>{
-    <span class="json-key">"status"</span>: <span class="json-string">"success"</span>,
-    <span class="json-key">"message"</span>: <span class="json-string">"Produk ID 3 berhasil dihapus dari database"</span>
-}</pre>
-            </div>
-        </details>
-
-        <h3>👥 Manajemen Pelanggan (Customers)</h3>
+        <h3 style="color:#2196F3; margin: 25px 0 10px 0;">👥 2. Customers (Pelanggan)</h3>
 
         <details class="endpoint">
-            <summary>
-                <span class="method-badge badge-get">GET</span>
-                <span class="endpoint-url">http://localhost:3000/api/v1/customers</span>
-                <span class="endpoint-desc">Daftar semua pelanggan</span>
-            </summary>
+            <summary><span class="method-badge bg-get">GET</span><span class="endpoint-url">/api/v1/customers</span><span class="endpoint-desc">Ambil semua customer</span></summary>
             <div class="endpoint-body">
-                <h4>Response (200 OK):</h4>
+                <h4>Hasil Response (200 OK):</h4>
 <pre>[
-    { <span class="json-key">"id"</span>: 1, <span class="json-key">"nama"</span>: <span class="json-string">"Budi Santoso"</span>, <span class="json-key">"email"</span>: <span class="json-string">"budi@gmail.com"</span>, <span class="json-key">"telepon"</span>: <span class="json-string">"08123456789"</span> },
-    { <span class="json-key">"id"</span>: 2, <span class="json-key">"nama"</span>: <span class="json-string">"Siti Aminah"</span>, <span class="json-key">"email"</span>: <span class="json-string">"siti@gmail.com"</span>, <span class="json-key">"telepon"</span>: <span class="json-string">"08998765432"</span> }
+  { <span class="json-key">"id"</span>: <span class="json-num">1</span>, <span class="json-key">"nama"</span>: <span class="json-str">"Budi Santoso"</span>, <span class="json-key">"email"</span>: <span class="json-str">"budi@gmail.com"</span>, <span class="json-key">"telepon"</span>: <span class="json-str">"08123456789"</span> }
 ]</pre>
             </div>
         </details>
 
         <details class="endpoint">
-            <summary>
-                <span class="method-badge badge-get">GET</span>
-                <span class="endpoint-url">http://localhost:3000/api/v1/customers/:id</span>
-                <span class="endpoint-desc">Detail 1 pelanggan</span>
-            </summary>
+            <summary><span class="method-badge bg-post">POST</span><span class="endpoint-url">/api/v1/customers</span><span class="endpoint-desc">Tambah customer baru</span></summary>
             <div class="endpoint-body">
-                <h4>Response (200 OK):</h4>
+                <h4>Request Body (JSON):</h4>
 <pre>{
-    <span class="json-key">"status"</span>: <span class="json-string">"success"</span>,
-    <span class="json-key">"data"</span>: { <span class="json-key">"id"</span>: 1, <span class="json-key">"nama"</span>: <span class="json-string">"Budi Santoso"</span>, <span class="json-key">"email"</span>: <span class="json-string">"budi@gmail.com"</span> }
+  <span class="json-key">"nama"</span>: <span class="json-str">"Siti Aminah"</span>,
+  <span class="json-key">"email"</span>: <span class="json-str">"siti@gmail.com"</span>,
+  <span class="json-key">"telepon"</span>: <span class="json-str">"08998765432"</span>
+}</pre>
+                <h4>Hasil Response (201 Created):</h4>
+<pre>{
+  <span class="json-key">"message"</span>: <span class="json-str">"Customer berhasil ditambahkan"</span>,
+  <span class="json-key">"insertId"</span>: <span class="json-num">2</span>
+}</pre>
+            </div>
+        </details>
+
+        <h3 style="color:#2196F3; margin: 25px 0 10px 0;">💰 3. Transactions (Transaksi Kasir)</h3>
+
+        <details class="endpoint">
+            <summary><span class="method-badge bg-post">POST</span><span class="endpoint-url">/api/v1/transactions</span><span class="endpoint-desc">Buat Transaksi Baru (Checkout)</span></summary>
+            <div class="endpoint-body">
+                <h4>Request Body (JSON):</h4>
+<pre>{
+  <span class="json-key">"customer_id"</span>: <span class="json-num">1</span>,
+  <span class="json-key">"items"</span>: [
+    { <span class="json-key">"product_id"</span>: <span class="json-num">1</span>, <span class="json-key">"jumlah"</span>: <span class="json-num">2</span> },
+    { <span class="json-key">"product_id"</span>: <span class="json-num">2</span>, <span class="json-key">"jumlah"</span>: <span class="json-num">1</span> }
+  ]
+}</pre>
+                <h4>Hasil Response (201 Created):</h4>
+<pre>{
+  <span class="json-key">"message"</span>: <span class="json-str">"Transaksi berhasil dibuat"</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"transaction_id"</span>: <span class="json-num">1</span>,
+    <span class="json-key">"total_harga"</span>: <span class="json-num">39000000</span>,
+    <span class="json-key">"tanggal"</span>: <span class="json-str">"2026-06-11T08:45:41.000Z"</span>
+  }
 }</pre>
             </div>
         </details>
 
         <details class="endpoint">
-            <summary>
-                <span class="method-badge badge-post">POST</span>
-                <span class="endpoint-url">http://localhost:3000/api/v1/customers</span>
-                <span class="endpoint-desc">Tambah pelanggan baru</span>
-            </summary>
+            <summary><span class="method-badge bg-get">GET</span><span class="endpoint-url">/api/v1/transactions/:id</span><span class="endpoint-desc">Lihat Detail Struk Transaksi</span></summary>
             <div class="endpoint-body">
-                <h4>Response (201 Created):</h4>
+                <h4>Hasil Response (200 OK):</h4>
 <pre>{
-    <span class="json-key">"status"</span>: <span class="json-string">"success"</span>,
-    <span class="json-key">"message"</span>: <span class="json-string">"Customer baru berhasil didaftarkan"</span>,
-    <span class="json-key">"customerId"</span>: <span class="json-number">3</span>
+  <span class="json-key">"id"</span>: <span class="json-num">1</span>,
+  <span class="json-key">"customer"</span>: { <span class="json-key">"nama"</span>: <span class="json-str">"Budi Santoso"</span> },
+  <span class="json-key">"items"</span>: [
+    { <span class="json-key">"nama_produk"</span>: <span class="json-str">"ASUS TUF A15"</span>, <span class="json-key">"harga"</span>: <span class="json-num">12000000</span>, <span class="json-key">"jumlah"</span>: <span class="json-num">2</span>, <span class="json-key">"subtotal"</span>: <span class="json-num">24000000</span> },
+    { <span class="json-key">"nama_produk"</span>: <span class="json-str">"iPhone 15"</span>, <span class="json-key">"harga"</span>: <span class="json-num">15000000</span>, <span class="json-key">"jumlah"</span>: <span class="json-num">1</span>, <span class="json-key">"subtotal"</span>: <span class="json-num">15000000</span> }
+  ],
+  <span class="json-key">"total_keseluruhan"</span>: <span class="json-num">39000000</span>
 }</pre>
             </div>
         </details>
 
+        <h3 style="color:#2196F3; margin: 25px 0 10px 0;">📊 4. Laporan (Reporting)</h3>
+
         <details class="endpoint">
-            <summary>
-                <span class="method-badge badge-put">PUT</span>
-                <span class="endpoint-url">http://localhost:3000/api/v1/customers/:id</span>
-                <span class="endpoint-desc">Update identitas pelanggan</span>
-            </summary>
+            <summary><span class="method-badge bg-get">GET</span><span class="endpoint-url">/api/v1/laporan/penjualan</span><span class="endpoint-desc">Rekap Omset Penjualan</span></summary>
             <div class="endpoint-body">
-                <h4>Response (200 OK):</h4>
+                <h4>Hasil Response (200 OK):</h4>
 <pre>{
-    <span class="json-key">"status"</span>: <span class="json-string">"success"</span>,
-    <span class="json-key">"message"</span>: <span class="json-string">"Informasi profil customer berhasil diupdate"</span>
+  <span class="json-key">"message"</span>: <span class="json-str">"Rekap penjualan"</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"total_transaksi"</span>: <span class="json-num">1</span>,
+    <span class="json-key">"total_pendapatan"</span>: <span class="json-str">"39000000"</span>
+  }
 }</pre>
             </div>
         </details>
-
+        
         <details class="endpoint">
-            <summary>
-                <span class="method-badge badge-delete">DELETE</span>
-                <span class="endpoint-url">http://localhost:3000/api/v1/customers/:id</span>
-                <span class="endpoint-desc">Hapus data pelanggan</span>
-            </summary>
+            <summary><span class="method-badge bg-get">GET</span><span class="endpoint-url">/api/v1/laporan/produk-terlaris</span><span class="endpoint-desc">Top 5 Produk Terlaris</span></summary>
             <div class="endpoint-body">
-                <h4>Response (200 OK):</h4>
+                <h4>Hasil Response (200 OK):</h4>
 <pre>{
-    <span class="json-key">"status"</span>: <span class="json-string">"success"</span>,
-    <span class="json-key">"message"</span>: <span class="json-string">"Data customer berhasil dihapus"</span>
-}</pre>
-            </div>
-        </details>
-
-        <h3>💰 Kasir & Transaksi (Transactions)</h3>
-
-        <details class="endpoint">
-            <summary>
-                <span class="method-badge badge-get">GET</span>
-                <span class="endpoint-url">http://localhost:3000/api/v1/transactions</span>
-                <span class="endpoint-desc">Histori semua transaksi</span>
-            </summary>
-            <div class="endpoint-body">
-                <h4>Response (200 OK):</h4>
-<pre>[
-    { <span class="json-key">"transaction_id"</span>: 1, <span class="json-key">"customer_name"</span>: <span class="json-string">"Budi Santoso"</span>, <span class="json-key">"total_harga"</span>: <span class="json-number">39000000</span>, <span class="json-key">"tanggal"</span>: <span class="json-string">"2026-06-11T08:45:41.000Z"</span> }
-]</pre>
-            </div>
-        </details>
-
-        <details class="endpoint">
-            <summary>
-                <span class="method-badge badge-get">GET</span>
-                <span class="endpoint-url">http://localhost:3000/api/v1/transactions/:id</span>
-                <span class="endpoint-desc">Cetak struk detail transaksi</span>
-            </summary>
-            <div class="endpoint-body">
-                <h4>Response (200 OK):</h4>
-<pre>{
-    <span class="json-key">"id"</span>: <span class="json-number">1</span>,
-    <span class="json-key">"customer"</span>: { <span class="json-key">"id"</span>: 1, <span class="json-key">"nama"</span>: <span class="json-string">"Budi Santoso"</span> },
-    <span class="json-key">"items"</span>: [
-        { <span class="json-key">"productId"</span>: 1, <span class="json-key">"nama"</span>: <span class="json-string">"ASUS TUF A15"</span>, <span class="json-key">"harga"</span>: <span class="json-number">12000000</span>, <span class="json-key">"jumlah"</span>: <span class="json-number">2</span>, <span class="json-key">"subtotal"</span>: <span class="json-number">24000000</span> }
-    ],
-    <span class="json-key">"totalHarga"</span>: <span class="json-number">24000000</span>
-}</pre>
-            </div>
-        </details>
-
-        <details class="endpoint">
-            <summary>
-                <span class="method-badge badge-post">POST</span>
-                <span class="endpoint-url">http://localhost:3000/api/v1/transactions</span>
-                <span class="endpoint-desc">Buat transaksi baru (Checkout)</span>
-            </summary>
-            <div class="endpoint-body">
-                <h4>Response (201 Created):</h4>
-<pre>{
-    <span class="json-key">"message"</span>: <span class="json-string">"Transaksi berhasil dibuat"</span>,
-    <span class="json-key">"data"</span>: {
-        <span class="json-key">"id"</span>: <span class="json-number">1</span>,
-        <span class="json-key">"totalHarga"</span>: <span class="json-number">39000000</span>,
-        <span class="json-key">"tanggal"</span>: <span class="json-string">"2026-06-11T08:45:41.000Z"</span>
-    }
-}</pre>
-            </div>
-        </details>
-
-        <details class="endpoint">
-            <summary>
-                <span class="method-badge badge-delete">DELETE</span>
-                <span class="endpoint-url">http://localhost:3000/api/v1/transactions/:id</span>
-                <span class="endpoint-desc">Batalkan transaksi & Return stok</span>
-            </summary>
-            <div class="endpoint-body">
-                <h4>Response (200 OK):</h4>
-<pre>{
-    <span class="json-key">"status"</span>: <span class="json-string">"success"</span>,
-    <span class="json-key">"message"</span>: <span class="json-string">"Transaksi penjualan dibatalkan, stok barang direstorasi"</span>
-}</pre>
-            </div>
-        </details>
-
-        <h3>📈 Business Intelligence (Laporan)</h3>
-
-        <details class="endpoint">
-            <summary>
-                <span class="method-badge badge-get">GET</span>
-                <span class="endpoint-url">http://localhost:3000/api/v1/laporan/penjualan</span>
-                <span class="endpoint-desc">Rekap total omset penjualan</span>
-            </summary>
-            <div class="endpoint-body">
-                <h4>Response (200 OK):</h4>
-<pre>{
-    <span class="json-key">"message"</span>: <span class="json-string">"Rekap penjualan"</span>,
-    <span class="json-key">"data"</span>: {
-        <span class="json-key">"total_transaksi"</span>: <span class="json-number">1</span>,
-        <span class="json-key">"total_pendapatan"</span>: <span class="json-string">"39000000"</span>
-    }
-}</pre>
-            </div>
-        </details>
-
-        <details class="endpoint">
-            <summary>
-                <span class="method-badge badge-get">GET</span>
-                <span class="endpoint-url">http://localhost:3000/api/v1/laporan/produk-terlaris</span>
-                <span class="endpoint-desc">Top 5 produk paling laku</span>
-            </summary>
-            <div class="endpoint-body">
-                <h4>Response (200 OK):</h4>
-<pre>{
-    <span class="json-key">"message"</span>: <span class="json-string">"Produk terlaris"</span>,
-    <span class="json-key">"data"</span>: [
-        { <span class="json-key">"product_id"</span>: 1, <span class="json-key">"nama"</span>: <span class="json-string">"ASUS TUF A15"</span>, <span class="json-key">"total_terjual"</span>: <span class="json-string">"2"</span> }
-    ]
-}</pre>
-            </div>
-        </details>
-
-        <details class="endpoint">
-            <summary>
-                <span class="method-badge badge-get">GET</span>
-                <span class="endpoint-url">http://localhost:3000/api/v1/laporan/per-customer</span>
-                <span class="endpoint-desc">Statistik belanja per pelanggan</span>
-            </summary>
-            <div class="endpoint-body">
-                <h4>Response (200 OK):</h4>
-<pre>{
-    <span class="json-key">"message"</span>: <span class="json-string">"Rekap kontribusi belanja customer"</span>,
-    <span class="json-key">"data"</span>: [
-        { <span class="json-key">"customer_id"</span>: 1, <span class="json-key">"nama"</span>: <span class="json-string">"Budi Santoso"</span>, <span class="json-key">"total_belanja"</span>: <span class="json-number">39000000</span> }
-    ]
-}</pre>
-            </div>
-        </details>
-
-        <details class="endpoint">
-            <summary>
-                <span class="method-badge badge-get">GET</span>
-                <span class="endpoint-url">http://localhost:3000/api/v1/laporan/per-hari</span>
-                <span class="endpoint-desc">Grafik tren penjualan harian</span>
-            </summary>
-            <div class="endpoint-body">
-                <h4>Response (200 OK):</h4>
-<pre>{
-    <span class="json-key">"message"</span>: <span class="json-string">"Grafik rekapitulasi harian"</span>,
-    <span class="json-key">"data"</span>: [
-        { <span class="json-key">"hari"</span>: <span class="json-string">"2026-06-11"</span>, <span class="json-key">"total_omset"</span>: <span class="json-number">39000000</span> }
-    ]
-}</pre>
-            </div>
-        </details>
-
-        <details class="endpoint">
-            <summary>
-                <span class="method-badge badge-get">GET</span>
-                <span class="endpoint-url">http://localhost:3000/api/v1/laporan/stok-menipis</span>
-                <span class="endpoint-desc">Warning sisa stok &lt; 5 unit</span>
-            </summary>
-            <div class="endpoint-body">
-                <h4>Response (200 OK):</h4>
-<pre>{
-    <span class="json-key">"message"</span>: <span class="json-string">"Produk dengan stok menipis (< 5)"</span>,
-    <span class="json-key">"data"</span>: [
-        { <span class="json-key">"id"</span>: 4, <span class="json-key">"nama"</span>: <span class="json-string">"Lenovo ThinkPad"</span>, <span class="json-key">"stok"</span>: <span class="json-number">5</span> }
-    ]
+  <span class="json-key">"message"</span>: <span class="json-str">"Produk terlaris"</span>,
+  <span class="json-key">"data"</span>: [
+    { <span class="json-key">"product_id"</span>: <span class="json-num">1</span>, <span class="json-key">"nama"</span>: <span class="json-str">"ASUS TUF A15"</span>, <span class="json-key">"total_terjual"</span>: <span class="json-str">"2"</span> }
+  ]
 }</pre>
             </div>
         </details>
@@ -554,23 +394,46 @@
     </div>
 
     <div class="card">
-        <h2>📊 Standarisasi Respon Status HTTP Code</h2>
-        <div class="status-grid">
-            <div class="status-item s200">200<br>OK</div>
-            <div class="status-item s201">201<br>Created</div>
-            <div class="status-item s400">400<br>Bad Request</div>
-            <div class="status-item s404">404<br>Not Found</div>
-            <div class="status-item s500">500<br>Server Error</div>
+        <h2>🛠️ Teknologi yang Digunakan</h2>
+        <div class="tech-grid">
+            <div class="tech-item"><div class="icon">🟢</div><h4>Node.js</h4><p>Runtime JavaScript</p></div>
+            <div class="tech-item"><div class="icon">⚡</div><h4>Express.js</h4><p>Web Framework</p></div>
+            <div class="tech-item"><div class="icon">🗄️</div><h4>MySQL</h4><p>Database (XAMPP)</p></div>
+            <div class="tech-item"><div class="icon">📮</div><h4>Postman</h4><p>API Testing</p></div>
         </div>
     </div>
 
     <div class="card">
-        <h2>📝 Kesimpulan Project</h2>
+        <h2>🔒 Middleware System</h2>
+        <div class="middleware-grid">
+            <div class="middleware-item"><h4>📝 Logger</h4><p>Mencatat setiap request yang masuk (Waktu & Method).</p></div>
+            <div class="middleware-item"><h4>✅ Validator</h4><p>Memfilter request body sebelum masuk ke controller.</p></div>
+            <div class="middleware-item"><h4>❌ Error Handler</h4><p>Menangani error internal agar server tidak crash.</p></div>
+            <div class="middleware-item"><h4>🔍 Not Found</h4><p>Menangkap rute URL yang salah / tidak terdaftar.</p></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📊 Standar Status Code HTTP</h2>
+        <div class="status-grid">
+            <div class="status-item bg-get">200<br>OK</div>
+            <div class="status-item bg-post">201<br>Created</div>
+            <div class="status-item bg-put">400<br>Bad Request</div>
+            <div class="status-item bg-delete">404<br>Not Found</div>
+            <div class="status-item" style="background: #9C27B0;">500<br>Server Error</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📝 Kesimpulan</h2>
+        <p>TechStore API berhasil dibangun dengan fitur fungsional lengkap yang memenuhi standar industri meliputi:</p>
+        <br>
         <ul style="padding-left: 20px; line-height: 2">
-            <li>✅ Penyelesaian modul operasi data CRUD terarah.</li>
-            <li>✅ Pengamanan integritas data via Middleware Logger & Validator.</li>
-            <li>✅ Database relasional multi-tabel menggunakan MySQL.</li>
-            <li>✅ Dokumentasi REST API transparan dengan <strong>Total 21 Endpoint Operasional</strong>.</li>
+            <li>✅ <strong>Implementasi CRUD Lengkap</strong> untuk data Products, Customers, dan Transactions.</li>
+            <li>✅ <strong>Arsitektur Keamanan</strong> melalui Middleware Logger, Validator, dan Error Handler.</li>
+            <li>✅ <strong>Relasi Database</strong> tersusun rapi menggunakan MySQL (XAMPP).</li>
+            <li>✅ <strong>Laporan Intelijen Bisnis</strong> mencakup Omset Penjualan, Top Produk, dan Sisa Stok (Warning).</li>
+            <li>✅ <strong>Telah Diuji Sepenuhnya</strong> menggunakan Postman dan berjalan tanpa kendala (*bug-free*).</li>
         </ul>
     </div>
 
