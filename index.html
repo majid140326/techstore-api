@@ -88,12 +88,16 @@
 
         /* POSTMAN UI SIMULATOR (No-click version) */
         .postman-wrapper { border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 35px; background: #fff; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
-        .pm-url-bar { display: flex; background: #f1f5f9; padding: 12px 15px; border-bottom: 1px solid #e2e8f0; align-items: center; gap: 15px; }
-        .pm-url { flex: 1; background: #fff; border: 1px solid #cbd5e1; padding: 8px 12px; border-radius: 4px; font-family: 'Consolas', monospace; font-size: 0.95em; color: #334155; }
+        .pm-url-bar { display: flex; background: #f1f5f9; padding: 12px 15px; border-bottom: 1px solid #e2e8f0; align-items: center; gap: 15px; flex-wrap: wrap; }
+        .pm-url { flex: 1; background: #fff; border: 1px solid #cbd5e1; padding: 8px 12px; border-radius: 4px; font-family: 'Consolas', monospace; font-size: 0.95em; color: #334155; min-width: 250px;}
         .pm-btn-send { background: #3b82f6; color: white; border: none; padding: 8px 20px; border-radius: 4px; font-weight: bold; }
         .pm-data-section { padding: 20px; }
         .pm-section-title { font-size: 0.85em; color: #64748b; margin-bottom: 8px; font-weight: bold; text-transform: uppercase; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px; }
         
+        /* List Endpoint Card */
+        .endpoint-list { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-bottom: 10px; }
+        .endpoint-list h4 { color: #0f172a; border-bottom: 2px solid #cbd5e1; padding-bottom: 8px; margin-bottom: 10px;}
+
         footer { text-align: center; padding: 30px; color: #64748b; font-size: 0.9em; margin-top: 20px; }
         
         .json-key { color: #9cdcfe; } .json-str { color: #ce9178; } .json-num { color: #b5cea8; }
@@ -107,6 +111,12 @@
 </header>
 
 <div class="container">
+
+    <div class="card">
+        <h2>📌 Judul Project & Studi Kasus</h2>
+        <h3 style="margin-top: 0; color:#0f172a;">Judul: TechStore API - Point of Sales Backend</h3>
+        <p style="text-align: justify;"><strong>Studi Kasus:</strong> Pengembangan arsitektur backend <em>Point of Sales</em> (Sistem Kasir) untuk sebuah toko ritel yang menjual HP dan Laptop. Sistem ini dirancang untuk mempermudah kasir dalam melakukan manajemen inventaris (Products), mendata informasi pembeli (Customers), memproses checkout belanjaan secara *real-time* yang langsung memotong sisa stok produk (Transactions), dan memberikan visibilitas kepada pemilik toko melalui rekapitulasi data penjualan cerdas (Laporan Laba & Sisa Stok).</p>
+    </div>
 
     <div class="card">
         <h2>👥 Kelompok 5</h2>
@@ -133,8 +143,15 @@
     <div class="card">
         <h2>🚀 Cara Menjalankan Project</h2>
         
-        <h3>1. Install Dependencies</h3>
-        <pre>npm install</pre>
+        <div class="alert-box" style="background: #f0fdf4; border-left-color: #22c55e;">
+            <h4>1. Eksekusi File di Terminal</h4>
+            <p>Buka <strong>Terminal</strong> (atau Command Prompt / Git Bash), lalu ikuti perintah berikut secara berurutan:</p>
+            <br>
+            <ol>
+                <li>Arahkan ke folder project: <code>cd TechStoreAPI</code></li>
+                <li>Install dependencies: <code>npm install</code></li>
+            </ol>
+        </div>
 
         <h3>2. Buat Database</h3>
         <p>Buka phpMyAdmin di <code>http://localhost/phpmyadmin</code> dan jalankan SQL berikut:</p>
@@ -178,8 +195,9 @@ CREATE TABLE transaction_items (
 );</pre>
 
         <h3>3. Jalankan Server</h3>
+        <p>Kembali ke terminal yang tadi (pastikan masih di dalam folder <code>TechStoreAPI</code>), lalu jalankan:</p>
         <pre>node server.js</pre>
-        <p>Server berjalan di <code>http://localhost:3000</code></p>
+        <p>Jika berhasil, akan muncul tulisan Server berjalan di <code>http://localhost:3000</code></p>
     </div>
 
     <div class="card">
@@ -187,7 +205,7 @@ CREATE TABLE transaction_items (
         <div class="alert-box">
             <p>Beberapa endpoint menggunakan <code>:id</code> di URL. Ganti <code>:id</code> dengan angka ID yang sesuai.</p>
             <br>
-            <p><strong>Contoh:</strong></p>
+            <p><strong>Contoh (Lengkap dengan Base URL):</strong></p>
             <ul>
                 <li><code>http://localhost:3000/api/v1/products/:id</code> &rarr; ganti :id dengan angka, contoh: <code>http://localhost:3000/api/v1/products/1</code></li>
                 <li><code>http://localhost:3000/api/v1/customers/:id</code> &rarr; ganti :id dengan angka, contoh: <code>http://localhost:3000/api/v1/customers/2</code></li>
@@ -243,6 +261,56 @@ CREATE TABLE transaction_items (
     </div>
 
     <div class="card">
+        <h2>📋 Daftar Endpoint yang Tersedia</h2>
+        <p style="margin-bottom: 15px;">Semua URL di bawah wajib diawali dengan Base URL: <strong><code>http://localhost:3000</code></strong></p>
+        
+        <div class="tech-grid">
+            <div class="endpoint-list">
+                <h4>ℹ️ Info Server</h4>
+                <ul>
+                    <li>GET <code>/api/info</code></li>
+                    <li>GET <code>/api/info/readme</code></li>
+                </ul>
+            </div>
+            <div class="endpoint-list">
+                <h4>📦 Products</h4>
+                <ul>
+                    <li>GET <code>/api/v1/products</code></li>
+                    <li>GET <code>/api/v1/products/:id</code></li>
+                    <li>POST <code>/api/v1/products</code></li>
+                    <li>PUT <code>/api/v1/products/:id</code></li>
+                    <li>DELETE <code>/api/v1/products/:id</code></li>
+                </ul>
+            </div>
+            <div class="endpoint-list">
+                <h4>👥 Customers</h4>
+                <ul>
+                    <li>GET <code>/api/v1/customers</code></li>
+                    <li>GET <code>/api/v1/customers/:id</code></li>
+                    <li>POST <code>/api/v1/customers</code></li>
+                    <li>PUT <code>/api/v1/customers/:id</code></li>
+                    <li>DELETE <code>/api/v1/customers/:id</code></li>
+                </ul>
+            </div>
+            <div class="endpoint-list">
+                <h4>💰 Transactions & Laporan</h4>
+                <ul>
+                    <li>GET <code>/api/v1/transactions</code></li>
+                    <li>GET <code>/api/v1/transactions/:id</code></li>
+                    <li>POST <code>/api/v1/transactions</code></li>
+                    <li>DELETE <code>/api/v1/transactions/:id</code></li>
+                    <hr style="margin: 10px 0; border:0; border-top:1px solid #ccc;">
+                    <li>GET <code>/api/v1/laporan/penjualan</code></li>
+                    <li>GET <code>/api/v1/laporan/produk-terlaris</code></li>
+                    <li>GET <code>/api/v1/laporan/per-customer</code></li>
+                    <li>GET <code>/api/v1/laporan/per-hari</code></li>
+                    <li>GET <code>/api/v1/laporan/stok-menipis</code></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
         <h2>📮 Panduan Penggunaan CRUD di Postman</h2>
         <div class="alert-box" style="background: #eff6ff; border-left-color: #3b82f6;">
             <h4>Langkah-Langkah Umum Testing API:</h4>
@@ -250,7 +318,7 @@ CREATE TABLE transaction_items (
                 <li>Buka aplikasi <strong>Postman</strong>.</li>
                 <li>Klik tombol <strong>+ New Request</strong> (atau tanda tambah di tab atas).</li>
                 <li>Pilih <strong>Method HTTP</strong> pada *dropdown* sebelah kiri (GET, POST, PUT, DELETE).</li>
-                <li>Masukkan <strong>Endpoint URL</strong> di kolom panjang (contoh: <code>http://localhost:3000/api/v1/products</code>).</li>
+                <li>Masukkan <strong>Endpoint URL Lengkap</strong> di kolom panjang (contoh: <code>http://localhost:3000/api/v1/products</code>).</li>
                 <li><strong>Untuk metode POST dan PUT (Tambah/Update Data):</strong>
                     <ul>
                         <li>Pilih tab <strong>Body</strong> tepat di bawah kolom URL.</li>
@@ -268,13 +336,13 @@ CREATE TABLE transaction_items (
 
     <div class="card">
         <h2>📡 Dokumentasi API & Tampilan Hasil CRUD</h2>
-        <p style="margin-bottom: 20px;"><strong>Base URL:</strong> <code>http://localhost:3000</code></p>
+        <p style="margin-bottom: 20px;"><strong>Base URL Global:</strong> <code>http://localhost:3000</code></p>
 
         <h3 style="color:#2c5364; border-bottom: 2px solid #eee; padding-bottom: 5px;">ℹ️ Info Server</h3>
         <table>
             <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
-            <tr><td><span class="m-badge m-get">GET</span></td><td><code>/api/info</code></td><td>Informasi API</td></tr>
-            <tr><td><span class="m-badge m-get">GET</span></td><td><code>/api/info/readme</code></td><td>Dokumentasi README</td></tr>
+            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/info</code></td><td>Informasi API</td></tr>
+            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/info/readme</code></td><td>Dokumentasi README</td></tr>
         </table>
         
         <div class="postman-wrapper">
@@ -296,11 +364,11 @@ CREATE TABLE transaction_items (
         <h3 style="color:#2c5364; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 40px;">📦 Products</h3>
         <table>
             <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
-            <tr><td><span class="m-badge m-get">GET</span></td><td><code>/api/v1/products</code></td><td>Ambil semua produk</td></tr>
-            <tr><td><span class="m-badge m-get">GET</span></td><td><code>/api/v1/products/:id</code></td><td>Ambil produk by ID</td></tr>
-            <tr><td><span class="m-badge m-post">POST</span></td><td><code>/api/v1/products</code></td><td>Tambah produk baru</td></tr>
-            <tr><td><span class="m-badge m-put">PUT</span></td><td><code>/api/v1/products/:id</code></td><td>Update produk</td></tr>
-            <tr><td><span class="m-badge m-delete">DELETE</span></td><td><code>/api/v1/products/:id</code></td><td>Hapus produk</td></tr>
+            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/products</code></td><td>Ambil semua produk</td></tr>
+            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/products/:id</code></td><td>Ambil produk by ID</td></tr>
+            <tr><td><span class="m-badge m-post">POST</span></td><td><code>http://localhost:3000/api/v1/products</code></td><td>Tambah produk baru</td></tr>
+            <tr><td><span class="m-badge m-put">PUT</span></td><td><code>http://localhost:3000/api/v1/products/:id</code></td><td>Update produk</td></tr>
+            <tr><td><span class="m-badge m-delete">DELETE</span></td><td><code>http://localhost:3000/api/v1/products/:id</code></td><td>Hapus produk</td></tr>
         </table>
 
         <div class="postman-wrapper">
@@ -405,11 +473,11 @@ CREATE TABLE transaction_items (
         <h3 style="color:#2c5364; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 40px;">👥 Customers</h3>
         <table>
             <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
-            <tr><td><span class="m-badge m-get">GET</span></td><td><code>/api/v1/customers</code></td><td>Ambil semua customer</td></tr>
-            <tr><td><span class="m-badge m-get">GET</span></td><td><code>/api/v1/customers/:id</code></td><td>Ambil customer by ID</td></tr>
-            <tr><td><span class="m-badge m-post">POST</span></td><td><code>/api/v1/customers</code></td><td>Tambah customer baru</td></tr>
-            <tr><td><span class="m-badge m-put">PUT</span></td><td><code>/api/v1/customers/:id</code></td><td>Update customer</td></tr>
-            <tr><td><span class="m-badge m-delete">DELETE</span></td><td><code>/api/v1/customers/:id</code></td><td>Hapus customer</td></tr>
+            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/customers</code></td><td>Ambil semua customer</td></tr>
+            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/customers/:id</code></td><td>Ambil customer by ID</td></tr>
+            <tr><td><span class="m-badge m-post">POST</span></td><td><code>http://localhost:3000/api/v1/customers</code></td><td>Tambah customer baru</td></tr>
+            <tr><td><span class="m-badge m-put">PUT</span></td><td><code>http://localhost:3000/api/v1/customers/:id</code></td><td>Update customer</td></tr>
+            <tr><td><span class="m-badge m-delete">DELETE</span></td><td><code>http://localhost:3000/api/v1/customers/:id</code></td><td>Hapus customer</td></tr>
         </table>
 
         <div class="postman-wrapper">
@@ -503,10 +571,10 @@ CREATE TABLE transaction_items (
         <h3 style="color:#2c5364; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 40px;">💰 Transactions</h3>
         <table>
             <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
-            <tr><td><span class="m-badge m-get">GET</span></td><td><code>/api/v1/transactions</code></td><td>Ambil semua transaksi</td></tr>
-            <tr><td><span class="m-badge m-get">GET</span></td><td><code>/api/v1/transactions/:id</code></td><td>Ambil transaksi by ID</td></tr>
-            <tr><td><span class="m-badge m-post">POST</span></td><td><code>/api/v1/transactions</code></td><td>Buat transaksi baru</td></tr>
-            <tr><td><span class="m-badge m-delete">DELETE</span></td><td><code>/api/v1/transactions/:id</code></td><td>Hapus transaksi</td></tr>
+            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/transactions</code></td><td>Ambil semua transaksi</td></tr>
+            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/transactions/:id</code></td><td>Ambil transaksi by ID</td></tr>
+            <tr><td><span class="m-badge m-post">POST</span></td><td><code>http://localhost:3000/api/v1/transactions</code></td><td>Buat transaksi baru</td></tr>
+            <tr><td><span class="m-badge m-delete">DELETE</span></td><td><code>http://localhost:3000/api/v1/transactions/:id</code></td><td>Hapus transaksi</td></tr>
         </table>
 
         <div class="postman-wrapper">
@@ -631,11 +699,11 @@ CREATE TABLE transaction_items (
         <h3 style="color:#2c5364; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 40px;">📈 Laporan</h3>
         <table>
             <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
-            <tr><td><span class="m-badge m-get">GET</span></td><td><code>/api/v1/laporan/penjualan</code></td><td>Rekap total penjualan</td></tr>
-            <tr><td><span class="m-badge m-get">GET</span></td><td><code>/api/v1/laporan/produk-terlaris</code></td><td>5 produk terlaris</td></tr>
-            <tr><td><span class="m-badge m-get">GET</span></td><td><code>/api/v1/laporan/per-customer</code></td><td>Rekap per customer</td></tr>
-            <tr><td><span class="m-badge m-get">GET</span></td><td><code>/api/v1/laporan/per-hari</code></td><td>Rekap penjualan per hari</td></tr>
-            <tr><td><span class="m-badge m-get">GET</span></td><td><code>/api/v1/laporan/stok-menipis</code></td><td>Produk stok kurang dari 5</td></tr>
+            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/laporan/penjualan</code></td><td>Rekap total penjualan</td></tr>
+            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/laporan/produk-terlaris</code></td><td>5 produk terlaris</td></tr>
+            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/laporan/per-customer</code></td><td>Rekap per customer</td></tr>
+            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/laporan/per-hari</code></td><td>Rekap penjualan per hari</td></tr>
+            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/laporan/stok-menipis</code></td><td>Produk stok kurang dari 5</td></tr>
         </table>
 
         <div class="postman-wrapper">
@@ -697,7 +765,7 @@ CREATE TABLE transaction_items (
             <span class="json-key">"nama"</span>: <span class="json-str">"Siti Rahayu"</span>,
             <span class="json-key">"telepon"</span>: <span class="json-str">"082345678901"</span>,
             <span class="json-key">"total_transaksi"</span>: <span class="json-num">0</span>,
-            <span class="json-key">"total_belanja"</span>: <span class="json-key">null</span>
+            <span class="json-key">"total_belanja"</span>: <span class="key">null</span>
         }
     ]
 }</pre>
@@ -762,10 +830,27 @@ CREATE TABLE transaction_items (
         </table>
     </div>
 
+    <div class="card">
+        <h2>📝 Kesimpulan</h2>
+        <p style="text-align: justify; margin-bottom: 15px;">
+            Sistem <strong>TechStore API</strong> telah berhasil dirancang dan dikembangkan dengan memenuhi spesifikasi kebutuhan arsitektur <em>Point of Sales</em> (Kasir) yang komprehensif. Melalui pengembangan ini, telah tercapai beberapa poin penting:
+        </p>
+        <ul style="line-height: 1.8;">
+            <li>✅ <strong>Database Relasional Terstruktur:</strong> Integrasi 4 tabel MySQL (Products, Customers, Transactions, Transaction Items) yang saling berelasi.</li>
+            <li>✅ <strong>Fungsionalitas CRUD Lengkap:</strong> Seluruh endpoin untuk manipulasi entitas berhasil dieksekusi via Postman tanpa kendala.</li>
+            <li>✅ <strong>Logika Bisnis Otomatis:</strong> Sistem secara otomatis dapat memotong ketersediaan stok produk setiap kali ada transaksi pembayaran berhasil.</li>
+            <li>✅ <strong>Keamanan & Validasi:</strong> Penggunaan middleware (Validator, Logger, Error Handler) menjamin API agar kebal terhadap payload JSON yang tidak valid maupun <em>Server Crash</em> akibat bad request.</li>
+            <li>✅ <strong>Sistem Pelaporan:</strong> API ini tak hanya menyimpan data, tapi juga mampu mengagregasikan informasi menjadi sebuah Business Intelligence (Laba penjualan harian, per-pelanggan, produk terlaris, dan pengingat sisa stok).</li>
+        </ul>
+        <p style="margin-top: 15px;">
+            Proyek ini sangat layak untuk dilanjutkan ke tahap integrasi sisi <em>Frontend</em> (contoh: React / Vue) atau aplikasi <em>Mobile</em> untuk digunakan langsung oleh kasir di lapangan.
+        </p>
+    </div>
+
 </div>
 
 <footer>
-    <p>TechStore API &copy; 2026 - Laporan Project</p>
+    <p>TechStore API &copy; 2026 - Laporan Project - Integrasi Sistem</p>
 </footer>
 
 </body>
