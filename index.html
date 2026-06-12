@@ -115,12 +115,14 @@
 
 <div class="container">
 
+    <!-- JUDUL PROJECT & STUDI KASUS -->
     <div class="card">
         <h2>📌 Judul Project & Studi Kasus</h2>
         <h3 style="margin-top: 0; color:#0f172a;">Judul: TechStore API - Point of Sales Backend</h3>
         <p style="text-align: justify;"><strong>Studi Kasus:</strong> Pengembangan arsitektur backend <em>Point of Sales</em> (Sistem Kasir) untuk sebuah toko ritel yang menjual HP dan Laptop. Sistem ini dirancang untuk mempermudah kasir dalam melakukan manajemen inventaris (Products), mendata informasi pembeli (Customers), memproses checkout belanjaan secara *real-time* yang langsung memotong sisa stok produk (Transactions), dan memberikan visibilitas kepada pemilik toko melalui rekapitulasi data penjualan cerdas (Laporan Laba & Sisa Stok).</p>
     </div>
 
+    <!-- KELOMPOK 5 -->
     <div class="card">
         <h2>👥 Kelompok 5</h2>
         <p><strong>Mata Kuliah:</strong> Integrasi Sistem</p>
@@ -133,6 +135,7 @@
         </div>
     </div>
 
+    <!-- TEKNOLOGI -->
     <div class="card">
         <h2>🛠️ Teknologi yang Digunakan</h2>
         <div class="tech-grid">
@@ -143,6 +146,7 @@
         </div>
     </div>
 
+    <!-- CARA MENJALANKAN PROJECT -->
     <div class="card">
         <h2>🚀 Cara Menjalankan Project</h2>
         
@@ -203,6 +207,7 @@ CREATE TABLE transaction_items (
         <p>Jika berhasil, akan muncul tulisan Server berjalan di <code>http://localhost:3000</code></p>
     </div>
 
+    <!-- CATATAN PENTING -->
     <div class="card">
         <h2>⚠️ Catatan Penting Penggunaan :id</h2>
         <div class="alert-box">
@@ -231,6 +236,7 @@ CREATE TABLE transaction_items (
         </div>
     </div>
 
+    <!-- STRUKTUR PROJECT -->
     <div class="card">
         <h2>📁 Struktur Project</h2>
 <pre>TechStoreAPI/
@@ -263,6 +269,23 @@ CREATE TABLE transaction_items (
 └── README.md</pre>
     </div>
 
+    <!-- ALUR REQUEST (LIFECYCLE) -->
+    <div class="card">
+        <h2>🔄 Alur Request (Lifecycle)</h2>
+        <p style="margin-bottom: 15px; text-align: justify;">Setiap request yang masuk ke TechStore API akan melewati siklus (lifecycle) berikut sebelum mengembalikan response ke pengguna:</p>
+        <div class="alert-box" style="background: #f8fafc; border-left-color: #64748b;">
+            <ol style="line-height: 1.8;">
+                <li>🖥️ <strong>Client (Postman / Browser):</strong> Mengirim HTTP Request (GET, POST, PUT, DELETE) ke endpoint tujuan.</li>
+                <li>🛣️ <strong>Router (routes/):</strong> Express.js menerima request dan mencocokkan URL dengan rute yang terdaftar.</li>
+                <li>🛡️ <strong>Middleware:</strong> Request dilewatkan ke <code>logger.js</code> (untuk pencatatan log) dan <code>validator.js</code> (untuk memastikan payload JSON sesuai standar sebelum diproses).</li>
+                <li>⚙️ <strong>Controller (controllers/):</strong> Jika lolos validasi, request diproses oleh controller yang memuat logika bisnis utama (misal: menghitung subtotal transaksi, validasi stok).</li>
+                <li>🗄️ <strong>Database (MySQL):</strong> Controller mengeksekusi query SQL (via <code>db.js</code>) untuk membaca (SELECT) atau memanipulasi (INSERT/UPDATE/DELETE) data.</li>
+                <li>📤 <strong>Response / Error Handler:</strong> Controller mengembalikan response berformat <strong>JSON</strong> ke Client. Jika terjadi <em>crash</em> atau <em>bug</em>, request akan ditangkap oleh <code>errorHandler.js</code> untuk mengembalikan respons error 500 yang rapi.</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- DAFTAR ENDPOINT -->
     <div class="card">
         <h2>📋 Daftar Endpoint yang Tersedia</h2>
         <p style="margin-bottom: 15px;">Semua URL di bawah wajib diawali dengan Base URL: <strong><code>http://localhost:3000</code></strong></p>
@@ -313,6 +336,7 @@ CREATE TABLE transaction_items (
         </div>
     </div>
 
+    <!-- PANDUAN POSTMAN UMUM -->
     <div class="card">
         <h2>📮 Panduan Penggunaan CRUD di Postman</h2>
         <div class="alert-box" style="background: #eff6ff; border-left-color: #3b82f6;">
@@ -337,10 +361,12 @@ CREATE TABLE transaction_items (
         </div>
     </div>
 
+    <!-- DOKUMENTASI API & HASIL CRUD -->
     <div class="card">
         <h2>📡 Dokumentasi API & Tampilan Hasil CRUD</h2>
         <p style="margin-bottom: 20px;"><strong>Base URL Global:</strong> <code>http://localhost:3000</code></p>
 
+        <!-- INFO -->
         <h3 style="color:#2c5364; border-bottom: 2px solid #eee; padding-bottom: 5px;">ℹ️ Info Server</h3>
         <table>
             <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
@@ -372,6 +398,7 @@ CREATE TABLE transaction_items (
             </div>
         </div>
 
+        <!-- PRODUCTS -->
         <h3 style="color:#2c5364; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 40px;">📦 Products</h3>
         <table>
             <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
@@ -382,6 +409,7 @@ CREATE TABLE transaction_items (
             <tr><td><span class="m-badge m-delete">DELETE</span></td><td><code>http://localhost:3000/api/v1/products/:id</code></td><td>Hapus produk</td></tr>
         </table>
 
+        <!-- GET ALL PRODUCTS -->
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/products</span></div>
             <div class="pm-guide">
@@ -413,6 +441,7 @@ CREATE TABLE transaction_items (
             </div>
         </div>
 
+        <!-- GET PRODUCT BY ID -->
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/products/1</span></div>
             <div class="pm-guide">
@@ -439,6 +468,7 @@ CREATE TABLE transaction_items (
             </div>
         </div>
 
+        <!-- POST PRODUCT -->
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-post">POST</span><span class="pm-url">http://localhost:3000/api/v1/products</span></div>
             <div class="pm-guide">
@@ -472,6 +502,7 @@ CREATE TABLE transaction_items (
             </div>
         </div>
 
+        <!-- PUT PRODUCT -->
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-put">PUT</span><span class="pm-url">http://localhost:3000/api/v1/products/1</span></div>
             <div class="pm-guide">
@@ -505,6 +536,7 @@ CREATE TABLE transaction_items (
             </div>
         </div>
 
+        <!-- DELETE PRODUCT -->
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-delete">DELETE</span><span class="pm-url">http://localhost:3000/api/v1/products/1</span></div>
             <div class="pm-guide">
@@ -523,6 +555,7 @@ CREATE TABLE transaction_items (
             </div>
         </div>
 
+        <!-- CUSTOMERS -->
         <h3 style="color:#2c5364; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 40px;">👥 Customers</h3>
         <table>
             <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
@@ -533,6 +566,7 @@ CREATE TABLE transaction_items (
             <tr><td><span class="m-badge m-delete">DELETE</span></td><td><code>http://localhost:3000/api/v1/customers/:id</code></td><td>Hapus customer</td></tr>
         </table>
 
+        <!-- GET ALL CUSTOMERS -->
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/customers</span></div>
             <div class="pm-guide">
@@ -562,6 +596,7 @@ CREATE TABLE transaction_items (
             </div>
         </div>
 
+        <!-- GET CUSTOMER BY ID -->
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/customers/1</span></div>
             <div class="pm-guide">
@@ -583,6 +618,7 @@ CREATE TABLE transaction_items (
             </div>
         </div>
 
+        <!-- POST CUSTOMER -->
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-post">POST</span><span class="pm-url">http://localhost:3000/api/v1/customers</span></div>
             <div class="pm-guide">
@@ -614,6 +650,7 @@ CREATE TABLE transaction_items (
             </div>
         </div>
 
+        <!-- PUT CUSTOMER -->
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-put">PUT</span><span class="pm-url">http://localhost:3000/api/v1/customers/1</span></div>
             <div class="pm-guide">
@@ -645,6 +682,7 @@ CREATE TABLE transaction_items (
             </div>
         </div>
 
+        <!-- DELETE CUSTOMER -->
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-delete">DELETE</span><span class="pm-url">http://localhost:3000/api/v1/customers/1</span></div>
             <div class="pm-guide">
@@ -663,6 +701,7 @@ CREATE TABLE transaction_items (
             </div>
         </div>
 
+        <!-- TRANSACTIONS -->
         <h3 style="color:#2c5364; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 40px;">💰 Transactions</h3>
         <table>
             <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
@@ -672,6 +711,7 @@ CREATE TABLE transaction_items (
             <tr><td><span class="m-badge m-delete">DELETE</span></td><td><code>http://localhost:3000/api/v1/transactions/:id</code></td><td>Hapus transaksi</td></tr>
         </table>
 
+        <!-- GET ALL TRANSACTIONS -->
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/transactions</span></div>
             <div class="pm-guide">
@@ -714,6 +754,7 @@ CREATE TABLE transaction_items (
             </div>
         </div>
 
+        <!-- GET TRANSACTION BY ID -->
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/transactions/1</span></div>
             <div class="pm-guide">
@@ -747,6 +788,7 @@ CREATE TABLE transaction_items (
             </div>
         </div>
 
+        <!-- POST TRANSACTION -->
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-post">POST</span><span class="pm-url">http://localhost:3000/api/v1/transactions</span></div>
             <div class="pm-guide">
@@ -806,6 +848,7 @@ CREATE TABLE transaction_items (
             </div>
         </div>
 
+        <!-- DELETE TRANSACTION -->
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-delete">DELETE</span><span class="pm-url">http://localhost:3000/api/v1/transactions/1</span></div>
             <div class="pm-guide">
@@ -824,6 +867,7 @@ CREATE TABLE transaction_items (
             </div>
         </div>
 
+        <!-- LAPORAN -->
         <h3 style="color:#2c5364; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 40px;">📈 Laporan</h3>
         <table>
             <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
@@ -834,6 +878,7 @@ CREATE TABLE transaction_items (
             <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/laporan/stok-menipis</code></td><td>Produk stok kurang dari 5</td></tr>
         </table>
 
+        <!-- GET REKAP PENJUALAN -->
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/laporan/penjualan</span></div>
             <div class="pm-guide">
@@ -858,6 +903,7 @@ CREATE TABLE transaction_items (
             </div>
         </div>
 
+        <!-- GET PRODUK TERLARIS -->
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/laporan/produk-terlaris</span></div>
             <div class="pm-guide">
@@ -890,6 +936,7 @@ CREATE TABLE transaction_items (
             </div>
         </div>
 
+        <!-- GET PER CUSTOMER -->
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/laporan/per-customer</span></div>
             <div class="pm-guide">
@@ -924,6 +971,7 @@ CREATE TABLE transaction_items (
             </div>
         </div>
 
+        <!-- GET PER HARI -->
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/laporan/per-hari</span></div>
             <div class="pm-guide">
@@ -949,6 +997,7 @@ CREATE TABLE transaction_items (
             </div>
         </div>
 
+        <!-- GET STOK MENIPIS -->
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/laporan/stok-menipis</span></div>
             <div class="pm-guide">
@@ -977,6 +1026,7 @@ CREATE TABLE transaction_items (
         </div>
     </div>
 
+    <!-- MIDDLEWARE & STATUS CODE -->
     <div class="card">
         <h2>🔒 Middleware</h2>
         <table>
@@ -998,6 +1048,7 @@ CREATE TABLE transaction_items (
         </table>
     </div>
 
+    <!-- KESIMPULAN -->
     <div class="card">
         <h2>📝 Kesimpulan</h2>
         <p style="text-align: justify; margin-bottom: 15px;">
