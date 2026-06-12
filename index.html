@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore API - Laporan Project</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f0f2f5;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(135deg, #1e3a5f, #2196F3);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        header p { font-size: 1.1em; opacity: 0.9; }
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9em;
+        }
+        .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .card h2 {
+            color: #1e3a5f;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2196F3;
+        }
+        .card h3 {
+            color: #2196F3;
+            margin: 20px 0 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+        th {
+            background: #1e3a5f;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        td { padding: 10px 12px; border-bottom: 1px solid #eee; }
+        tr:hover { background: #f5f9ff; }
+        .method {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.85em;
+            color: white;
+        }
+        .get { background: #4CAF50; }
+        .post { background: #2196F3; }
+        .put { background: #FF9800; }
+        .delete { background: #f44336; }
+        code {
+            background: #f0f0f0;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #d63384;
+        }
+        pre {
+            background: #1e1e1e;
+            color: #dcdcdc;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.9em;
+            margin: 10px 0;
+        }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .tech-item {
+            background: #f5f9ff;
+            border: 1px solid #d0e8ff;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        .tech-item .icon { font-size: 2em; margin-bottom: 8px; }
+        .tech-item h4 { color: #1e3a5f; }
+        .struktur {
+            background: #1e1e1e;
+            color: #dcdcdc;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.9em;
+            line-height: 1.8;
+        }
+        .middleware-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .middleware-item {
+            background: #f5f9ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        .middleware-item h4 { color: #1e3a5f; margin-bottom: 5px; }
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+        .status-item {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+        }
+        .s200 { background: #4CAF50; }
+        .s201 { background: #2196F3; }
+        .s400 { background: #FF9800; }
+        .s404 { background: #f44336; }
+        .s500 { background: #9C27B0; }
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #888;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🖥️ TechStore API</h1>
+    <p>REST API Sistem Kasir Toko HP dan Laptop</p>
+    <br>
+    <span class="badge">📚 Kelompok 5</span>
+    <span class="badge">🎓 Integrasi Sistem</span>
+    <span class="badge">⚡ Node.js + MySQL</span>
+</header>
+
+<div class="container">
+
+    <!-- Pendahuluan -->
+    <div class="card">
+        <h2>📌 Pendahuluan</h2>
+        <p>TechStore API adalah REST API yang dibangun menggunakan <strong>Node.js</strong> dan <strong>Express.js</strong> sebagai backend sistem kasir toko HP dan Laptop. API ini mengelola data produk, customer, transaksi penjualan, dan laporan secara lengkap dengan koneksi database <strong>MySQL (XAMPP)</strong>.</p>
+    </div>
+
+    <!-- Teknologi -->
+    <div class="card">
+        <h2>🛠️ Teknologi yang Digunakan</h2>
+        <div class="tech-grid">
+            <div class="tech-item">
+                <div class="icon">🟢</div>
+                <h4>Node.js</h4>
+                <p>Runtime JavaScript</p>
+            </div>
+            <div class="tech-item">
+                <div class="icon">⚡</div>
+                <h4>Express.js</h4>
+                <p>Web Framework</p>
+            </div>
+            <div class="tech-item">
+                <div class="icon">🗄️</div>
+                <h4>MySQL</h4>
+                <p>Database (XAMPP)</p>
+            </div>
+            <div class="tech-item">
+                <div class="icon">📮</div>
+                <h4>Postman</h4>
+                <p>API Testing</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Struktur Project -->
+    <div class="card">
+        <h2>📁 Struktur Project</h2>
+        <div class="struktur">
+TechStoreAPI/<br>
+├── src/<br>
+│   ├── config/<br>
+│   │   └── db.js<br>
+│   ├── controllers/<br>
+│   │   ├── customers.controller.js<br>
+│   │   ├── laporan.controller.js<br>
+│   │   ├── products.controller.js<br>
+│   │   └── transactions.controller.js<br>
+│   ├── middleware/<br>
+│   │   ├── errorHandler.js<br>
+│   │   ├── logger.js<br>
+│   │   └── validator.js<br>
+│   ├── routes/<br>
+│   │   ├── customers.routes.js<br>
+│   │   ├── info.routes.js<br>
+│   │   ├── laporan.routes.js<br>
+│   │   ├── products.routes.js<br>
+│   │   └── transactions.routes.js<br>
+│   └── app.js<br>
+├── server.js<br>
+├── package.json<br>
+└── README.md
+        </div>
+    </div>
+
+    <!-- Dokumentasi API -->
+    <div class="card">
+        <h2>📡 Dokumentasi API</h2>
+        <p>Base URL: <code>http://localhost:3000</code></p>
+
+        <h3>Info</h3>
+        <table>
+            <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/api/info</code></td><td>Informasi API</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/api/info/readme</code></td><td>Dokumentasi README</td></tr>
+        </table>
+
+        <h3>Products</h3>
+        <table>
+            <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/api/v1/products</code></td><td>Ambil semua produk</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/api/v1/products/:id</code></td><td>Ambil produk by ID</td></tr>
+            <tr><td><span class="method post">POST</span></td><td><code>/api/v1/products</code></td><td>Tambah produk baru</td></tr>
+            <tr><td><span class="method put">PUT</span></td><td><code>/api/v1/products/:id</code></td><td>Update produk</td></tr>
+            <tr><td><span class="method delete">DELETE</span></td><td><code>/api/v1/products/:id</code></td><td>Hapus produk</td></tr>
+        </table>
+
+        <h3>Customers</h3>
+        <table>
+            <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/api/v1/customers</code></td><td>Ambil semua customer</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/api/v1/customers/:id</code></td><td>Ambil customer by ID</td></tr>
+            <tr><td><span class="method post">POST</span></td><td><code>/api/v1/customers</code></td><td>Tambah customer baru</td></tr>
+            <tr><td><span class="method put">PUT</span></td><td><code>/api/v1/customers/:id</code></td><td>Update customer</td></tr>
+            <tr><td><span class="method delete">DELETE</span></td><td><code>/api/v1/customers/:id</code></td><td>Hapus customer</td></tr>
+        </table>
+
+        <h3>Transactions</h3>
+        <table>
+            <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/api/v1/transactions</code></td><td>Ambil semua transaksi</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/api/v1/transactions/:id</code></td><td>Ambil transaksi by ID</td></tr>
+            <tr><td><span class="method post">POST</span></td><td><code>/api/v1/transactions</code></td><td>Buat transaksi baru</td></tr>
+            <tr><td><span class="method delete">DELETE</span></td><td><code>/api/v1/transactions/:id</code></td><td>Hapus transaksi</td></tr>
+        </table>
+
+        <h3>Laporan</h3>
+        <table>
+            <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/api/v1/laporan/penjualan</code></td><td>Rekap total penjualan</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/api/v1/laporan/produk-terlaris</code></td><td>5 produk terlaris</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/api/v1/laporan/per-customer</code></td><td>Rekap per customer</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/api/v1/laporan/per-hari</code></td><td>Rekap penjualan per hari</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/api/v1/laporan/stok-menipis</code></td><td>Produk stok kurang dari 5</td></tr>
+        </table>
+    </div>
+
+    <!-- Hasil Pengujian -->
+    <div class="card">
+        <h2>✅ Hasil Pengujian</h2>
+
+        <h3>GET /api/v1/products</h3>
+        <pre>[
+    { "id": 1, "nama": "ASUS TUF A15", "kategori": "Laptop", "harga": 12000000, "stok": 10 },
+    { "id": 2, "nama": "iPhone 15", "kategori": "HP", "harga": 15000000, "stok": 8 },
+    { "id": 3, "nama": "Samsung Galaxy A54", "kategori": "HP", "harga": 4500000, "stok": 15 },
+    { "id": 4, "nama": "Lenovo ThinkPad", "kategori": "Laptop", "harga": 14000000, "stok": 5 }
+]</pre>
+
+        <h3>POST /api/v1/transactions</h3>
+        <pre>{
+    "message": "Transaksi berhasil dibuat",
+    "data": {
+        "id": 1,
+        "customer": { "id": 1, "nama": "Budi Santoso" },
+        "items": [
+            { "productId": 1, "nama": "ASUS TUF A15", "harga": 12000000, "jumlah": 2, "subtotal": 24000000 },
+            { "productId": 2, "nama": "iPhone 15", "harga": 15000000, "jumlah": 1, "subtotal": 15000000 }
+        ],
+        "totalHarga": 39000000,
+        "tanggal": "2026-06-11T08:45:41.000Z"
+    }
+}</pre>
+
+        <h3>GET /api/v1/laporan/penjualan</h3>
+        <pre>{
+    "message": "Rekap penjualan",
+    "data": {
+        "total_transaksi": 1,
+        "total_pendapatan": "39000000",
+        "transaksi_pertama": "2026-06-11T08:45:41.000Z",
+        "transaksi_terakhir": "2026-06-11T08:45:41.000Z"
+    }
+}</pre>
+
+        <h3>GET /api/v1/laporan/produk-terlaris</h3>
+        <pre>{
+    "message": "Produk terlaris",
+    "data": [
+        { "product_id": 1, "nama": "ASUS TUF A15", "total_terjual": "2", "total_pendapatan": "24000000" },
+        { "product_id": 2, "nama": "iPhone 15", "total_terjual": "1", "total_pendapatan": "15000000" }
+    ]
+}</pre>
+
+        <h3>GET /api/v1/laporan/stok-menipis</h3>
+        <pre>{
+    "message": "Produk dengan stok menipis",
+    "data": [
+        { "id": 4, "nama": "Lenovo ThinkPad", "kategori": "Laptop", "harga": 14000000, "stok": 5 }
+    ]
+}</pre>
+    </div>
+
+    <!-- Middleware -->
+    <div class="card">
+        <h2>🔒 Middleware</h2>
+        <div class="middleware-grid">
+            <div class="middleware-item">
+                <h4>📝 Logger</h4>
+                <p>Mencatat setiap request yang masuk beserta waktu dan method</p>
+            </div>
+            <div class="middleware-item">
+                <h4>✅ Validator</h4>
+                <p>Validasi input request body sebelum diproses controller</p>
+            </div>
+            <div class="middleware-item">
+                <h4>❌ Error Handler</h4>
+                <p>Menangani error secara global dan mengembalikan response yang rapi</p>
+            </div>
+            <div class="middleware-item">
+                <h4>🔍 Not Found</h4>
+                <p>Menangani route yang tidak ditemukan dengan pesan yang jelas</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Code -->
+    <div class="card">
+        <h2>📊 Status Code</h2>
+        <div class="status-grid">
+            <div class="status-item s200">200<br>OK</div>
+            <div class="status-item s201">201<br>Created</div>
+            <div class="status-item s400">400<br>Bad Request</div>
+            <div class="status-item s404">404<br>Not Found</div>
+            <div class="status-item s500">500<br>Internal Server Error</div>
+        </div>
+    </div>
+
+    <!-- Kesimpulan -->
+    <div class="card">
+        <h2>📝 Kesimpulan</h2>
+        <p>TechStore API berhasil dibangun dengan fitur lengkap meliputi:</p>
+        <br>
+        <ul style="padding-left: 20px; line-height: 2">
+            <li>✅ CRUD Products, Customers, dan Transactions</li>
+            <li>✅ Middleware Logger, Validator, dan Error Handler</li>
+            <li>✅ Koneksi Database MySQL menggunakan XAMPP</li>
+            <li>✅ Laporan Rekap Penjualan, Produk Terlaris, Per Customer, Per Hari, dan Stok Menipis</li>
+            <li>✅ Dokumentasi API lengkap via README</li>
+            <li>✅ Total 17 Endpoint tersedia</li>
+        </ul>
+    </div>
+
+</div>
+
+<footer>
+    <p>TechStore API &copy; 2026 - Kelompok 5 - Integrasi Sistem</p>
+</footer>
+
+</body>
+</html>
