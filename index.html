@@ -86,11 +86,14 @@
         .m-badge { display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 0.85em; color: white; min-width: 70px; text-align: center; }
         .m-get { background: #10b981; } .m-post { background: #3b82f6; } .m-put { background: #f59e0b; } .m-delete { background: #ef4444; }
 
-        /* POSTMAN UI SIMULATOR (No-click version) */
+        /* POSTMAN UI SIMULATOR */
         .postman-wrapper { border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 35px; background: #fff; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
         .pm-url-bar { display: flex; background: #f1f5f9; padding: 12px 15px; border-bottom: 1px solid #e2e8f0; align-items: center; gap: 15px; flex-wrap: wrap; }
         .pm-url { flex: 1; background: #fff; border: 1px solid #cbd5e1; padding: 8px 12px; border-radius: 4px; font-family: 'Consolas', monospace; font-size: 0.95em; color: #334155; min-width: 250px;}
         .pm-btn-send { background: #3b82f6; color: white; border: none; padding: 8px 20px; border-radius: 4px; font-weight: bold; }
+        .pm-guide { background: #eef7ff; border-bottom: 1px solid #cbd5e1; padding: 12px 20px; font-size: 0.9em; }
+        .pm-guide strong { color: #1e40af; display: block; margin-bottom: 5px; }
+        .pm-guide ol { margin: 0 0 0 20px; color: #334155; }
         .pm-data-section { padding: 20px; }
         .pm-section-title { font-size: 0.85em; color: #64748b; margin-bottom: 8px; font-weight: bold; text-transform: uppercase; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px; }
         
@@ -351,6 +354,14 @@ CREATE TABLE transaction_items (
                 <span class="pm-url">http://localhost:3000/api/info</span>
                 <button class="pm-btn-send">Send</button>
             </div>
+            <div class="pm-guide">
+                <strong>Langkah Testing di Postman:</strong>
+                <ol>
+                    <li>Klik <strong>+ New Request</strong>.</li>
+                    <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/info</code>.</li>
+                    <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
+                </ol>
+            </div>
             <div class="pm-data-section">
                 <div class="pm-section-title">Response (Body)</div>
 <pre>{
@@ -373,6 +384,14 @@ CREATE TABLE transaction_items (
 
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/products</span></div>
+            <div class="pm-guide">
+                <strong>Langkah Testing di Postman:</strong>
+                <ol>
+                    <li>Klik <strong>+ New Request</strong>.</li>
+                    <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/v1/products</code>.</li>
+                    <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
+                </ol>
+            </div>
             <div class="pm-data-section">
                 <div class="pm-section-title">Response (Body)</div>
 <pre>[
@@ -396,6 +415,14 @@ CREATE TABLE transaction_items (
 
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/products/1</span></div>
+            <div class="pm-guide">
+                <strong>Langkah Testing di Postman:</strong>
+                <ol>
+                    <li>Klik <strong>+ New Request</strong>.</li>
+                    <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/v1/products/1</code> (Angka 1 adalah ID Produk).</li>
+                    <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
+                </ol>
+            </div>
             <div class="pm-data-section">
                 <div class="pm-section-title">Response (Body)</div>
 <pre>{
@@ -414,6 +441,15 @@ CREATE TABLE transaction_items (
 
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-post">POST</span><span class="pm-url">http://localhost:3000/api/v1/products</span></div>
+            <div class="pm-guide">
+                <strong>Langkah Testing di Postman:</strong>
+                <ol>
+                    <li>Klik <strong>+ New Request</strong>.</li>
+                    <li>Pilih method <strong>POST</strong> dan paste URL <code>http://localhost:3000/api/v1/products</code>.</li>
+                    <li>Pilih tab <strong>Body</strong> &rarr; pilih <strong>raw</strong> &rarr; ubah text menjadi <strong>JSON</strong> di kanan.</li>
+                    <li>Copy & Paste *Request Body* di bawah ke dalam Postman, lalu klik <strong>Send</strong>.</li>
+                </ol>
+            </div>
             <div class="pm-data-section">
                 <div class="pm-section-title">Request Body (JSON)</div>
 <pre>{
@@ -438,6 +474,15 @@ CREATE TABLE transaction_items (
 
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-put">PUT</span><span class="pm-url">http://localhost:3000/api/v1/products/1</span></div>
+            <div class="pm-guide">
+                <strong>Langkah Testing di Postman:</strong>
+                <ol>
+                    <li>Klik <strong>+ New Request</strong>.</li>
+                    <li>Pilih method <strong>PUT</strong> dan paste URL <code>http://localhost:3000/api/v1/products/1</code>.</li>
+                    <li>Pilih tab <strong>Body</strong> &rarr; pilih <strong>raw</strong> &rarr; ubah text menjadi <strong>JSON</strong> di kanan.</li>
+                    <li>Copy & Paste *Request Body* untuk mengubah data, lalu klik <strong>Send</strong>.</li>
+                </ol>
+            </div>
             <div class="pm-data-section">
                 <div class="pm-section-title">Request Body (JSON)</div>
 <pre>{
@@ -462,6 +507,14 @@ CREATE TABLE transaction_items (
 
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-delete">DELETE</span><span class="pm-url">http://localhost:3000/api/v1/products/1</span></div>
+            <div class="pm-guide">
+                <strong>Langkah Testing di Postman:</strong>
+                <ol>
+                    <li>Klik <strong>+ New Request</strong>.</li>
+                    <li>Pilih method <strong>DELETE</strong> dan paste URL <code>http://localhost:3000/api/v1/products/1</code>.</li>
+                    <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
+                </ol>
+            </div>
             <div class="pm-data-section">
                 <div class="pm-section-title">Response (Body)</div>
 <pre>{
@@ -482,6 +535,14 @@ CREATE TABLE transaction_items (
 
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/customers</span></div>
+            <div class="pm-guide">
+                <strong>Langkah Testing di Postman:</strong>
+                <ol>
+                    <li>Klik <strong>+ New Request</strong>.</li>
+                    <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/v1/customers</code>.</li>
+                    <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
+                </ol>
+            </div>
             <div class="pm-data-section">
                 <div class="pm-section-title">Response (Body)</div>
 <pre>[
@@ -503,6 +564,14 @@ CREATE TABLE transaction_items (
 
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/customers/1</span></div>
+            <div class="pm-guide">
+                <strong>Langkah Testing di Postman:</strong>
+                <ol>
+                    <li>Klik <strong>+ New Request</strong>.</li>
+                    <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/v1/customers/1</code>.</li>
+                    <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
+                </ol>
+            </div>
             <div class="pm-data-section">
                 <div class="pm-section-title">Response (Body)</div>
 <pre>{
@@ -516,6 +585,15 @@ CREATE TABLE transaction_items (
 
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-post">POST</span><span class="pm-url">http://localhost:3000/api/v1/customers</span></div>
+            <div class="pm-guide">
+                <strong>Langkah Testing di Postman:</strong>
+                <ol>
+                    <li>Klik <strong>+ New Request</strong>.</li>
+                    <li>Pilih method <strong>POST</strong> dan paste URL <code>http://localhost:3000/api/v1/customers</code>.</li>
+                    <li>Pilih tab <strong>Body</strong> &rarr; pilih <strong>raw</strong> &rarr; ubah text menjadi <strong>JSON</strong> di kanan.</li>
+                    <li>Copy & Paste *Request Body* di bawah ke dalam Postman, lalu klik <strong>Send</strong>.</li>
+                </ol>
+            </div>
             <div class="pm-data-section">
                 <div class="pm-section-title">Request Body (JSON)</div>
 <pre>{
@@ -538,6 +616,15 @@ CREATE TABLE transaction_items (
 
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-put">PUT</span><span class="pm-url">http://localhost:3000/api/v1/customers/1</span></div>
+            <div class="pm-guide">
+                <strong>Langkah Testing di Postman:</strong>
+                <ol>
+                    <li>Klik <strong>+ New Request</strong>.</li>
+                    <li>Pilih method <strong>PUT</strong> dan paste URL <code>http://localhost:3000/api/v1/customers/1</code>.</li>
+                    <li>Pilih tab <strong>Body</strong> &rarr; pilih <strong>raw</strong> &rarr; ubah text menjadi <strong>JSON</strong> di kanan.</li>
+                    <li>Copy & Paste *Request Body* untuk memperbarui pelanggan, lalu klik <strong>Send</strong>.</li>
+                </ol>
+            </div>
             <div class="pm-data-section">
                 <div class="pm-section-title">Request Body (JSON)</div>
 <pre>{
@@ -560,6 +647,14 @@ CREATE TABLE transaction_items (
 
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-delete">DELETE</span><span class="pm-url">http://localhost:3000/api/v1/customers/1</span></div>
+            <div class="pm-guide">
+                <strong>Langkah Testing di Postman:</strong>
+                <ol>
+                    <li>Klik <strong>+ New Request</strong>.</li>
+                    <li>Pilih method <strong>DELETE</strong> dan paste URL <code>http://localhost:3000/api/v1/customers/1</code>.</li>
+                    <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
+                </ol>
+            </div>
             <div class="pm-data-section">
                 <div class="pm-section-title">Response (Body)</div>
 <pre>{
@@ -579,6 +674,14 @@ CREATE TABLE transaction_items (
 
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/transactions</span></div>
+            <div class="pm-guide">
+                <strong>Langkah Testing di Postman:</strong>
+                <ol>
+                    <li>Klik <strong>+ New Request</strong>.</li>
+                    <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/v1/transactions</code>.</li>
+                    <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
+                </ol>
+            </div>
             <div class="pm-data-section">
                 <div class="pm-section-title">Response (Body)</div>
 <pre>[
@@ -613,6 +716,14 @@ CREATE TABLE transaction_items (
 
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/transactions/1</span></div>
+            <div class="pm-guide">
+                <strong>Langkah Testing di Postman:</strong>
+                <ol>
+                    <li>Klik <strong>+ New Request</strong>.</li>
+                    <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/v1/transactions/1</code>.</li>
+                    <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
+                </ol>
+            </div>
             <div class="pm-data-section">
                 <div class="pm-section-title">Response (Body)</div>
 <pre>{
@@ -638,6 +749,15 @@ CREATE TABLE transaction_items (
 
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-post">POST</span><span class="pm-url">http://localhost:3000/api/v1/transactions</span></div>
+            <div class="pm-guide">
+                <strong>Langkah Testing di Postman:</strong>
+                <ol>
+                    <li>Klik <strong>+ New Request</strong>.</li>
+                    <li>Pilih method <strong>POST</strong> dan paste URL <code>http://localhost:3000/api/v1/transactions</code>.</li>
+                    <li>Pilih tab <strong>Body</strong> &rarr; pilih <strong>raw</strong> &rarr; ubah text menjadi <strong>JSON</strong> di kanan.</li>
+                    <li>Copy & Paste struktur keranjang belanja berikut, lalu klik <strong>Send</strong>.</li>
+                </ol>
+            </div>
             <div class="pm-data-section">
                 <div class="pm-section-title">Request Body (JSON)</div>
 <pre>{
@@ -688,6 +808,14 @@ CREATE TABLE transaction_items (
 
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-delete">DELETE</span><span class="pm-url">http://localhost:3000/api/v1/transactions/1</span></div>
+            <div class="pm-guide">
+                <strong>Langkah Testing di Postman:</strong>
+                <ol>
+                    <li>Klik <strong>+ New Request</strong>.</li>
+                    <li>Pilih method <strong>DELETE</strong> dan paste URL <code>http://localhost:3000/api/v1/transactions/1</code>.</li>
+                    <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
+                </ol>
+            </div>
             <div class="pm-data-section">
                 <div class="pm-section-title">Response (Body)</div>
 <pre>{
@@ -708,6 +836,14 @@ CREATE TABLE transaction_items (
 
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/laporan/penjualan</span></div>
+            <div class="pm-guide">
+                <strong>Langkah Testing di Postman:</strong>
+                <ol>
+                    <li>Klik <strong>+ New Request</strong>.</li>
+                    <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/v1/laporan/penjualan</code>.</li>
+                    <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
+                </ol>
+            </div>
             <div class="pm-data-section">
                 <div class="pm-section-title">Response (Body)</div>
 <pre>{
@@ -724,6 +860,14 @@ CREATE TABLE transaction_items (
 
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/laporan/produk-terlaris</span></div>
+            <div class="pm-guide">
+                <strong>Langkah Testing di Postman:</strong>
+                <ol>
+                    <li>Klik <strong>+ New Request</strong>.</li>
+                    <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/v1/laporan/produk-terlaris</code>.</li>
+                    <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
+                </ol>
+            </div>
             <div class="pm-data-section">
                 <div class="pm-section-title">Response (Body)</div>
 <pre>{
@@ -748,6 +892,14 @@ CREATE TABLE transaction_items (
 
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/laporan/per-customer</span></div>
+            <div class="pm-guide">
+                <strong>Langkah Testing di Postman:</strong>
+                <ol>
+                    <li>Klik <strong>+ New Request</strong>.</li>
+                    <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/v1/laporan/per-customer</code>.</li>
+                    <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
+                </ol>
+            </div>
             <div class="pm-data-section">
                 <div class="pm-section-title">Response (Body)</div>
 <pre>{
@@ -774,6 +926,14 @@ CREATE TABLE transaction_items (
 
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/laporan/per-hari</span></div>
+            <div class="pm-guide">
+                <strong>Langkah Testing di Postman:</strong>
+                <ol>
+                    <li>Klik <strong>+ New Request</strong>.</li>
+                    <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/v1/laporan/per-hari</code>.</li>
+                    <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
+                </ol>
+            </div>
             <div class="pm-data-section">
                 <div class="pm-section-title">Response (Body)</div>
 <pre>{
@@ -791,6 +951,14 @@ CREATE TABLE transaction_items (
 
         <div class="postman-wrapper">
             <div class="pm-url-bar"><span class="m-badge m-get">GET</span><span class="pm-url">http://localhost:3000/api/v1/laporan/stok-menipis</span></div>
+            <div class="pm-guide">
+                <strong>Langkah Testing di Postman:</strong>
+                <ol>
+                    <li>Klik <strong>+ New Request</strong>.</li>
+                    <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/v1/laporan/stok-menipis</code>.</li>
+                    <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
+                </ol>
+            </div>
             <div class="pm-data-section">
                 <div class="pm-section-title">Response (Body)</div>
 <pre>{
