@@ -74,7 +74,7 @@
         
         /* Note / Alert Box */
         .alert-box { background: #fffbeb; border-left: 5px solid #f59e0b; padding: 20px; border-radius: 4px; margin: 15px 0; }
-        .alert-box h4 { color: #b45309; margin-bottom: 10px; }
+        .alert-box h4 { margin-bottom: 10px; }
 
         /* Tables */
         table { width: 100%; border-collapse: collapse; margin: 15px 0 25px 0; font-size: 0.95em; }
@@ -116,6 +116,18 @@
 <div class="container">
 
     <div class="card">
+        <h2>🚀 Pendahuluan</h2>
+        <p style="text-align: justify; margin-bottom: 15px;">Sistem manajemen kasir konvensional seringkali menghadapi kendala dalam hal sinkronisasi data ketersediaan barang secara <em>real-time</em>, pencatatan transaksi yang rentan <em>human-error</em>, hingga lambatnya pembuatan rekapitulasi laporan bisnis harian. Hal ini menuntut adanya digitalisasi melalui sebuah arsitektur <em>backend</em> tersentralisasi yang tangguh dan aman.</p>
+        <p style="text-align: justify;"><strong>Tujuan Utama Project:</strong> Pembuatan <strong>TechStore API</strong> ini bertujuan untuk memecahkan masalah tersebut dengan merancang sistem RESTful API cerdas yang menjembatani antarmuka kasir (*Frontend*) dengan sentra basis data (*Database*). API ini dibuat untuk mengotomatisasi beberapa proses vital bisnis seperti:</p>
+        <ul style="line-height: 1.8; margin-top: 10px;">
+            <li>Melakukan sentralisasi inventaris (stok hp/laptop) dan mencegah penjualan barang yang stoknya sudah habis.</li>
+            <li>Mengotomatisasi pemotongan sisa stok di gudang secara mutlak setiap kali keranjang transaksi *checkout* berhasil diproses.</li>
+            <li>Menerapkan keamanan *layer* ganda melalui autentikasi **API Key** sehingga data toko tidak bocor kepada pihak eksternal.</li>
+            <li>Mengagregasikan jutaan data transaksi menjadi *Business Intelligence (Laporan Cerdas)*, seperti mengetahui produk apa yang paling laris, pelanggan yang paling sering belanja, hingga peringatan sisa stok menipis bagi pemilik toko.</li>
+        </ul>
+    </div>
+
+    <div class="card">
         <h2>📌 Judul Project & Studi Kasus</h2>
         <h3 style="margin-top: 0; color:#0f172a;">Judul: TechStore API - Point of Sales Backend</h3>
         <p style="text-align: justify;"><strong>Studi Kasus:</strong> Pengembangan arsitektur backend <em>Point of Sales</em> (Sistem Kasir) untuk sebuah toko ritel yang menjual HP dan Laptop. Sistem ini dirancang untuk mempermudah kasir dalam melakukan manajemen inventaris (Products), mendata informasi pembeli (Customers), memproses checkout belanjaan secara *real-time* yang langsung memotong sisa stok produk (Transactions), dan memberikan visibilitas kepada pemilik toko melalui rekapitulasi data penjualan cerdas (Laporan Laba & Sisa Stok).</p>
@@ -147,7 +159,7 @@
         <h2>🚀 Cara Menjalankan Project</h2>
         
         <div class="alert-box" style="background: #f0fdf4; border-left-color: #22c55e;">
-            <h4>1. Eksekusi File di Terminal</h4>
+            <h4 style="color: #15803d;">1. Eksekusi File di Terminal</h4>
             <p>Buka <strong>Terminal</strong> (atau Command Prompt / Git Bash), lalu ikuti perintah berikut secara berurutan:</p>
             <br>
             <ol>
@@ -206,6 +218,7 @@ CREATE TABLE transaction_items (
     <div class="card">
         <h2>⚠️ Catatan Penting Penggunaan :id</h2>
         <div class="alert-box">
+            <h4 style="color: #b45309;">Penjelasan Path Variables</h4>
             <p>Beberapa endpoint menggunakan <code>:id</code> di URL. Ganti <code>:id</code> dengan angka ID yang sesuai.</p>
             <br>
             <p><strong>Contoh (Lengkap dengan Base URL):</strong></p>
@@ -264,13 +277,14 @@ CREATE TABLE transaction_items (
         <h2>🔄 Alur Request (Lifecycle)</h2>
         <p style="margin-bottom: 15px; text-align: justify;">Setiap request yang masuk ke TechStore API akan melewati siklus (lifecycle) berikut sebelum mengembalikan response ke pengguna:</p>
         <div class="alert-box" style="background: #f8fafc; border-left-color: #64748b;">
+            <h4 style="color: #334155;">Tahapan Validasi & Eksekusi Server</h4>
             <ol style="line-height: 1.8;">
                 <li>🖥️ <strong>Client (Postman / Browser):</strong> Mengirim HTTP Request (GET, POST, PUT, DELETE) beserta Header API Key ke endpoint tujuan.</li>
                 <li>🛣️ <strong>Router (routes/):</strong> Express.js menerima request dan mencocokkan URL dengan rute yang terdaftar.</li>
                 <li>🛡️ <strong>Middleware:</strong> Request dilewatkan ke <code>logger.js</code>, <code>auth.js</code> (Pengecekan API Key), dan <code>validator.js</code> (Pengecekan struktur JSON). Jika API Key salah, request langsung ditolak (Error 401).</li>
-                <li>⚙️ <strong>Controller (controllers/):</strong> Jika lolos validasi keamanan, request diproses oleh controller yang memuat logika bisnis utama (misal: menghitung subtotal transaksi, potong stok).</li>
-                <li>🗄️ <strong>Database (MySQL):</strong> Controller mengeksekusi query SQL untuk membaca (SELECT) atau memanipulasi (INSERT/UPDATE/DELETE) data.</li>
-                <li>📤 <strong>Response / Error Handler:</strong> Controller mengembalikan response berformat <strong>JSON</strong> ke Client. Jika ada *bug*, ditangkap oleh <code>errorHandler.js</code>.</li>
+                <li>⚙️ <strong>Controller (controllers/):</strong> Jika lolos validasi keamanan, request diproses oleh controller yang memuat logika bisnis utama (misal: pengecekan duplikat nama, menghitung subtotal transaksi, validasi ketersediaan stok).</li>
+                <li>🗄️ <strong>Database (MySQL):</strong> Controller mengeksekusi query SQL (via <code>db.js</code>) untuk membaca (SELECT) atau memanipulasi (INSERT/UPDATE/DELETE) data aktual di tabel.</li>
+                <li>📤 <strong>Response / Error Handler:</strong> Controller mengembalikan response berformat <strong>JSON</strong> ke Client secara rapi. Jika terjadi <em>crash</em> sintaks, ditangkap oleh <code>errorHandler.js</code>.</li>
             </ol>
         </div>
     </div>
@@ -328,7 +342,7 @@ CREATE TABLE transaction_items (
     <div class="card">
         <h2>📮 Panduan Penggunaan CRUD & API Key di Postman</h2>
         <div class="alert-box" style="background: #eff6ff; border-left-color: #3b82f6;">
-            <h4>Langkah-Langkah Umum Testing API:</h4>
+            <h4 style="color: #1d4ed8;">Langkah-Langkah Umum Testing API:</h4>
             <ol>
                 <li>Buka aplikasi <strong>Postman</strong>.</li>
                 <li>Klik tombol <strong>+ New Request</strong> (atau tanda tambah di tab atas).</li>
@@ -351,10 +365,23 @@ CREATE TABLE transaction_items (
     </div>
 
     <div class="card">
-        <h2>📡 Dokumentasi API & Tampilan Hasil CRUD</h2>
+        <h2>📡 Dokumentasi API & Skenario Respon Sistem</h2>
         <p style="margin-bottom: 20px;"><strong>Base URL Global:</strong> <code>http://localhost:3000</code></p>
 
-        <h3 style="color:#2c5364; border-bottom: 2px solid #eee; padding-bottom: 5px;">ℹ️ Info Server (Publik)</h3>
+        <div class="alert-box" style="background: #fef2f2; border-left-color: #ef4444; border-left-width: 5px; margin-bottom: 30px;">
+            <h4 style="color: #b91c1c;">🚫 Respon Kesalahan Umum (Global): API Key Ditolak / Unauthorized (401 & 403)</h4>
+            <p><strong>Sebagai catatan untuk pembaca:</strong> Karena semua endpoint di bawah ini (kecuali info server) berlindung di balik benteng keamanan <em>API Key</em>, maka jika pengguna sengaja atau lupa memasukkan parameter <code>x-api-key</code> yang benar di tab Headers Postman, sistem akan secara global membekukan permintaan tersebut dan mengembalikan respon error baku di bawah ini. Oleh karena itu, respon <em>Unauthorized</em> ini <strong>hanya akan dijabarkan di kotak ini saja</strong> dan tidak akan ditulis berulang-ulang di bawah setiap endpoint agar laporan lebih bersih dan ringkas.</p>
+<pre style="margin-top: 15px;">{
+    <span class="json-key">"status"</span>: <span class="json-str">"error"</span>,
+    <span class="json-key">"message"</span>: <span class="json-str">"Akses ditolak. API Key tidak ditemukan pada Header 'x-api-key'."</span> // (Jika Lupa/Kosong - Status 401)
+}</pre>
+<pre style="margin-top: 10px;">{
+    <span class="json-key">"status"</span>: <span class="json-str">"error"</span>,
+    <span class="json-key">"message"</span>: <span class="json-str">"Akses ditolak. API Key yang Anda masukkan tidak valid."</span> // (Jika Typo/Salah Kunci - Status 403)
+}</pre>
+        </div>
+
+        <h3 style="color:#2c5364; border-bottom: 2px solid #eee; padding-bottom: 5px;">ℹ️ Info Server (Jalur Bebas / Publik)</h3>
         <table>
             <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
             <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/info</code></td><td>Informasi API</td></tr>
@@ -372,12 +399,12 @@ CREATE TABLE transaction_items (
                 <ol>
                     <li>Klik <strong>+ New Request</strong>.</li>
                     <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/info</code>.</li>
-                    <li><strong>Catatan:</strong> Karena ini adalah rute Publik, Anda <strong>TIDAK PERLU</strong> memasukkan API Key di tab Headers.</li>
+                    <li><strong>Catatan Khusus:</strong> Karena ini adalah rute Publik untuk *health check*, Anda <strong>TIDAK PERLU</strong> memasukkan API Key di tab Headers.</li>
                     <li>Klik tombol biru <strong>Send</strong>.</li>
                 </ol>
             </div>
             <div class="pm-data-section">
-                <div class="pm-section-title">Response (Body)</div>
+                <div class="pm-section-title">Response (Berhasil - 200 OK)</div>
 <pre>{
     <span class="json-key">"nama"</span>: <span class="json-str">"TechStore API"</span>,
     <span class="json-key">"versi"</span>: <span class="json-str">"1.0.0"</span>,
@@ -386,7 +413,7 @@ CREATE TABLE transaction_items (
             </div>
         </div>
 
-        <h3 style="color:#2c5364; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 40px;">📦 Products</h3>
+        <h3 style="color:#2c5364; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 40px;">📦 Products (Produk & Inventaris)</h3>
         <table>
             <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
             <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/products</code></td><td>Ambil semua produk</td></tr>
@@ -408,7 +435,7 @@ CREATE TABLE transaction_items (
                 </ol>
             </div>
             <div class="pm-data-section">
-                <div class="pm-section-title">Response (Berhasil Menggunakan API Key - 200 OK)</div>
+                <div class="pm-section-title">Response (Berhasil - 200 OK)</div>
 <pre>[
     {
         <span class="json-key">"id"</span>: <span class="json-num">1</span>,
@@ -425,11 +452,6 @@ CREATE TABLE transaction_items (
         <span class="json-key">"stok"</span>: <span class="json-num">8</span>
     }
 ]</pre>
-                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Jika Lupa/Tanpa API Key - 401 Unauthorized)</div>
-<pre>{
-    <span class="json-key">"status"</span>: <span class="json-str">"error"</span>,
-    <span class="json-key">"message"</span>: <span class="json-str">"Akses ditolak. API Key tidak ditemukan pada Header 'x-api-key'."</span>
-}</pre>
             </div>
         </div>
 
@@ -445,7 +467,7 @@ CREATE TABLE transaction_items (
                 </ol>
             </div>
             <div class="pm-data-section">
-                <div class="pm-section-title">Response (Berhasil Menggunakan API Key - 200 OK)</div>
+                <div class="pm-section-title">Response (Berhasil Ditemukan - 200 OK)</div>
 <pre>{
     <span class="json-key">"id"</span>: <span class="json-num">1</span>,
     <span class="json-key">"nama"</span>: <span class="json-str">"ASUS TUF A15"</span>,
@@ -453,10 +475,9 @@ CREATE TABLE transaction_items (
     <span class="json-key">"harga"</span>: <span class="json-num">12000000</span>,
     <span class="json-key">"stok"</span>: <span class="json-num">10</span>
 }</pre>
-                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Jika Lupa/Tanpa API Key - 401 Unauthorized)</div>
+                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Gagal: ID Tidak Valid / Tidak Ada di Database - 404 Not Found)</div>
 <pre>{
-    <span class="json-key">"status"</span>: <span class="json-str">"error"</span>,
-    <span class="json-key">"message"</span>: <span class="json-str">"Akses ditolak. API Key tidak ditemukan pada Header 'x-api-key'."</span>
+    <span class="json-key">"message"</span>: <span class="json-str">"Produk tidak ditemukan"</span>
 }</pre>
             </div>
         </div>
@@ -481,7 +502,7 @@ CREATE TABLE transaction_items (
     <span class="json-key">"harga"</span>: <span class="json-num">12000000</span>,
     <span class="json-key">"stok"</span>: <span class="json-num">10</span>
 }</pre>
-                <div class="pm-section-title">Response (Berhasil Menggunakan API Key - 201 Created)</div>
+                <div class="pm-section-title">Response (Berhasil Menambah Data - 201 Created)</div>
 <pre>{
     <span class="json-key">"message"</span>: <span class="json-str">"Produk berhasil ditambahkan"</span>,
     <span class="json-key">"data"</span>: {
@@ -492,10 +513,13 @@ CREATE TABLE transaction_items (
         <span class="json-key">"stok"</span>: <span class="json-num">10</span>
     }
 }</pre>
-                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Jika Lupa/Tanpa API Key - 401 Unauthorized)</div>
+                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Gagal: Nama Produk Duplikat / Sudah Pernah Dimasukkan - 400 Bad Request)</div>
 <pre>{
-    <span class="json-key">"status"</span>: <span class="json-str">"error"</span>,
-    <span class="json-key">"message"</span>: <span class="json-str">"Akses ditolak. API Key tidak ditemukan pada Header 'x-api-key'."</span>
+    <span class="json-key">"message"</span>: <span class="json-str">"Produk dengan nama 'ASUS TUF A15' sudah terdaftar di sistem. Tidak boleh ada nama yang sama."</span>
+}</pre>
+                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Gagal: Validasi Form Kosong / Tipe Data Salah - 400 Bad Request)</div>
+<pre>{
+    <span class="json-key">"message"</span>: <span class="json-str">"Semua *field* (nama, kategori, harga, stok) wajib diisi dengan format yang benar."</span>
 }</pre>
             </div>
         </div>
@@ -520,7 +544,7 @@ CREATE TABLE transaction_items (
     <span class="json-key">"harga"</span>: <span class="json-num">13000000</span>,
     <span class="json-key">"stok"</span>: <span class="json-num">8</span>
 }</pre>
-                <div class="pm-section-title">Response (Berhasil Menggunakan API Key - 200 OK)</div>
+                <div class="pm-section-title">Response (Berhasil Melakukan Perubahan - 200 OK)</div>
 <pre>{
     <span class="json-key">"message"</span>: <span class="json-str">"Produk berhasil diupdate"</span>,
     <span class="json-key">"data"</span>: {
@@ -531,10 +555,9 @@ CREATE TABLE transaction_items (
         <span class="json-key">"stok"</span>: <span class="json-num">8</span>
     }
 }</pre>
-                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Jika Lupa/Tanpa API Key - 401 Unauthorized)</div>
+                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Gagal: Target ID Salah / Terhapus - 404 Not Found)</div>
 <pre>{
-    <span class="json-key">"status"</span>: <span class="json-str">"error"</span>,
-    <span class="json-key">"message"</span>: <span class="json-str">"Akses ditolak. API Key tidak ditemukan pada Header 'x-api-key'."</span>
+    <span class="json-key">"message"</span>: <span class="json-str">"Produk yang ingin di-update tidak ditemukan di database"</span>
 }</pre>
             </div>
         </div>
@@ -551,19 +574,18 @@ CREATE TABLE transaction_items (
                 </ol>
             </div>
             <div class="pm-data-section">
-                <div class="pm-section-title">Response (Berhasil Menggunakan API Key - 200 OK)</div>
+                <div class="pm-section-title">Response (Berhasil Menghapus - 200 OK)</div>
 <pre>{
-    <span class="json-key">"message"</span>: <span class="json-str">"Produk berhasil dihapus"</span>
+    <span class="json-key">"message"</span>: <span class="json-str">"Produk berhasil dihapus dari sistem"</span>
 }</pre>
-                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Jika Lupa/Tanpa API Key - 401 Unauthorized)</div>
+                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Gagal: Target ID Salah - 404 Not Found)</div>
 <pre>{
-    <span class="json-key">"status"</span>: <span class="json-str">"error"</span>,
-    <span class="json-key">"message"</span>: <span class="json-str">"Akses ditolak. API Key tidak ditemukan pada Header 'x-api-key'."</span>
+    <span class="json-key">"message"</span>: <span class="json-str">"Produk tidak ditemukan, penghapusan dibatalkan."</span>
 }</pre>
             </div>
         </div>
 
-        <h3 style="color:#2c5364; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 40px;">👥 Customers</h3>
+        <h3 style="color:#2c5364; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 40px;">👥 Customers (Pelanggan)</h3>
         <table>
             <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
             <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/customers</code></td><td>Ambil semua customer</td></tr>
@@ -580,12 +602,12 @@ CREATE TABLE transaction_items (
                 <ol>
                     <li>Klik <strong>+ New Request</strong>.</li>
                     <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/v1/customers</code>.</li>
-                    <li>Buka tab <strong>Headers</strong>, masukkan Key: <code>x-api-key</code> dan Value: <code>techstorekelompok5_2026</code>.</li>
+                    <li>Buka tab <strong>Headers</strong>, masukkan Key: `x-api-key` dan Value: `techstorekelompok5_2026`.</li>
                     <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
                 </ol>
             </div>
             <div class="pm-data-section">
-                <div class="pm-section-title">Response (Berhasil Menggunakan API Key - 200 OK)</div>
+                <div class="pm-section-title">Response (Berhasil - 200 OK)</div>
 <pre>[
     {
         <span class="json-key">"id"</span>: <span class="json-num">1</span>,
@@ -600,11 +622,6 @@ CREATE TABLE transaction_items (
         <span class="json-key">"alamat"</span>: <span class="json-str">"Jl. Sudirman No. 20"</span>
     }
 ]</pre>
-                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Jika Lupa/Tanpa API Key - 401 Unauthorized)</div>
-<pre>{
-    <span class="json-key">"status"</span>: <span class="json-str">"error"</span>,
-    <span class="json-key">"message"</span>: <span class="json-str">"Akses ditolak. API Key tidak ditemukan pada Header 'x-api-key'."</span>
-}</pre>
             </div>
         </div>
 
@@ -615,22 +632,21 @@ CREATE TABLE transaction_items (
                 <ol>
                     <li>Klik <strong>+ New Request</strong>.</li>
                     <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/v1/customers/1</code>.</li>
-                    <li>Buka tab <strong>Headers</strong>, masukkan Key: <code>x-api-key</code> dan Value: <code>techstorekelompok5_2026</code>.</li>
+                    <li>Buka tab <strong>Headers</strong>, masukkan Key: `x-api-key` dan Value: `techstorekelompok5_2026`.</li>
                     <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
                 </ol>
             </div>
             <div class="pm-data-section">
-                <div class="pm-section-title">Response (Berhasil Menggunakan API Key - 200 OK)</div>
+                <div class="pm-section-title">Response (Berhasil Ditemukan - 200 OK)</div>
 <pre>{
     <span class="json-key">"id"</span>: <span class="json-num">1</span>,
     <span class="json-key">"nama"</span>: <span class="json-str">"Budi Santoso"</span>,
     <span class="json-key">"telepon"</span>: <span class="json-str">"081234567890"</span>,
     <span class="json-key">"alamat"</span>: <span class="json-str">"Jl. Merdeka No. 10"</span>
 }</pre>
-                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Jika Lupa/Tanpa API Key - 401 Unauthorized)</div>
+                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Gagal: ID Tidak Valid - 404 Not Found)</div>
 <pre>{
-    <span class="json-key">"status"</span>: <span class="json-str">"error"</span>,
-    <span class="json-key">"message"</span>: <span class="json-str">"Akses ditolak. API Key tidak ditemukan pada Header 'x-api-key'."</span>
+    <span class="json-key">"message"</span>: <span class="json-str">"Customer tidak ditemukan"</span>
 }</pre>
             </div>
         </div>
@@ -642,7 +658,7 @@ CREATE TABLE transaction_items (
                 <ol>
                     <li>Klik <strong>+ New Request</strong>.</li>
                     <li>Pilih method <strong>POST</strong> dan paste URL <code>http://localhost:3000/api/v1/customers</code>.</li>
-                    <li>Buka tab <strong>Headers</strong>, masukkan Key: <code>x-api-key</code> dan Value: <code>techstorekelompok5_2026</code>.</li>
+                    <li>Buka tab <strong>Headers</strong>, masukkan Key: `x-api-key` dan Value: `techstorekelompok5_2026`.</li>
                     <li>Pilih tab <strong>Body</strong> &rarr; pilih <strong>raw</strong> &rarr; ubah text menjadi <strong>JSON</strong> di kanan.</li>
                     <li>Copy & Paste *Request Body* di bawah ke dalam Postman, lalu klik <strong>Send</strong>.</li>
                 </ol>
@@ -654,7 +670,7 @@ CREATE TABLE transaction_items (
     <span class="json-key">"telepon"</span>: <span class="json-str">"081234567890"</span>,
     <span class="json-key">"alamat"</span>: <span class="json-str">"Jl. Merdeka No. 10"</span>
 }</pre>
-                <div class="pm-section-title">Response (Berhasil Menggunakan API Key - 201 Created)</div>
+                <div class="pm-section-title">Response (Berhasil Menambah - 201 Created)</div>
 <pre>{
     <span class="json-key">"message"</span>: <span class="json-str">"Customer berhasil ditambahkan"</span>,
     <span class="json-key">"data"</span>: {
@@ -664,10 +680,9 @@ CREATE TABLE transaction_items (
         <span class="json-key">"alamat"</span>: <span class="json-str">"Jl. Merdeka No. 10"</span>
     }
 }</pre>
-                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Jika Lupa/Tanpa API Key - 401 Unauthorized)</div>
+                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Gagal: Validasi Nomor Telepon Sama - 400 Bad Request)</div>
 <pre>{
-    <span class="json-key">"status"</span>: <span class="json-str">"error"</span>,
-    <span class="json-key">"message"</span>: <span class="json-str">"Akses ditolak. API Key tidak ditemukan pada Header 'x-api-key'."</span>
+    <span class="json-key">"message"</span>: <span class="json-str">"Nomor telepon sudah digunakan oleh customer lain. Silakan gunakan nomor unik."</span>
 }</pre>
             </div>
         </div>
@@ -679,7 +694,7 @@ CREATE TABLE transaction_items (
                 <ol>
                     <li>Klik <strong>+ New Request</strong>.</li>
                     <li>Pilih method <strong>PUT</strong> dan paste URL <code>http://localhost:3000/api/v1/customers/1</code>.</li>
-                    <li>Buka tab <strong>Headers</strong>, masukkan Key: <code>x-api-key</code> dan Value: <code>techstorekelompok5_2026</code>.</li>
+                    <li>Buka tab <strong>Headers</strong>, masukkan Key: `x-api-key` dan Value: `techstorekelompok5_2026`.</li>
                     <li>Pilih tab <strong>Body</strong> &rarr; pilih <strong>raw</strong> &rarr; ubah text menjadi <strong>JSON</strong> di kanan.</li>
                     <li>Copy & Paste *Request Body* untuk memperbarui pelanggan, lalu klik <strong>Send</strong>.</li>
                 </ol>
@@ -691,7 +706,7 @@ CREATE TABLE transaction_items (
     <span class="json-key">"telepon"</span>: <span class="json-str">"089999999999"</span>,
     <span class="json-key">"alamat"</span>: <span class="json-str">"Jl. Baru No. 99"</span>
 }</pre>
-                <div class="pm-section-title">Response (Berhasil Menggunakan API Key - 200 OK)</div>
+                <div class="pm-section-title">Response (Berhasil Diubah - 200 OK)</div>
 <pre>{
     <span class="json-key">"message"</span>: <span class="json-str">"Customer berhasil diupdate"</span>,
     <span class="json-key">"data"</span>: {
@@ -701,10 +716,9 @@ CREATE TABLE transaction_items (
         <span class="json-key">"alamat"</span>: <span class="json-str">"Jl. Baru No. 99"</span>
     }
 }</pre>
-                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Jika Lupa/Tanpa API Key - 401 Unauthorized)</div>
+                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Gagal: ID Tidak Valid - 404 Not Found)</div>
 <pre>{
-    <span class="json-key">"status"</span>: <span class="json-str">"error"</span>,
-    <span class="json-key">"message"</span>: <span class="json-str">"Akses ditolak. API Key tidak ditemukan pada Header 'x-api-key'."</span>
+    <span class="json-key">"message"</span>: <span class="json-str">"Customer tidak ditemukan di database"</span>
 }</pre>
             </div>
         </div>
@@ -716,30 +730,29 @@ CREATE TABLE transaction_items (
                 <ol>
                     <li>Klik <strong>+ New Request</strong>.</li>
                     <li>Pilih method <strong>DELETE</strong> dan paste URL <code>http://localhost:3000/api/v1/customers/1</code>.</li>
-                    <li>Buka tab <strong>Headers</strong>, masukkan Key: <code>x-api-key</code> dan Value: <code>techstorekelompok5_2026</code>.</li>
+                    <li>Buka tab <strong>Headers</strong>, masukkan Key: `x-api-key` dan Value: `techstorekelompok5_2026`.</li>
                     <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
                 </ol>
             </div>
             <div class="pm-data-section">
-                <div class="pm-section-title">Response (Berhasil Menggunakan API Key - 200 OK)</div>
+                <div class="pm-section-title">Response (Berhasil Menghapus - 200 OK)</div>
 <pre>{
     <span class="json-key">"message"</span>: <span class="json-str">"Customer berhasil dihapus"</span>
 }</pre>
-                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Jika Lupa/Tanpa API Key - 401 Unauthorized)</div>
+                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Gagal: ID Tidak Valid - 404 Not Found)</div>
 <pre>{
-    <span class="json-key">"status"</span>: <span class="json-str">"error"</span>,
-    <span class="json-key">"message"</span>: <span class="json-str">"Akses ditolak. API Key tidak ditemukan pada Header 'x-api-key'."</span>
+    <span class="json-key">"message"</span>: <span class="json-str">"Customer tidak ditemukan"</span>
 }</pre>
             </div>
         </div>
 
-        <h3 style="color:#2c5364; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 40px;">💰 Transactions</h3>
+        <h3 style="color:#2c5364; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 40px;">💰 Transactions (Kasir Penjualan)</h3>
         <table>
             <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
-            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/transactions</code></td><td>Ambil semua transaksi</td></tr>
-            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/transactions/:id</code></td><td>Ambil transaksi by ID</td></tr>
-            <tr><td><span class="m-badge m-post">POST</span></td><td><code>http://localhost:3000/api/v1/transactions</code></td><td>Buat transaksi baru</td></tr>
-            <tr><td><span class="m-badge m-delete">DELETE</span></td><td><code>http://localhost:3000/api/v1/transactions/:id</code></td><td>Hapus transaksi</td></tr>
+            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/transactions</code></td><td>Ambil semua riwayat transaksi</td></tr>
+            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/transactions/:id</code></td><td>Ambil struk/transaksi by ID</td></tr>
+            <tr><td><span class="m-badge m-post">POST</span></td><td><code>http://localhost:3000/api/v1/transactions</code></td><td>Proses Kasir (Buat transaksi baru)</td></tr>
+            <tr><td><span class="m-badge m-delete">DELETE</span></td><td><code>http://localhost:3000/api/v1/transactions/:id</code></td><td>Batalkan/Hapus transaksi</td></tr>
         </table>
 
         <div class="postman-wrapper">
@@ -749,12 +762,12 @@ CREATE TABLE transaction_items (
                 <ol>
                     <li>Klik <strong>+ New Request</strong>.</li>
                     <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/v1/transactions</code>.</li>
-                    <li>Buka tab <strong>Headers</strong>, masukkan Key: <code>x-api-key</code> dan Value: <code>techstorekelompok5_2026</code>.</li>
+                    <li>Buka tab <strong>Headers</strong>, masukkan Key: `x-api-key` dan Value: `techstorekelompok5_2026`.</li>
                     <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
                 </ol>
             </div>
             <div class="pm-data-section">
-                <div class="pm-section-title">Response (Berhasil Menggunakan API Key - 200 OK)</div>
+                <div class="pm-section-title">Response (Berhasil - 200 OK)</div>
 <pre>[
     {
         <span class="json-key">"id"</span>: <span class="json-num">1</span>,
@@ -782,11 +795,6 @@ CREATE TABLE transaction_items (
         <span class="json-key">"tanggal"</span>: <span class="json-str">"2026-06-11T08:45:41.000Z"</span>
     }
 ]</pre>
-                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Jika Lupa/Tanpa API Key - 401 Unauthorized)</div>
-<pre>{
-    <span class="json-key">"status"</span>: <span class="json-str">"error"</span>,
-    <span class="json-key">"message"</span>: <span class="json-str">"Akses ditolak. API Key tidak ditemukan pada Header 'x-api-key'."</span>
-}</pre>
             </div>
         </div>
 
@@ -797,12 +805,12 @@ CREATE TABLE transaction_items (
                 <ol>
                     <li>Klik <strong>+ New Request</strong>.</li>
                     <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/v1/transactions/1</code>.</li>
-                    <li>Buka tab <strong>Headers</strong>, masukkan Key: <code>x-api-key</code> dan Value: <code>techstorekelompok5_2026</code>.</li>
+                    <li>Buka tab <strong>Headers</strong>, masukkan Key: `x-api-key` dan Value: `techstorekelompok5_2026`.</li>
                     <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
                 </ol>
             </div>
             <div class="pm-data-section">
-                <div class="pm-section-title">Response (Berhasil Menggunakan API Key - 200 OK)</div>
+                <div class="pm-section-title">Response (Berhasil Ditemukan - 200 OK)</div>
 <pre>{
     <span class="json-key">"id"</span>: <span class="json-num">1</span>,
     <span class="json-key">"customer"</span>: {
@@ -821,10 +829,9 @@ CREATE TABLE transaction_items (
     <span class="json-key">"totalHarga"</span>: <span class="json-num">39000000</span>,
     <span class="json-key">"tanggal"</span>: <span class="json-str">"2026-06-11T08:45:41.000Z"</span>
 }</pre>
-                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Jika Lupa/Tanpa API Key - 401 Unauthorized)</div>
+                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Gagal: Struk/Transaksi Tidak Ada - 404 Not Found)</div>
 <pre>{
-    <span class="json-key">"status"</span>: <span class="json-str">"error"</span>,
-    <span class="json-key">"message"</span>: <span class="json-str">"Akses ditolak. API Key tidak ditemukan pada Header 'x-api-key'."</span>
+    <span class="json-key">"message"</span>: <span class="json-str">"Transaksi tidak ditemukan di catatan"</span>
 }</pre>
             </div>
         </div>
@@ -836,9 +843,9 @@ CREATE TABLE transaction_items (
                 <ol>
                     <li>Klik <strong>+ New Request</strong>.</li>
                     <li>Pilih method <strong>POST</strong> dan paste URL <code>http://localhost:3000/api/v1/transactions</code>.</li>
-                    <li>Buka tab <strong>Headers</strong>, masukkan Key: <code>x-api-key</code> dan Value: <code>techstorekelompok5_2026</code>.</li>
+                    <li>Buka tab <strong>Headers</strong>, masukkan Key: `x-api-key` dan Value: `techstorekelompok5_2026`.</li>
                     <li>Pilih tab <strong>Body</strong> &rarr; pilih <strong>raw</strong> &rarr; ubah text menjadi <strong>JSON</strong> di kanan.</li>
-                    <li>Copy & Paste struktur keranjang belanja berikut, lalu klik <strong>Send</strong>.</li>
+                    <li>Copy & Paste struktur keranjang belanja berikut, lalu klik <strong>Send</strong>. *(Akan memicu Controller untuk mengecek Database secara mutlak).*</li>
                 </ol>
             </div>
             <div class="pm-data-section">
@@ -850,9 +857,9 @@ CREATE TABLE transaction_items (
         { <span class="json-key">"productId"</span>: <span class="json-num">2</span>, <span class="json-key">"jumlah"</span>: <span class="json-num">1</span> }
     ]
 }</pre>
-                <div class="pm-section-title">Response (Berhasil Menggunakan API Key - 201 Created)</div>
+                <div class="pm-section-title">Response (Berhasil Diproses & Stok Berkurang - 201 Created)</div>
 <pre>{
-    <span class="json-key">"message"</span>: <span class="json-str">"Transaksi berhasil dibuat"</span>,
+    <span class="json-key">"message"</span>: <span class="json-str">"Transaksi berhasil dibuat, stok telah dipotong."</span>,
     <span class="json-key">"data"</span>: {
         <span class="json-key">"id"</span>: <span class="json-num">1</span>,
         <span class="json-key">"customer"</span>: {
@@ -867,22 +874,23 @@ CREATE TABLE transaction_items (
                 <span class="json-key">"jumlah"</span>: <span class="json-num">2</span>,
                 <span class="json-key">"subtotal"</span>: <span class="json-num">24000000</span>
             },
-            {
-                <span class="json-key">"productId"</span>: <span class="json-num">2</span>,
-                <span class="json-key">"nama"</span>: <span class="json-str">"iPhone 15"</span>,
-                <span class="json-key">"harga"</span>: <span class="json-num">15000000</span>,
-                <span class="json-key">"jumlah"</span>: <span class="json-num">1</span>,
-                <span class="json-key">"subtotal"</span>: <span class="json-num">15000000</span>
-            }
+            ...
         ],
         <span class="json-key">"totalHarga"</span>: <span class="json-num">39000000</span>,
         <span class="json-key">"tanggal"</span>: <span class="json-str">"2026-06-11T08:45:41.000Z"</span>
     }
 }</pre>
-                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Jika Lupa/Tanpa API Key - 401 Unauthorized)</div>
+                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Gagal: Validasi Keranjang Salah/Format Array Buruk - 400 Bad Request)</div>
 <pre>{
-    <span class="json-key">"status"</span>: <span class="json-str">"error"</span>,
-    <span class="json-key">"message"</span>: <span class="json-str">"Akses ditolak. API Key tidak ditemukan pada Header 'x-api-key'."</span>
+    <span class="json-key">"message"</span>: <span class="json-str">"Format transaksi tidak valid. Pastikan items berupa array yang tidak kosong."</span>
+}</pre>
+                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Gagal: Pembeli Belum Terdaftar - 404 Not Found)</div>
+<pre>{
+    <span class="json-key">"message"</span>: <span class="json-str">"Customer dengan ID tersebut tidak ditemukan, harap daftarkan dulu."</span>
+}</pre>
+                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Gagal: Sisa Stok Gudang Minus / Tidak Cukup - 400 Bad Request)</div>
+<pre>{
+    <span class="json-key">"message"</span>: <span class="json-str">"Stok produk ASUS TUF A15 tidak cukup. Sisa stok: 1, Permintaan: 2."</span>
 }</pre>
             </div>
         </div>
@@ -894,31 +902,30 @@ CREATE TABLE transaction_items (
                 <ol>
                     <li>Klik <strong>+ New Request</strong>.</li>
                     <li>Pilih method <strong>DELETE</strong> dan paste URL <code>http://localhost:3000/api/v1/transactions/1</code>.</li>
-                    <li>Buka tab <strong>Headers</strong>, masukkan Key: <code>x-api-key</code> dan Value: <code>techstorekelompok5_2026</code>.</li>
+                    <li>Buka tab <strong>Headers</strong>, masukkan Key: `x-api-key` dan Value: `techstorekelompok5_2026`.</li>
                     <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
                 </ol>
             </div>
             <div class="pm-data-section">
-                <div class="pm-section-title">Response (Berhasil Menggunakan API Key - 200 OK)</div>
+                <div class="pm-section-title">Response (Berhasil Menghapus / Return - 200 OK)</div>
 <pre>{
-    <span class="json-key">"message"</span>: <span class="json-str">"Transaksi berhasil dihapus"</span>
+    <span class="json-key">"message"</span>: <span class="json-str">"Transaksi berhasil dibatalkan dan dihapus."</span>
 }</pre>
-                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Jika Lupa/Tanpa API Key - 401 Unauthorized)</div>
+                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Gagal: Target ID Salah - 404 Not Found)</div>
 <pre>{
-    <span class="json-key">"status"</span>: <span class="json-str">"error"</span>,
-    <span class="json-key">"message"</span>: <span class="json-str">"Akses ditolak. API Key tidak ditemukan pada Header 'x-api-key'."</span>
+    <span class="json-key">"message"</span>: <span class="json-str">"Transaksi tidak ditemukan untuk dihapus."</span>
 }</pre>
             </div>
         </div>
 
-        <h3 style="color:#2c5364; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 40px;">📈 Laporan</h3>
+        <h3 style="color:#2c5364; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 40px;">📈 Laporan (Business Intelligence)</h3>
         <table>
             <tr><th>Method</th><th>Endpoint</th><th>Deskripsi</th></tr>
-            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/laporan/penjualan</code></td><td>Rekap total penjualan</td></tr>
-            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/laporan/produk-terlaris</code></td><td>5 produk terlaris</td></tr>
-            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/laporan/per-customer</code></td><td>Rekap per customer</td></tr>
-            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/laporan/per-hari</code></td><td>Rekap penjualan per hari</td></tr>
-            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/laporan/stok-menipis</code></td><td>Produk stok kurang dari 5</td></tr>
+            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/laporan/penjualan</code></td><td>Rekap total laba penjualan</td></tr>
+            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/laporan/produk-terlaris</code></td><td>5 produk paling laku keras</td></tr>
+            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/laporan/per-customer</code></td><td>Riwayat pengeluaran/belanja pelanggan</td></tr>
+            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/laporan/per-hari</code></td><td>Trend penjualan per hari kalender</td></tr>
+            <tr><td><span class="m-badge m-get">GET</span></td><td><code>http://localhost:3000/api/v1/laporan/stok-menipis</code></td><td>Notifikasi produk kritis (Stok &lt; 5)</td></tr>
         </table>
 
         <div class="postman-wrapper">
@@ -928,25 +935,20 @@ CREATE TABLE transaction_items (
                 <ol>
                     <li>Klik <strong>+ New Request</strong>.</li>
                     <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/v1/laporan/penjualan</code>.</li>
-                    <li>Buka tab <strong>Headers</strong>, masukkan Key: <code>x-api-key</code> dan Value: <code>techstorekelompok5_2026</code>.</li>
+                    <li>Buka tab <strong>Headers</strong>, masukkan Key: `x-api-key` dan Value: `techstorekelompok5_2026`.</li>
                     <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
                 </ol>
             </div>
             <div class="pm-data-section">
-                <div class="pm-section-title">Response (Berhasil Menggunakan API Key - 200 OK)</div>
+                <div class="pm-section-title">Response (Berhasil Kalkulasi - 200 OK)</div>
 <pre>{
-    <span class="json-key">"message"</span>: <span class="json-str">"Rekap penjualan"</span>,
+    <span class="json-key">"message"</span>: <span class="json-str">"Rekap penjualan keseluruhan"</span>,
     <span class="json-key">"data"</span>: {
         <span class="json-key">"total_transaksi"</span>: <span class="json-num">1</span>,
         <span class="json-key">"total_pendapatan"</span>: <span class="json-str">"39000000"</span>,
         <span class="json-key">"transaksi_pertama"</span>: <span class="json-str">"2026-06-11T08:45:41.000Z"</span>,
         <span class="json-key">"transaksi_terakhir"</span>: <span class="json-str">"2026-06-11T08:45:41.000Z"</span>
     }
-}</pre>
-                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Jika Lupa/Tanpa API Key - 401 Unauthorized)</div>
-<pre>{
-    <span class="json-key">"status"</span>: <span class="json-str">"error"</span>,
-    <span class="json-key">"message"</span>: <span class="json-str">"Akses ditolak. API Key tidak ditemukan pada Header 'x-api-key'."</span>
 }</pre>
             </div>
         </div>
@@ -958,14 +960,14 @@ CREATE TABLE transaction_items (
                 <ol>
                     <li>Klik <strong>+ New Request</strong>.</li>
                     <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/v1/laporan/produk-terlaris</code>.</li>
-                    <li>Buka tab <strong>Headers</strong>, masukkan Key: <code>x-api-key</code> dan Value: <code>techstorekelompok5_2026</code>.</li>
+                    <li>Buka tab <strong>Headers</strong>, masukkan Key: `x-api-key` dan Value: `techstorekelompok5_2026`.</li>
                     <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
                 </ol>
             </div>
             <div class="pm-data-section">
-                <div class="pm-section-title">Response (Berhasil Menggunakan API Key - 200 OK)</div>
+                <div class="pm-section-title">Response (Berhasil Analisa Produk Laris - 200 OK)</div>
 <pre>{
-    <span class="json-key">"message"</span>: <span class="json-str">"Produk terlaris"</span>,
+    <span class="json-key">"message"</span>: <span class="json-str">"Produk terlaris berdasarkan kuantitas"</span>,
     <span class="json-key">"data"</span>: [
         {
             <span class="json-key">"product_id"</span>: <span class="json-num">1</span>,
@@ -981,11 +983,6 @@ CREATE TABLE transaction_items (
         }
     ]
 }</pre>
-                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Jika Lupa/Tanpa API Key - 401 Unauthorized)</div>
-<pre>{
-    <span class="json-key">"status"</span>: <span class="json-str">"error"</span>,
-    <span class="json-key">"message"</span>: <span class="json-str">"Akses ditolak. API Key tidak ditemukan pada Header 'x-api-key'."</span>
-}</pre>
             </div>
         </div>
 
@@ -996,12 +993,12 @@ CREATE TABLE transaction_items (
                 <ol>
                     <li>Klik <strong>+ New Request</strong>.</li>
                     <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/v1/laporan/per-customer</code>.</li>
-                    <li>Buka tab <strong>Headers</strong>, masukkan Key: <code>x-api-key</code> dan Value: <code>techstorekelompok5_2026</code>.</li>
+                    <li>Buka tab <strong>Headers</strong>, masukkan Key: `x-api-key` dan Value: `techstorekelompok5_2026`.</li>
                     <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
                 </ol>
             </div>
             <div class="pm-data-section">
-                <div class="pm-section-title">Response (Berhasil Menggunakan API Key - 200 OK)</div>
+                <div class="pm-section-title">Response (Berhasil Rekap Belanja - 200 OK)</div>
 <pre>{
     <span class="json-key">"message"</span>: <span class="json-str">"Rekap per customer"</span>,
     <span class="json-key">"data"</span>: [
@@ -1021,11 +1018,6 @@ CREATE TABLE transaction_items (
         }
     ]
 }</pre>
-                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Jika Lupa/Tanpa API Key - 401 Unauthorized)</div>
-<pre>{
-    <span class="json-key">"status"</span>: <span class="json-str">"error"</span>,
-    <span class="json-key">"message"</span>: <span class="json-str">"Akses ditolak. API Key tidak ditemukan pada Header 'x-api-key'."</span>
-}</pre>
             </div>
         </div>
 
@@ -1036,14 +1028,14 @@ CREATE TABLE transaction_items (
                 <ol>
                     <li>Klik <strong>+ New Request</strong>.</li>
                     <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/v1/laporan/per-hari</code>.</li>
-                    <li>Buka tab <strong>Headers</strong>, masukkan Key: <code>x-api-key</code> dan Value: <code>techstorekelompok5_2026</code>.</li>
+                    <li>Buka tab <strong>Headers</strong>, masukkan Key: `x-api-key` dan Value: `techstorekelompok5_2026`.</li>
                     <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
                 </ol>
             </div>
             <div class="pm-data-section">
-                <div class="pm-section-title">Response (Berhasil Menggunakan API Key - 200 OK)</div>
+                <div class="pm-section-title">Response (Berhasil Filter Kalender - 200 OK)</div>
 <pre>{
-    <span class="json-key">"message"</span>: <span class="json-str">"Rekap per hari"</span>,
+    <span class="json-key">"message"</span>: <span class="json-str">"Rekap trend penjualan per hari"</span>,
     <span class="json-key">"data"</span>: [
         {
             <span class="json-key">"tanggal"</span>: <span class="json-str">"2026-06-11T08:45:41.000Z"</span>,
@@ -1051,11 +1043,6 @@ CREATE TABLE transaction_items (
             <span class="json-key">"total_pendapatan"</span>: <span class="json-str">"39000000"</span>
         }
     ]
-}</pre>
-                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Jika Lupa/Tanpa API Key - 401 Unauthorized)</div>
-<pre>{
-    <span class="json-key">"status"</span>: <span class="json-str">"error"</span>,
-    <span class="json-key">"message"</span>: <span class="json-str">"Akses ditolak. API Key tidak ditemukan pada Header 'x-api-key'."</span>
 }</pre>
             </div>
         </div>
@@ -1067,28 +1054,23 @@ CREATE TABLE transaction_items (
                 <ol>
                     <li>Klik <strong>+ New Request</strong>.</li>
                     <li>Pilih method <strong>GET</strong> dan paste URL <code>http://localhost:3000/api/v1/laporan/stok-menipis</code>.</li>
-                    <li>Buka tab <strong>Headers</strong>, masukkan Key: <code>x-api-key</code> dan Value: <code>techstorekelompok5_2026</code>.</li>
+                    <li>Buka tab <strong>Headers</strong>, masukkan Key: `x-api-key` dan Value: `techstorekelompok5_2026`.</li>
                     <li>Biarkan tab Body kosong, lalu klik tombol biru <strong>Send</strong>.</li>
                 </ol>
             </div>
             <div class="pm-data-section">
-                <div class="pm-section-title">Response (Berhasil Menggunakan API Key - 200 OK)</div>
+                <div class="pm-section-title">Response (Berhasil Filter Warning - 200 OK)</div>
 <pre>{
-    <span class="json-key">"message"</span>: <span class="json-str">"Produk dengan stok menipis"</span>,
+    <span class="json-key">"message"</span>: <span class="json-str">"Peringatan! Produk dengan sisa stok kurang dari 5"</span>,
     <span class="json-key">"data"</span>: [
         {
             <span class="json-key">"id"</span>: <span class="json-num">4</span>,
             <span class="json-key">"nama"</span>: <span class="json-str">"Lenovo ThinkPad"</span>,
             <span class="json-key">"kategori"</span>: <span class="json-str">"Laptop"</span>,
             <span class="json-key">"harga"</span>: <span class="json-num">14000000</span>,
-            <span class="json-key">"stok"</span>: <span class="json-num">5</span>
+            <span class="json-key">"stok"</span>: <span class="json-num">4</span>
         }
     ]
-}</pre>
-                <div class="pm-section-title" style="margin-top: 15px; color: #ef4444;">Response (Jika Lupa/Tanpa API Key - 401 Unauthorized)</div>
-<pre>{
-    <span class="json-key">"status"</span>: <span class="json-str">"error"</span>,
-    <span class="json-key">"message"</span>: <span class="json-str">"Akses ditolak. API Key tidak ditemukan pada Header 'x-api-key'."</span>
 }</pre>
             </div>
         </div>
@@ -1098,41 +1080,38 @@ CREATE TABLE transaction_items (
         <h2>🔒 Middleware</h2>
         <table>
             <tr><th>Middleware</th><th>Fungsi</th></tr>
-            <tr><td>Logger</td><td>Mencatat setiap request yang masuk</td></tr>
-            <tr><td>Auth (API Key)</td><td>Memvalidasi keamanan akses sebelum masuk ke controller (Status 401/403 jika gagal)</td></tr>
-            <tr><td>Validator</td><td>Validasi input request body</td></tr>
-            <tr><td>Error Handler</td><td>Menangani error secara global</td></tr>
-            <tr><td>Not Found</td><td>Menangani route yang tidak ditemukan</td></tr>
+            <tr><td>Logger</td><td>Mencatat setiap request yang masuk ke terminal.</td></tr>
+            <tr><td>Auth (API Key)</td><td>Benteng utama yang memvalidasi otentikasi kunci sebelum eksekusi berlanjut.</td></tr>
+            <tr><td>Validator</td><td>Mengecek aturan logika data (misal: "Stok tidak boleh minus", "Harga wajib angka").</td></tr>
+            <tr><td>Error Handler</td><td>Mencegah Node.js *Crash* dan mengembalikan error JSON yang bersahabat kepada kasir.</td></tr>
+            <tr><td>Not Found</td><td>Menangani route/URL sembarang yang ditebak orang.</td></tr>
         </table>
 
-        <h2 style="margin-top: 30px;">📊 Status Code</h2>
+        <h2 style="margin-top: 30px;">📊 Status Code (HTTP Standar)</h2>
         <table>
             <tr><th>Status Code</th><th>Keterangan</th></tr>
-            <tr><td>200</td><td>OK (Berhasil)</td></tr>
-            <tr><td>201</td><td>Created (Data Baru Berhasil Ditambahkan)</td></tr>
-            <tr><td>400</td><td>Bad Request (Data yang dikirim salah/tidak lengkap)</td></tr>
-            <tr><td>401</td><td>Unauthorized (API Key tidak dimasukkan)</td></tr>
-            <tr><td>403</td><td>Forbidden (API Key dimasukkan namun salah)</td></tr>
-            <tr><td>404</td><td>Not Found (Data/Endpoint tidak ditemukan)</td></tr>
-            <tr><td>500</td><td>Internal Server Error</td></tr>
+            <tr><td><span style="color: #10b981; font-weight: bold;">200</span></td><td><strong>OK</strong> - Permintaan/Kalkulasi sukses.</td></tr>
+            <tr><td><span style="color: #3b82f6; font-weight: bold;">201</span></td><td><strong>Created</strong> - Data baru sukses ditambahkan (Simpan Produk/Checkout).</td></tr>
+            <tr><td><span style="color: #f59e0b; font-weight: bold;">400</span></td><td><strong>Bad Request</strong> - Format salah, ada duplikasi data, stok kurang, atau isi form kosong.</td></tr>
+            <tr><td><span style="color: #ef4444; font-weight: bold;">401</span></td><td><strong>Unauthorized</strong> - Klien tidak mengirimkan Headers <code>x-api-key</code>.</td></tr>
+            <tr><td><span style="color: #ef4444; font-weight: bold;">403</span></td><td><strong>Forbidden</strong> - Kunci <code>x-api-key</code> dimasukkan, namun salah / palsu.</td></tr>
+            <tr><td><span style="color: #ef4444; font-weight: bold;">404</span></td><td><strong>Not Found</strong> - ID Barang, Transaksi, Pelanggan, atau Endpoint URL tidak ditemukan.</td></tr>
+            <tr><td><span style="color: #9333ea; font-weight: bold;">500</span></td><td><strong>Internal Server Error</strong> - Kesalahan internal kode atau putus koneksi Database MySQL.</td></tr>
         </table>
     </div>
 
     <div class="card">
-        <h2>📝 Kesimpulan</h2>
-        <p style="text-align: justify; margin-bottom: 15px;">
-            Sistem <strong>TechStore API</strong> telah berhasil dirancang dan dikembangkan dengan memenuhi spesifikasi kebutuhan arsitektur <em>Point of Sales</em> (Kasir) yang komprehensif. Melalui pengembangan ini, telah tercapai beberapa poin penting:
-        </p>
+        <h2>📝 Kesimpulan & Analisa Akhir</h2>
+        <p style="text-align: justify; margin-bottom: 15px;">Sistem <strong>TechStore API</strong> terbukti sukses dikembangkan sebagai sebuah fondasi arsitektur <em>backend Point of Sales</em> (Kasir) bertaraf komprehensif, memanfaatkan kecepatan Node.js dan kehandalan basis data relasional MySQL.</p>
+        <p style="text-align: justify; margin-bottom: 15px;">Pengujian dan integrasi mendalam yang dilakukan memperlihatkan beberapa pencapaian arsitektur penting:</p>
         <ul style="line-height: 1.8;">
-            <li>✅ <strong>Database Relasional Terstruktur:</strong> Integrasi 4 tabel MySQL (Products, Customers, Transactions, Transaction Items) yang saling berelasi.</li>
-            <li>✅ <strong>Fungsionalitas CRUD Lengkap:</strong> Seluruh endpoin untuk manipulasi entitas berhasil dieksekusi via Postman tanpa kendala.</li>
-            <li>✅ <strong>Logika Bisnis Otomatis:</strong> Sistem secara otomatis dapat memotong ketersediaan stok produk setiap kali ada transaksi pembayaran berhasil.</li>
-            <li>✅ <strong>Keamanan API Key Tertutup:</strong> Sistem dirancang tertutup dengan Custom Middleware yang mewajibkan <code>x-api-key</code> di Header. Rute krusial tidak dapat di-tembus tanpa token autentikasi yang tepat.</li>
-            <li>✅ <strong>Sistem Pelaporan:</strong> API ini tak hanya menyimpan data, tapi juga mampu mengagregasikan informasi menjadi sebuah Business Intelligence (Laba penjualan harian, per-pelanggan, produk terlaris, dan pengingat sisa stok).</li>
+            <li>✅ <strong>Integritas Database Skala Menengah:</strong> Sukses menghubungkan 4 tabel MySQL (Products, Customers, Transactions, Transaction Items) melalui konsep <em>Foreign Key</em>. Relasi ini mengikat setiap transaksi belanja ke profil pelanggan yang valid dan ke katalog barang yang konkret, menghindari resiko rekap transaksi siluman (transaksi tanpa pelanggan yang jelas).</li>
+            <li>✅ <strong>Penanganan Error yang Sangat Kuat (*Robust Error Handling*):</strong> Sistem tidak hanya mampu melakukan simpan-tampil data (CRUD) secara lurus, tetapi juga dilengkapi dengan penanganan kondisi *edge-cases*. Aplikasi ini menolak nama produk ganda (mencegah duplikat), membatalkan pesanan kasir jika ID pelanggan tidak valid, dan dengan cerdas memblokir *checkout* jika permintaan beli melampaui sisa stok gudang (mengembalikan error 400 Bad Request).</li>
+            <li>✅ <strong>Logika Bisnis Real-time:</strong> Sistem telah di-<em>program</em> untuk secara otomatis memotong stok barang di gudang inventaris secara instan setelah tabel transaksi berhasil mencatat *checkout*, menjaga sinkronisasi tanpa perlu intervensi manual pengelola (*zero manual updating*).</li>
+            <li>✅ <strong>Keamanan Tertutup (*Zero Trust Architecture*):</strong> Penerapan <em>Custom Middleware Authentication</em> berhasil mengamankan semua operasi (*write/read/delete/update*). Akses sepenuhnya terkunci. Tanpa melampirkan kunci token <code>x-api-key</code> yang valid di komponen Headers, mustahil pihak luar bisa memanipulasi maupun sekadar melirik arus keuangan atau inventaris toko (*Unauthorized Protection*).</li>
+            <li>✅ <strong>Intelijen Bisnis Lanjut (Laporan):</strong> Tidak sebatas menyimpan angka mati, API ini memiliki rute khusus (*Data Aggregation*) untuk mengekstrak data mentah menjadi wawasan bermakna (*Business Intelligence*), seperti menganalisis barang terlaris, menghitung grafik omzet harian otomatis, dan membunyikan alarm logik untuk barang yang akan segera habis.</li>
         </ul>
-        <p style="margin-top: 15px;">
-            Proyek ini sangat layak untuk dilanjutkan ke tahap integrasi sisi <em>Frontend</em> (contoh: React / Vue) atau aplikasi <em>Mobile</em> untuk digunakan langsung oleh kasir di lapangan.
-        </p>
+        <p style="text-align: justify; margin-top: 15px; font-style: italic;"><strong>Tindak Lanjut Pengembangan:</strong> Berdasarkan pengujian akhir dengan Postman, struktur backend ini dinyatakan matang, sangat aman dari malpraktik manipulasi *payload*, dan siap 100% untuk dikonsumsi oleh baris *code* aplikasi Frontend (misal: panel web Vue.js/React untuk operator toko, maupun aplikasi kasir Mobile/Android) sebagai otaknya.</p>
     </div>
 
 </div>
