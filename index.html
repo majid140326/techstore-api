@@ -6,133 +6,95 @@
     <title>TechStore API - Laporan Project</title>
     <style>
         /* =========================================================
-           TEMA PRESENTASI PREMIUM (MODERN CORPORATE)
+           TEMA DOKUMENTASI & LAPORAN PROFESIONAL (VERTICAL SCROLL)
            ========================================================= */
         :root {
-            --bg-dark: #0f172a;       /* Slate 900 */
+            --bg-body: #f4f7f9;
             --bg-card: #ffffff;
-            --text-main: #334155;     /* Slate 700 */
+            --text-main: #475569;     /* Slate 600 */
             --text-heading: #0f172a;  /* Slate 900 */
-            --primary: #2563eb;       /* Blue 600 */
+            --primary: #0284c7;       /* Light Blue 600 */
             --border-light: #e2e8f0;  /* Slate 200 */
-            --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
-            --shadow-strong: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        html, body {
-            width: 100%; height: 100%;
-            background: var(--bg-dark);
-            background-image: radial-gradient(circle at top right, #1e293b 0%, #0f172a 100%);
+        body {
+            background-color: var(--bg-body);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             color: var(--text-main);
             line-height: 1.7;
-            overflow: hidden; 
-        }
-
-        body {
-            display: flex;
-            align-items: center;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            padding: 0 5vw;
-        }
-
-        /* Instruksi Navigasi Floating (Glassmorphism) */
-        body::after {
-            content: "➔ Geser Kiri / Kanan (Scroll) Untuk Pindah Slide";
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #f8fafc;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 12px 28px;
-            border-radius: 50px;
-            font-size: 0.9em;
-            font-weight: 600;
-            pointer-events: none;
-            z-index: 1000;
-            letter-spacing: 0.5px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .container { display: contents; }
-
-        /* =========================================================
-           KARTU (SLIDES)
-           ========================================================= */
-        header, .card, footer {
-            flex: 0 0 1000px; 
-            max-width: 85vw; 
-            height: 562px; 
-            max-height: 80vh; 
-            margin: 0 25px; 
-            background: var(--bg-card);
-            scroll-snap-align: center;
-            border-radius: 16px;
-            box-shadow: var(--shadow-strong);
-            overflow-y: auto; 
+            font-size: 16px;
             overflow-x: hidden;
-            padding: 50px;
-            position: relative;
+            scroll-behavior: smooth;
         }
 
-        /* Slide Pertama (Header Executive) */
+        /* HEADER / HERO SECTION */
         header {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border-top: 6px solid var(--primary);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             color: white;
+            padding: 80px 20px 100px 20px;
             text-align: center;
-            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05), var(--shadow-strong);
+            border-bottom: 5px solid var(--primary);
         }
-        header h1 { font-size: 3.5em; margin-bottom: 15px; font-weight: 800; letter-spacing: -1px; text-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        header p { font-size: 1.25em; color: #94a3b8; max-width: 80%; line-height: 1.6; }
+        header h1 { 
+            font-size: 3.2em; 
+            margin-bottom: 15px; 
+            font-weight: 800; 
+            letter-spacing: -0.5px; 
+        }
+        header p { 
+            font-size: 1.25em; 
+            color: #cbd5e1; 
+            max-width: 800px; 
+            margin: 0 auto;
+        }
 
-        footer {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: #f8fafc;
-            font-size: 1.1em;
-            color: #64748b;
-            font-weight: 500;
+        /* CONTAINER UTAMA */
+        .container { 
+            max-width: 1050px; 
+            margin: -50px auto 40px auto; /* Menarik container naik menimpa header sedikit */
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* CARD / KOTAK KONTEN */
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 50px 60px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow-card);
             border: 1px solid var(--border-light);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-
-        /* Judul Sticky Premium */
+        
+        /* JUDUL DI DALAM CARD */
         .card h2 {
             color: var(--text-heading);
-            font-size: 1.75em;
+            font-size: 2em;
             font-weight: 700;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             padding-bottom: 15px;
             border-bottom: 2px solid var(--border-light);
             display: flex;
             align-items: center;
             gap: 12px;
-            position: sticky;
-            top: -50px; 
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding-top: 50px;
-            z-index: 10;
         }
-        .card h3 { color: var(--text-heading); margin: 35px 0 15px 0; font-size: 1.25em; font-weight: 600; }
+        .card h3 { 
+            color: var(--text-heading); 
+            margin: 35px 0 15px 0; 
+            font-size: 1.4em; 
+            font-weight: 600; 
+        }
         
         /* =========================================================
-           KOMPONEN INTERNAL
+           KOMPONEN INTERNAL (GRID, TABEL, LIST, KODE)
            ========================================================= */
+        p { margin-bottom: 15px; text-align: justify; }
+        
         .team-grid, .tech-grid { 
             display: grid; 
             gap: 20px; 
@@ -142,49 +104,42 @@
         .tech-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
 
         .team-item, .tech-item { 
-            background: #ffffff; 
+            background: #f8fafc; 
             border: 1px solid var(--border-light); 
-            border-radius: 12px; 
+            border-radius: 10px; 
             padding: 20px; 
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
-            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
         .team-item { display: flex; align-items: center; gap: 15px; }
-        .team-item:hover, .tech-item:hover { 
-            transform: translateY(-4px); 
-            box-shadow: var(--shadow-soft);
-            border-color: #cbd5e1;
-        }
-        .team-item .avatar { font-size: 2.2em; background: #f0fdfa; padding: 12px; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.05);}
-        .team-item div h4 { color: var(--text-heading); margin-bottom: 4px; font-size: 1.05em; }
-        .team-item div p { color: #64748b; font-size: 0.85em; font-family: 'SFMono-Regular', Consolas, monospace; font-weight: 600; }
-        .tech-item h4 { color: var(--text-heading); }
+        .team-item .avatar { font-size: 2.2em; background: #e0f2fe; padding: 12px; border-radius: 50%; color: #0284c7;}
+        .team-item div h4 { color: var(--text-heading); margin-bottom: 4px; font-size: 1.1em; }
+        .team-item div p { color: #64748b; font-size: 0.9em; font-family: 'Consolas', monospace; font-weight: bold; margin: 0;}
+        .tech-item h4 { color: var(--text-heading); font-size: 1.1em;}
 
-        ul, ol { margin-left: 20px; margin-bottom: 20px; }
-        li { margin-bottom: 8px; padding-left: 5px; }
+        ul, ol { margin-left: 25px; margin-bottom: 20px; }
+        li { margin-bottom: 10px; padding-left: 5px; }
         
         /* Typography Code & Pre */
         code { 
             background: #f1f5f9; 
             padding: 3px 8px; 
             border-radius: 6px; 
-            color: #db2777; 
-            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; 
-            font-size: 0.9em; 
-            font-weight: 500;
+            color: #be185d; 
+            font-family: 'Consolas', monospace; 
+            font-size: 0.95em; 
+            font-weight: 600;
         }
         pre { 
-            background: #1e1e1e; 
-            color: #d4d4d4; 
-            padding: 20px; 
+            background: #1e293b; 
+            color: #e2e8f0; 
+            padding: 20px 25px; 
             border-radius: 10px; 
             overflow-x: auto; 
-            font-size: 0.9em; 
-            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; 
+            font-size: 0.95em; 
+            font-family: 'Consolas', monospace; 
             margin: 15px 0 25px 0; 
-            border: 1px solid #333;
-            border-left: 4px solid var(--primary); 
-            line-height: 1.5;
+            border-left: 5px solid var(--primary); 
+            line-height: 1.6;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
         }
         
@@ -193,89 +148,92 @@
             background: #f8fafc; 
             border: 1px solid var(--border-light);
             border-left: 5px solid var(--primary); 
-            padding: 20px 25px; 
+            padding: 25px; 
             border-radius: 8px; 
-            margin: 20px 0; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            margin: 25px 0; 
         }
-        .alert-box h4 { margin-bottom: 12px; font-size: 1.1em; display: flex; align-items: center; gap: 8px; }
+        .alert-box h4 { margin-bottom: 15px; font-size: 1.15em; display: flex; align-items: center; gap: 8px; }
 
         /* Elegant Tables */
-        table { width: 100%; border-collapse: collapse; margin: 20px 0 30px 0; font-size: 0.95em; border: 1px solid var(--border-light); border-radius: 8px; overflow: hidden; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0 35px 0; font-size: 1em; border: 1px solid var(--border-light); border-radius: 8px; overflow: hidden; }
         th { 
-            background: #f8fafc; 
-            color: #475569; 
-            padding: 15px; 
+            background: #f1f5f9; 
+            color: #334155; 
+            padding: 15px 20px; 
             text-align: left; 
-            font-weight: 600; 
-            text-transform: uppercase; 
-            font-size: 0.85em; 
-            letter-spacing: 0.05em; 
+            font-weight: 700; 
             border-bottom: 2px solid var(--border-light); 
         }
-        td { padding: 12px 15px; border-bottom: 1px solid var(--border-light); color: var(--text-main); }
+        td { padding: 15px 20px; border-bottom: 1px solid var(--border-light); color: var(--text-main); }
         tr:hover td { background: #f8fafc; }
-        tr:last-child td { border-bottom: none; }
         
         /* Badges */
         .m-badge { 
-            display: inline-block; padding: 4px 12px; border-radius: 6px; 
-            font-weight: 700; font-size: 0.75em; color: white; min-width: 75px; 
+            display: inline-block; padding: 5px 12px; border-radius: 6px; 
+            font-weight: bold; font-size: 0.8em; color: white; min-width: 80px; 
             text-align: center; text-transform: uppercase; letter-spacing: 0.5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .m-get { background: #10b981; } .m-post { background: #3b82f6; } .m-put { background: #f59e0b; } .m-delete { background: #ef4444; }
 
-        /* POSTMAN UI SIMULATOR (Sleek Dark/Light Theme) */
+        /* POSTMAN UI SIMULATOR (Sleek Theme) */
         .postman-wrapper { 
             border: 1px solid var(--border-light); 
-            border-radius: 12px; 
-            margin-bottom: 40px; 
+            border-radius: 10px; 
+            margin-bottom: 45px; 
             background: #ffffff; 
             overflow: hidden; 
-            box-shadow: var(--shadow-soft); 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02); 
         }
         .pm-url-bar { 
-            display: flex; background: #f8fafc; padding: 15px 20px; 
+            display: flex; background: #f8fafc; padding: 15px 25px; 
             border-bottom: 1px solid var(--border-light); align-items: center; gap: 15px; flex-wrap: wrap; 
         }
         .pm-url { 
             flex: 1; background: #ffffff; border: 1px solid #cbd5e1; padding: 10px 15px; 
-            border-radius: 6px; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.9em; 
-            color: #1e293b; min-width: 250px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);
+            border-radius: 6px; font-family: 'Consolas', monospace; font-size: 0.95em; 
+            color: #1e293b; min-width: 250px; font-weight: bold;
         }
         .pm-btn-send { 
-            background: var(--primary); color: white; border: none; padding: 10px 24px; 
-            border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.1s; 
+            background: var(--primary); color: white; border: none; padding: 10px 25px; 
+            border-radius: 6px; font-weight: bold; font-size: 0.95em;
         }
-        .pm-btn-send:hover { background: #1d4ed8; }
-        .pm-btn-send:active { transform: scale(0.97); }
         
-        .pm-guide { background: #f0f9ff; border-bottom: 1px solid #e0f2fe; padding: 15px 25px; font-size: 0.9em; }
+        .pm-guide { background: #f0f9ff; border-bottom: 1px solid #e0f2fe; padding: 15px 25px; font-size: 0.95em; }
         .pm-guide strong { color: #0369a1; display: block; margin-bottom: 8px; }
-        .pm-guide ol { margin: 0 0 0 20px; color: #334155; }
+        .pm-guide ol { margin: 0 0 0 25px; color: #334155; }
         
         .pm-data-section { padding: 25px; }
         .pm-section-title { 
-            font-size: 0.8em; color: #64748b; margin-bottom: 12px; font-weight: 700; 
+            font-size: 0.85em; color: #64748b; margin-bottom: 12px; font-weight: 700; 
             text-transform: uppercase; border-bottom: 2px solid var(--border-light); 
             padding-bottom: 8px; letter-spacing: 0.5px;
         }
         
         /* List Endpoint Card */
-        .endpoint-list { background: #ffffff; border: 1px solid var(--border-light); border-radius: 12px; padding: 20px; margin-bottom: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .endpoint-list h4 { color: var(--text-heading); border-bottom: 2px solid var(--border-light); padding-bottom: 10px; margin-bottom: 15px; font-size: 1.1em;}
+        .endpoint-list { background: #ffffff; border: 1px solid var(--border-light); border-radius: 10px; padding: 25px; margin-bottom: 10px; }
+        .endpoint-list h4 { color: var(--text-heading); border-bottom: 2px solid var(--border-light); padding-bottom: 10px; margin-bottom: 15px; font-size: 1.15em;}
 
         /* JSON Syntax Highlighting */
         .json-key { color: #7dd3fc; } 
         .json-str { color: #fca5a5; } 
         .json-num { color: #86efac; }
 
-        /* Custom Elegant Scrollbar */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #64748b;
+            font-size: 1em;
+            font-weight: bold;
+            margin-top: 20px;
+            border-top: 1px solid var(--border-light);
+            background: white;
+        }
+
+        /* Responsiveness for mobile/projectors */
+        @media (max-width: 768px) {
+            .card { padding: 30px 20px; }
+            header h1 { font-size: 2.2em; }
+        }
     </style>
 </head>
 <body>
@@ -540,7 +498,7 @@ CREATE TABLE transaction_items (
         <h2>📡 Dokumentasi API & Skenario Respon Sistem</h2>
         <p style="margin-bottom: 20px;"><strong>Base URL Global:</strong> <code>http://localhost:3000</code></p>
 
-        <div class="alert-box" style="background: #fef2f2; border-left-color: #ef4444; margin-bottom: 30px;">
+        <div class="alert-box" style="background: #fef2f2; border-left-color: #ef4444; border-left-width: 5px; margin-bottom: 30px;">
             <h4 style="color: #b91c1c;">🚫 Respon Kesalahan Umum (Global): API Key Ditolak / Unauthorized (401 & 403)</h4>
             <p><strong>Sebagai catatan untuk pembaca:</strong> Karena semua endpoint di bawah ini (kecuali info server) berlindung di balik benteng keamanan <em>API Key</em>, maka jika pengguna sengaja atau lupa memasukkan parameter <code>x-api-key</code> yang benar di tab Headers Postman, sistem akan secara global membekukan permintaan tersebut dan mengembalikan respon error baku di bawah ini. Oleh karena itu, respon <em>Unauthorized</em> ini <strong>hanya akan dijabarkan di kotak ini saja</strong> dan tidak akan ditulis berulang-ulang di bawah setiap endpoint agar laporan lebih bersih dan ringkas.</p>
 <pre style="margin-top: 15px;">{
@@ -1259,7 +1217,7 @@ CREATE TABLE transaction_items (
             <tr><td>Not Found</td><td>Menangani route/URL sembarang yang ditebak orang.</td></tr>
         </table>
 
-        <h2 style="margin-top: 30px;">📊 Status Code (HTTP Standar)</h2>
+        <h2 style="margin-top: 40px;">📊 Status Code (HTTP Standar)</h2>
         <table>
             <tr><th>Status Code</th><th>Keterangan</th></tr>
             <tr><td><span style="color: #10b981; font-weight: bold;">200</span></td><td><strong>OK</strong> - Permintaan/Kalkulasi sukses.</td></tr>
